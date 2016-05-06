@@ -4,7 +4,7 @@ from pygame.locals import *
 
 #Derive your class from the Sprite super class
 class Beam(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y, play_sound=True):
         """ Creates a beam (level 1)
 
         Arguments:
@@ -17,8 +17,10 @@ class Beam(pygame.sprite.Sprite):
         super().__init__();
 
         # Play the sound file
-        s = pygame.mixer.Sound(file="sounds/player_wpn1.ogg")
-        s.play()
+        self.sound = pygame.mixer.Sound(file="sounds/player_wpn1.ogg")
+
+        if play_sound:
+            self.sound.play()
 
         # Load image
         self.image = pygame.image.load("sprites/player_wpn1.gif").convert()
@@ -45,6 +47,7 @@ class Beam(pygame.sprite.Sprite):
             SCREEN: Screen pygame object
         """
         SCREEN.blit(self.image, (self.rect.x, self.rect.y))
+
 
     def bounce(self):
         """ Bounces the ball by inverting the angles.

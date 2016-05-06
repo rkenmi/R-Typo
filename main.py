@@ -152,7 +152,7 @@ def main():
                 cooldown_counter += 1 # Initiate cooldown sequence
         elif keys[pygame.K_e]:
             if not player.charged_beam and not player.dead:
-                b = ChargedBeam(player.rect.x + player.image.get_width(), player.rect.y - 20 + player.image.get_height() / 2)
+                b = ChargedBeam(player.rect.x + player.image.get_width(), player.rect.y + player.image.get_height() / 2)
                 beams.add(b)
                 player.charged_beam = b
                 player.charged_beam.charging = True
@@ -182,6 +182,7 @@ def main():
 
         if player.dead:
             pygame.mixer.music.stop()
+
             death_counter += 1
             if 300 > death_counter > 200:
                 alpha += 4

@@ -85,6 +85,10 @@ class Player(pygame.sprite.Sprite):
 
     def death(self):
         self.dead = True
+        if self.charged_beam:
+            self.charged_beam.charging = False
+            self.charged_beam.charge_sound.stop()
+            self.charged_beam = None
 
     def respawn(self):
         self.rect.x = self.respawn_pos[0]
