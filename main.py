@@ -48,14 +48,18 @@ def draw_scrolling_platforms(surface, tiled_map, platforms, scroll_x, debug=0):
                 platforms.add(spr)
 
 
-def update_beams(surface, beams, platforms):
+def update_beams(surface, beams, platforms, debug=0):
     for beam in beams:
         if beam.charging:
             beam.draw(surface)
-        elif not beam.charging and not beam.out_of_screen \
-                and len(pygame.sprite.spritecollide(beam, platforms, False, pygame.sprite.collide_rect)) == 0:
+        elif not beam.charging and \
+                len(pygame.sprite.spritecollide(beam, platforms, False, pygame.sprite.collide_rect)) == 0 \
+                and not beam.out_of_screen:
             beam.draw(surface)
             beam.move(surface)
+            if debug:
+                pygame.draw.rect(surface, (0, 0, 255),
+                     (beam.rect.x, beam.rect.y, beam.image.get_width(), beam.image.get_height() ))
         else:
             beams.remove(beam)
     return beams
@@ -99,7 +103,7 @@ def main():
 
     # set up the music
     pygame.mixer.music.load('sounds/music/solo_sortie.mp3')
-    #pygame.mixer.music.play(-1, 0.2) # loop music
+    pygame.mixer.music.play(-1, 0.2) # loop music
 
     # set mixer channel to 4 for performance and to prevent sound conflicts
     pygame.mixer.set_num_channels(4)
@@ -152,7 +156,7 @@ def main():
                 cooldown_counter += 1 # Initiate cooldown sequence
         elif keys[pygame.K_e]:
             if not player.charged_beam and not player.dead:
-                b = ChargedBeam(player.rect.x + player.image.get_width(), player.rect.y + player.image.get_height() / 2)
+                b = ChargedBeam(player.rect.x + player.image.get_width() - 5, player.rect.y + player.image.get_height() / 2)
                 beams.add(b)
                 player.charged_beam = b
                 player.charged_beam.charging = True
@@ -198,10 +202,9 @@ def main():
                 alpha_surface.set_alpha(alpha)
             elif death_counter > 450:
                 if lives > 0:
-                    #pygame.mixer.music.play(-1, 0.2) # resume music
+                    pygame.mixer.music.play(-1, 0.2) # resume music
                     player.respawn()
                     death_counter = 0
-
 
             surface.blit(alpha_surface, (0, 0))
         else:

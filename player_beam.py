@@ -48,7 +48,6 @@ class Beam(pygame.sprite.Sprite):
         """
         SCREEN.blit(self.image, (self.rect.x, self.rect.y))
 
-
     def bounce(self):
         """ Bounces the ball by inverting the angles.
         """
@@ -68,18 +67,6 @@ class Beam(pygame.sprite.Sprite):
             x (int): x coord to move
             y (int): y coord to move
         """
-        #r_collide = self.rect.x + self.image.get_width() + self.vx > SCREEN.get_width()
-        #l_collide = self.rect.x + self.vx < 0
-        #t_collide = self.rect.y + self.vy < 0
-        #b_collide = self.rect.y + self.image.get_height() + self.vy > SCREEN.get_height()
-
-        # Check collision on right and left sides of screen
-        #if l_collide or r_collide:
-        #    self.vx *= -1
-
-        # Check collision on top and bottom sides of screen
-        #if t_collide or b_collide:
-        #    self.vy *= -1
 
         self.rect.x += self.vx
         if self.rect.x > SCREEN.get_width():

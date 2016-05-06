@@ -56,7 +56,6 @@ class ChargedBeam(Beam):
 
             self.charge_timer += 1
             self.shot_ready = True
-            print(self.charge_level)
             if 0 <= self.charge_timer < 4:
                 self.charge_image = pygame.image.load("sprites/player_wpn2_charge2.gif").convert()
             elif 4 < self.charge_timer < 8:
@@ -77,12 +76,6 @@ class ChargedBeam(Beam):
             self.charge_image.set_colorkey(pygame.Color(0, 0, 0))
 
         else: # key is let go, or beam is about to shoot
-            if self.shot_ready:
-                self.charge_sound.stop()
-                self.charge_timer = 0
-                self.shot_ready = False
-                if self.charge_level > 0:
-                    self.sound.play()
 
             self.animation_loop += 1
             if self.charge_level == 1:
@@ -116,17 +109,24 @@ class ChargedBeam(Beam):
                 else:
                     self.image = pygame.image.load("sprites/player_wpn2_shoot5a.gif").convert()
 
-            if self.charge_level < 3:
-                SCREEN.blit(self.image, (self.rect.x, self.rect.y))
-            elif self.charge_level == 3:
-                SCREEN.blit(self.image, (self.rect.x, self.rect.y - 2))
-            elif self.charge_level == 4:
-                SCREEN.blit(self.image, (self.rect.x, self.rect.y - 5))
-            elif self.charge_level == 5:
-                SCREEN.blit(self.image, (self.rect.x, self.rect.y - 10))
-            elif self.charge_level == 6:
-                SCREEN.blit(self.image, (self.rect.x, self.rect.y - 15))
+            if self.shot_ready:
+                self.charge_sound.stop()
+                self.charge_timer = 0
+                self.shot_ready = False
 
+                if self.charge_level > 0:
+                    self.sound.play()
+
+                if self.charge_level == 3:
+                    self.rect.y -= 2
+                elif self.charge_level == 4:
+                    self.rect.y -= 5
+                elif self.charge_level == 5:
+                    self.rect.y -= 10
+                elif self.charge_level == 6:
+                    self.rect.y -= 15
+
+            SCREEN.blit(self.image, (self.rect.x, self.rect.y))
             self.image.set_colorkey(pygame.Color(0, 0, 0))
 
 
@@ -150,18 +150,6 @@ class ChargedBeam(Beam):
             x (int): x coord to move
             y (int): y coord to move
         """
-        #r_collide = self.rect.x + self.image.get_width() + self.vx > SCREEN.get_width()
-        #l_collide = self.rect.x + self.vx < 0
-        #t_collide = self.rect.y + self.vy < 0
-        #b_collide = self.rect.y + self.image.get_height() + self.vy > SCREEN.get_height()
-
-        # Check collision on right and left sides of screen
-        #if l_collide or r_collide:
-        #    self.vx *= -1
-
-        # Check collision on top and bottom sides of screen
-        #if t_collide or b_collide:
-        #    self.vy *= -1
 
         self.rect.x += self.vx
         if self.rect.x > SCREEN.get_width():
