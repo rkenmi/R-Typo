@@ -96,6 +96,7 @@ def main():
     window_size = (800, 600)
     surface = pygame.display.set_mode(window_size)
     bg = pygame.image.load("img/stage.png").convert()
+    ready_img = pygame.image.load("img/ready.gif").convert()
     #bg = pygame.image.load("img/test.bmp").convert()
 
     # set the title of the window
@@ -115,16 +116,17 @@ def main():
     player.draw(surface)
 
 
-    # variables
-    lives = 3
-    scroll_x = 0
+    # game settings
+    lives, scroll_x = 3, 0
+
+    # counters
     cooldown_counter, death_counter = 0, 0
-    charge_beam = False
+
     tiled_map = load_pygame('rtype_tile.tmx')
     alpha_surface = Surface((800, 600)) # The custom-surface of the size of the screen.
     alpha_surface.fill((0, 0, 0))
     alpha_surface.set_alpha(0)
-
+    alpha_surface.blit(ready_img, (400-162,300-27))
     alpha = 0
 
     while True:  # <--- main game loop
@@ -184,22 +186,37 @@ def main():
         beams = update_beams(surface, beams, platforms)
         player.draw(surface)
 
+        collision_detection(surface, player, platforms)
+
+        ####### UI #######
+        pygame.draw.rect(surface, BLACK, (0, 560, 800, 40))
+        for i in range (0, lives):
+            lives_img = pygame.image.load("sprites/life_icon.gif").convert()
+            lives_ico = Icon(100 + (i * 30), 565, lives_img)
+            lives_ico.draw(surface)
+
+        ####### Death Handler #######
         if player.dead:
             pygame.mixer.music.stop()
-
             death_counter += 1
+
+            # Fade out
             if 300 > death_counter > 200:
                 alpha += 4
                 alpha_surface.set_alpha(alpha)
+
             elif 350 > death_counter > 300:
                 scroll_x = 0
                 lives -= 1
                 if lives == 0:
                     sys.exit()
                 death_counter = 351
+
+            # Fade in
             elif 450 > death_counter > 350:
                 alpha -= 4
                 alpha_surface.set_alpha(alpha)
+
             elif death_counter > 450:
                 if lives > 0:
                     pygame.mixer.music.play(-1, 0.2) # resume music
@@ -209,18 +226,7 @@ def main():
             surface.blit(alpha_surface, (0, 0))
         else:
             alpha = 0
-
-        collision_detection(surface, player, platforms)
-
-        if not player.dead:
             scroll_x -= 1   # Scroll the background to the right by decrementing offset scroll_x
-
-        pygame.draw.rect(surface, BLACK, (0, 560, 800, 40))
-
-        for i in range (0, lives):
-            lives_img = pygame.image.load("sprites/life_icon.gif").convert()
-            lives_ico = Icon(100 + (i * 30), 565, lives_img)
-            lives_ico.draw(surface)
 
         pygame.display.update()  # Update the display when all events have been processed
         FPS_CLOCK.tick(FPS)
