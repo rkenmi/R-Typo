@@ -7,29 +7,18 @@ from player_beam import Beam
 from block import Block
 from icon import Icon
 from player_beam_charged import ChargedBeam
-import sys
+from enemy import Enemy
+import create_enemies
+import sys,random
 
 # CONSTANTS
 SPEED = 5
 RESET_COOLDOWN = 10
 RECT_COLOR = (0, 255, 255)
 
-def update_respawn(surface, player, platforms):
-    respawn_x, respawn_y = (player.rect.x, player.rect.y)
-    safety_spr = Block(pygame.draw.rect(surface, RECT_COLOR,
-            (respawn_x, respawn_y, player.image.get_width(), player.image.get_height()), 3))
 
-    while respawn_y < surface.get_height():
-        safety_spr.rect.y = respawn_y
-        print('y : ', respawn_y, '\t', len(pygame.sprite.spritecollide(safety_spr, platforms, False, pygame.sprite.collide_rect)))
-        if len(pygame.sprite.spritecollide(safety_spr, platforms, False, pygame.sprite.collide_rect)) == 0:
-            player.respawn_pos = (respawn_x, respawn_y)
-            break
-        respawn_y += 10
-
-
-def draw_scrolling_platforms(surface, tiled_map, platforms, scroll_x, debug=0):
-    platforms.empty()   # refresh platform sprites (due to scrolling)
+def draw_scrolling_hitbox(surface, tiled_map, hitbox, scroll_x, debug=0):
+    hitbox.empty()   # refresh hitbox sprites (due to scrolling)
 
     for layer in tiled_map.visible_layers:
         if isinstance(layer, pytmx.TiledObjectGroup):
@@ -45,15 +34,15 @@ def draw_scrolling_platforms(surface, tiled_map, platforms, scroll_x, debug=0):
                         (obj.x + scroll_x, obj.y, obj.width, obj.height)
                     )
 
-                platforms.add(spr)
+                hitbox.add(spr) # add pytmx map platforms
 
 
-def update_beams(surface, beams, platforms, debug=0):
+def update_beams(surface, beams, hitbox, debug=0):
     for beam in beams:
         if beam.charging:
             beam.draw(surface)
         elif not beam.charging and \
-                len(pygame.sprite.spritecollide(beam, platforms, False, pygame.sprite.collide_rect)) == 0 \
+                len(pygame.sprite.spritecollide(beam, hitbox, False, collision_beam_handler)) == 0 \
                 and not beam.out_of_screen:
             beam.draw(surface)
             beam.move(surface)
@@ -62,16 +51,89 @@ def update_beams(surface, beams, platforms, debug=0):
                      (beam.rect.x, beam.rect.y, beam.image.get_width(), beam.image.get_height() ))
         else:
             beams.remove(beam)
-    return beams
 
 
-def collision_detection(surface, player, platforms):
-    if len(pygame.sprite.spritecollide(player, platforms, False, pygame.sprite.collide_rect)) > 0:
+def collision_beam_handler(a, b):
+    if pygame.sprite.collide_rect(a, b):
+        if isinstance(b, Enemy):
+            b.take_damage(a.damage)
+        return True
+    else:
+        return False
+
+
+def collision_player(surface, player, hitbox):
+    if len(pygame.sprite.spritecollide(player, hitbox, False, pygame.sprite.collide_rect)) > 0:
         if not player.invincible:
             player.death()
         else:
             player.rect.x = player.last_pos[0] - 1 # offset for screen side-scroll to the right
             player.rect.y = player.last_pos[1]
+
+
+def enemy_handler(surface, player, enemies, hitbox):
+    """ Handles enemy movements on surface, giving them rectangle blocks, drawing them, deleting them, etc.
+
+    Parameters:
+        surface (Surface) : the screen
+        player (pygame.sprite) : the player sprite
+        enemies (pygame.sprite.Group) : group of enemy sprites
+        hitbox (pygame.sprite.Group) : group of hitbox sprites
+    """
+    if not player.dead:
+        for enemy in enemies:
+            enemy.move(-1, 0)
+            hitbox.add(enemy)
+
+    for enemy in enemies:
+        if player.rect.x - enemy.rect.x > surface.get_width(): # if player has passed enemy far enough, kill enemy
+            enemy.death(sound=False) # start dead_timer on enemy
+
+        if enemy.dead_timer < enemy.dead_timer_max:
+            enemy.draw(surface)
+        else:
+            enemies.remove(enemy)
+
+
+def player_keys_move(surface, player, keys):
+    vx, vy = 0, 0
+    player.last_pos = (player.rect.x, player.rect.y)
+
+    if keys[pygame.K_w]:
+        vy -= SPEED
+    elif keys[pygame.K_s]:
+        vy += SPEED
+
+    if keys[pygame.K_a]:
+        vx -= SPEED
+    elif keys[pygame.K_d]:
+        vx += SPEED
+
+    player.move(surface, vx, vy)
+
+
+def player_keys_shoot(surface, player, keys, beams, cooldown_counter):
+    if keys[pygame.K_SPACE] and not player.charged_beam:
+        if cooldown_counter == 0 and not player.dead:
+            b = Beam(player.rect.x + player.image.get_width(), player.rect.y + player.image.get_height() / 2)
+            beams.add(b)
+            cooldown_counter += 1 # Initiate cooldown sequence
+    elif keys[pygame.K_e]:
+        if not player.charged_beam and not player.dead:
+            b = ChargedBeam(player.rect.x + player.image.get_width() - 5, player.rect.y + player.image.get_height() / 2)
+            beams.add(b)
+            player.charged_beam = b
+            player.charged_beam.charging = True
+    else:
+        if player.charged_beam:
+            player.charged_beam.charging = False # reset charge if no keys are pressed
+        player.charged_beam = None  # delete charged beam
+
+    if cooldown_counter == RESET_COOLDOWN:
+        cooldown_counter = 0
+    elif cooldown_counter > 0:
+        cooldown_counter += 1
+    return cooldown_counter
 
 
 def main():
@@ -109,18 +171,22 @@ def main():
     # set mixer channel to 4 for performance and to prevent sound conflicts
     pygame.mixer.set_num_channels(4)
 
-    platforms = pygame.sprite.Group()
+    hitbox = pygame.sprite.Group()
     beams = pygame.sprite.Group()
 
     player = Player(100, 280)
     player.draw(surface)
 
+    enemies = create_enemies.get_group(surface)
 
     # game settings
-    lives, scroll_x = 3, 0
+    lives, scroll_x, stop_enemies = 3, 0, False
 
     # counters
-    cooldown_counter, death_counter = 0, 0
+    cooldown_counter = 0
+    
+    # round fail timer (player died)
+    rf_timer = 0
 
     tiled_map = load_pygame('rtype_tile.tmx')
     alpha_surface = Surface((800, 600)) # The custom-surface of the size of the screen.
@@ -130,49 +196,10 @@ def main():
     alpha = 0
 
     while True:  # <--- main game loop
-        #update_respawn(surface, player, platforms)  # If player needs to respawn, find best location to respawn
-
-
         ####### Key Events #######
         keys = pygame.key.get_pressed()
-        vx, vy = 0, 0
-
-        player.last_pos = (player.rect.x, player.rect.y)
-
-        if keys[pygame.K_w]:
-            vy -= SPEED
-        elif keys[pygame.K_s]:
-            vy += SPEED
-
-        if keys[pygame.K_a]:
-            vx -= SPEED
-        elif keys[pygame.K_d]:
-            vx += SPEED
-
-        player.move(surface, vx, vy)
-
-        if keys[pygame.K_SPACE] and not player.charged_beam:
-            if cooldown_counter == 0 and not player.dead:
-                b = Beam(player.rect.x + player.image.get_width(), player.rect.y + player.image.get_height() / 2)
-                beams.add(b)
-                cooldown_counter += 1 # Initiate cooldown sequence
-        elif keys[pygame.K_e]:
-            if not player.charged_beam and not player.dead:
-                b = ChargedBeam(player.rect.x + player.image.get_width() - 5, player.rect.y + player.image.get_height() / 2)
-                beams.add(b)
-                player.charged_beam = b
-                player.charged_beam.charging = True
-        else:
-            if player.charged_beam:
-                player.charged_beam.charging = False # reset charge if no keys are pressed
-            player.charged_beam = None  # delete charged beam
-
-
-        if cooldown_counter == RESET_COOLDOWN:
-            cooldown_counter = 0
-        elif cooldown_counter > 0:
-            cooldown_counter += 1
-
+        player_keys_move(surface, player, keys)
+        cooldown_counter = player_keys_shoot(surface, player, keys, beams, cooldown_counter)
 
         ####### Normal Events #######
         for event in pygame.event.get():
@@ -180,13 +207,16 @@ def main():
                 pygame.quit()
                 sys.exit()
 
-        surface.blit(bg, (scroll_x, 0))
-        draw_scrolling_platforms(surface, tiled_map, platforms, scroll_x)
+        surface.blit(bg, (scroll_x, 0)) # SCROLL the background in +x direction
 
-        beams = update_beams(surface, beams, platforms)
+        draw_scrolling_hitbox(surface, tiled_map, hitbox, scroll_x)
+
+        ####### Collisions #######
+        enemy_handler(surface, player, enemies, hitbox)
+        update_beams(surface, beams, hitbox)
         player.draw(surface)
 
-        collision_detection(surface, player, platforms)
+        collision_player(surface, player, hitbox)
 
         ####### UI #######
         pygame.draw.rect(surface, BLACK, (0, 560, 800, 40))
@@ -195,33 +225,31 @@ def main():
             lives_ico = Icon(100 + (i * 30), 565, lives_img)
             lives_ico.draw(surface)
 
-        ####### Death Handler #######
+        ####### Round Fail #######
         if player.dead:
             pygame.mixer.music.stop()
-            death_counter += 1
+            rf_timer += 1
 
-            # Fade out
-            if 300 > death_counter > 200:
+            if 300 > rf_timer > 200:
                 alpha += 4
-                alpha_surface.set_alpha(alpha)
+                alpha_surface.set_alpha(alpha) # Fade out
 
-            elif 350 > death_counter > 300:
+            elif 350 > rf_timer > 300:
                 scroll_x = 0
                 lives -= 1
+                enemies = create_enemies.get_group(surface)
                 if lives == 0:
                     sys.exit()
-                death_counter = 351
+                rf_timer = 350
 
-            # Fade in
-            elif 450 > death_counter > 350:
+            elif 450 > rf_timer > 350:
                 alpha -= 4
-                alpha_surface.set_alpha(alpha)
+                alpha_surface.set_alpha(alpha)  # Fade in
 
-            elif death_counter > 450:
-                if lives > 0:
-                    pygame.mixer.music.play(-1, 0.2) # resume music
-                    player.respawn()
-                    death_counter = 0
+            elif rf_timer > 450 and lives > 0:
+                pygame.mixer.music.play(-1, 0.2) # resume music
+                player.respawn()
+                rf_timer = 0
 
             surface.blit(alpha_surface, (0, 0))
         else:

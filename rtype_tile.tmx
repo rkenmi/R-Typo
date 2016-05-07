@@ -527,11 +527,8 @@
   <object id="103" x="4369.62" y="434.083" width="143.042" height="7.25003"/>
   <object id="104" x="4352.48" y="345.708" width="240.188" height="46.9583"/>
   <object id="105" x="4335.24" y="379.854" width="14.7607" height="17.4792"/>
-  <object id="106" x="4593.95" y="352.667" width="35.3804" height="10"/>
   <object id="107" x="4492.98" y="-1" width="127.024" height="117.667"/>
   <object id="108" x="4496.49" y="118.5" width="123.512" height="43.5002"/>
-  <object id="109" x="4553.33" y="160.917" width="13.3333" height="43.5002"/>
-  <object id="110" x="4492" y="162.25" width="12" height="19.7501"/>
   <object id="111" x="4598.67" y="163.458" width="21.3333" height="35.2084"/>
   <object id="112" x="4621.75" y="-0.333333" width="2097.25" height="30"/>
   <object id="113" x="4789.83" y="366" width="282.167" height="38"/>
@@ -572,8 +569,5 @@
   <object id="171" x="6573.89" y="156.198" width="8.22933" height="31.604"/>
   <object id="172" x="6612.67" y="196.865" width="103.333" height="11.802"/>
   <object id="173" x="6611.33" y="350.766" width="104.057" height="11.802"/>
-  <object id="174" x="1921.33" y="216.667" width="18.6667" height="8"/>
-  <object id="176" x="1888.67" y="202" width="18.6667" height="8"/>
-  <object id="177" x="1905.33" y="208" width="18.6667" height="10.6667"/>
  </objectgroup>
 </map>

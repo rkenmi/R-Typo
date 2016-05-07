@@ -30,14 +30,18 @@ class Beam(pygame.sprite.Sprite):
 
         # Required for collision detection
         self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.vx = 15
 
         # By default, beams do not charge but fire rapidly
         self.charging = False
 
-        self.rect.x = x
-        self.rect.y = y
-        self.vx = 15
-        self.radius = self.image.get_width() / 2
+        # Beams can fail, with no displayed output
+        self.fail = False
+
+        # Variables
+        self.damage = 1
         self.out_of_screen = False
 
     def draw(self, SCREEN):
