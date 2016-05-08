@@ -95,6 +95,13 @@ def enemy_handler(surface, player, enemies, hitbox):
             enemies.remove(enemy)
 
 
+def enemy_triggers(scroll_x, enemies):
+    if -700 < scroll_x < -500:
+        for enemy in enemies:
+            if enemy.id == 2:
+                enemy.move(-1, 0)
+
+
 def player_keys_move(surface, player, keys):
     vx, vy = 0, 0
     player.last_pos = (player.rect.x, player.rect.y)
@@ -115,15 +122,15 @@ def player_keys_move(surface, player, keys):
 def player_keys_shoot(surface, player, keys, beams, cooldown_counter):
     if keys[pygame.K_SPACE] and not player.charged_beam:
         if cooldown_counter == 0 and not player.dead:
-            b = Beam(player.rect.x + player.image.get_width(), player.rect.y + player.image.get_height() / 2)
-            beams.add(b)
+            beams.add(
+                player.shoot(player.rect.x+player.image.get_width(), player.rect.y+player.image.get_height()/2)
+            )
             cooldown_counter += 1 # Initiate cooldown sequence
     elif keys[pygame.K_e]:
         if not player.charged_beam and not player.dead:
-            b = ChargedBeam(player.rect.x + player.image.get_width() - 5, player.rect.y + player.image.get_height() / 2)
-            beams.add(b)
-            player.charged_beam = b
-            player.charged_beam.charging = True
+            beams.add(
+                player.shoot(player.rect.x+player.image.get_width()-5, player.rect.y+player.image.get_height()/2, True)
+            )
     else:
         if player.charged_beam:
             player.charged_beam.charging = False # reset charge if no keys are pressed
@@ -255,6 +262,8 @@ def main():
         else:
             alpha = 0
             scroll_x -= 1   # Scroll the background to the right by decrementing offset scroll_x
+
+        enemy_triggers(scroll_x, enemies)
 
         pygame.display.update()  # Update the display when all events have been processed
         FPS_CLOCK.tick(FPS)

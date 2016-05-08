@@ -9,9 +9,8 @@ DEAD_STEP = 10 # time between each death sprite
 DEAD_TIMER_MAX = 70 # time after which
 
 
-
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y, eid=0, animation_timer_max=ANIMATION_TIMER_MAX, dead_timer_max=DEAD_TIMER_MAX):
         # Don't forget to call the super constructor
         super().__init__()
 
@@ -35,17 +34,17 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.y = y
 
         # Variables
+        self.id = eid
         self.hp = 1 # default 1 hp
         self.dead = False
         self.mute = False # mute death sound
 
         # Used as a timer for animation sequences
         self.animation_timer, self.dead_timer = 0, 0
-        self.dead_timer_max = DEAD_TIMER_MAX
+        self.animation_timer_max, self.dead_timer_max = animation_timer_max, dead_timer_max
         self.hit_timer = 0
         self.hit_animation = False
         self.out_of_screen = False
-        print(self.animation_timer)
 
     def draw(self, surface):
         """ Draws to screen
@@ -59,14 +58,14 @@ class Enemy(pygame.sprite.Sprite):
             ##### Hit Animation #####
             self.draw_hit_timer()
 
-            for i in range(0, len(self.images)):
-                if i == len(self.images)-1 and self.animation_timer > (i+1)*ANIMATION_STEP:
+            for i in range(0, len(self.images)+1):
+                if i == len(self.images) and self.animation_timer > (i+1)*ANIMATION_STEP:
                     self.image = self.images[0][1]
                 elif self.animation_timer > (i+1)*ANIMATION_STEP and not self.images[i][0]:
                     self.images[i][0] = True
                     self.image = self.images[i][1]
 
-            if self.animation_timer > ANIMATION_TIMER_MAX:
+            if self.animation_timer > self.animation_timer_max:
                 self.animation_timer = 0
                 for i in range(0, len(self.images)):
                     self.images[i][0] = False
@@ -89,7 +88,7 @@ class Enemy(pygame.sprite.Sprite):
                 if (i+1)*DEAD_STEP < self.dead_timer < (i+2)*DEAD_STEP:
                     self.image = self.dead_images[i]
 
-            if self.dead_timer < DEAD_TIMER_MAX:
+            if self.dead_timer < self.dead_timer_max:
                 surface.blit(self.image, (self.rect.x, self.rect.y))
 
     def death(self, sound=True):

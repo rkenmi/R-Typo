@@ -1,5 +1,7 @@
 import pygame
 import math
+from player_beam import Beam
+from player_beam_charged import ChargedBeam
 from pygame.locals import *
 
 #Derive your class from the Sprite super class
@@ -91,6 +93,24 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load("sprites/player.gif").convert()
         # Set the color that should be transparent
         self.image.set_colorkey(pygame.Color(0, 0, 0))
+
+    def shoot(self, beam_x, beam_y, charged=False):
+        """
+        Arguments:
+            beam_x (int): x coordinate of where beam will be drawn
+            beam_y (int): y coordinate of where beam will be drawn
+            charged (bool): True/False depending on whether it is a charged beam or not
+
+        Returns:
+            A newly created beam object
+        """
+        if not charged:
+            b = Beam(beam_x, beam_y)
+        else:
+            b = ChargedBeam(beam_x, beam_y)
+            b.charging = True
+            self.charged_beam = b
+        return b
 
     def move(self, surface, x, y):
         """ Moves the beam by altering the x and y coordinates.

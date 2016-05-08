@@ -13,7 +13,7 @@ import sys
 
 def get_group(surface):
     enemies = pygame.sprite.Group()
-    enemies.add(SitBot(700, 280, animation_timer=5))
-    enemies.add(SitBot(1250, 265, animation_timer=15))
-    enemies.add(SitBot(1400, 265, animation_timer=10))
+    enemies.add(SitBot(700, 280, eid=1, animation_timer=5))
+    enemies.add(SitBot(1250, 265, eid=2, animation_timer=15))
+    enemies.add(SitBot(1400, 265, eid=3, animation_timer=10))
     return enemies

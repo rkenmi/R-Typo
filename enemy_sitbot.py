@@ -3,9 +3,9 @@ from enemy import Enemy
 
 
 class SitBot(Enemy):
-    def __init__(self, x, y, animation_timer=0):
+    def __init__(self, x, y, eid=0, animation_timer_max=60, dead_timer_max=70, animation_timer=0):
         # Don't forget to call the super constructor
-        super().__init__(x, y)
+        super().__init__(x, y, eid, animation_timer_max, dead_timer_max)
 
         # Load images
         self.images = []
