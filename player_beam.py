@@ -2,7 +2,8 @@ import pygame
 import math
 from pygame.locals import *
 
-#Derive your class from the Sprite super class
+
+#  Derive your class from the Sprite super class
 class Beam(pygame.sprite.Sprite):
     def __init__(self, x, y, play_sound=True):
         """ Creates a beam (level 1)
@@ -58,19 +59,20 @@ class Beam(pygame.sprite.Sprite):
             surface: Screen pygame object
         """
         # Only trigger once, when drawn for the first time
+        offset = 50  # make it "look" like the beam is actually traveling past the screen
         if self.oos_x == -1 and self.oos_y == -1:
-                self.oos_x, self.oos_y = surface.get_width() - self.image.get_width()/2, \
-                                         surface.get_height() - self.image.get_height()/2
+            self.oos_x, self.oos_y = surface.get_width() - self.image.get_width() + offset, \
+                                     surface.get_height() - self.image.get_height() + offset
 
         surface.blit(self.image, (self.rect.x, self.rect.y))
 
     def bounce(self):
         """ Bounces the ball by inverting the angles.
         """
-        if self.hit is False: # sort of helps with collision/stuck issues when balls hit each other
+        if self.hit is False:  # sort of helps with collision/stuck issues when balls hit each other
             magnitude = math.sqrt(math.pow(self.vy, 2) + math.pow(self.vx, 2))
             theta = math.atan2(self.vy, self.vx) # get velocity direction
-            theta += math.pi/2 # flip the velocity direction
+            theta += math.pi/2  # flip the velocity direction
             self.vx = math.cos(theta) * magnitude
             self.vy = math.sin(theta) * magnitude
 

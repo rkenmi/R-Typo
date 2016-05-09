@@ -39,9 +39,7 @@ class ChargedBeam(Beam):
             self.impact_images.append(pygame.image.load("sprites/player_wpn2_impact"+str(i+1)+".gif").convert())
 
         self.image =  pygame.image.load("sprites/black.gif").convert() # temporary sprite
-
         self.charge_image = pygame.image.load("sprites/player_wpn1.gif").convert()
-        #self.image = pygame.image.load("sprites/player_wpn2_shoot5a.gif").convert() # temporary sprite
 
         # Set the color that should be transparent
         self.image.set_colorkey(pygame.Color(0, 0, 0))
@@ -137,10 +135,11 @@ class ChargedBeam(Beam):
             self.rect = self.image.get_rect() # update rect to fix moving hitboxes
             self.rect.x, self.rect.y = x, y
 
-            # Only trigger once, when drawn for the first time
+            #  Only trigger once, when drawn for the first time
+            offset = 50  # make it "look" like the beam is actually traveling past the screen
             if self.oos_x == -1 and self.oos_y == -1:
-                self.oos_x, self.oos_y = surface.get_width() - self.image.get_width()/2, \
-                                         surface.get_height() - self.image.get_height()/2
+                self.oos_x, self.oos_y = surface.get_width() - self.image.get_width() + offset, \
+                                         surface.get_height() - self.image.get_height() + offset
 
             surface.blit(self.image, (self.rect.x, self.rect.y))
             self.image.set_colorkey(pygame.Color(0, 0, 0))
@@ -152,7 +151,7 @@ class ChargedBeam(Beam):
                 self.shot_ready = False
 
     def impact(self, surface):
-        self.damage = 0 # prevent damage from triggering multiple times
+        self.damage = 0  # prevent damage from triggering multiple times
         impact_step = 2
 
         if self.out_of_screen:

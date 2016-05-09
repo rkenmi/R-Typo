@@ -55,7 +55,7 @@ class Enemy(pygame.sprite.Sprite):
         if not self.dead: # enemy is alive
             self.animation_counter += 1
             
-            if self.hit_animation: # enemy is hit
+            if self.hit_animation: # enemy was hit with a beam
                 self.hit_timer() # start hit timer
 
             for i in range(0, len(self.images)+1):
@@ -78,12 +78,14 @@ class Enemy(pygame.sprite.Sprite):
                 surface.blit(self.image, (self.rect.x, self.rect.y))
             else:
                 surface.blit(self.image, (self.rect.x, self.rect.y), None, BLEND_RGB_ADD)
-        else: # enemy is about to die
+        else: # enemy is about to die, start dead timer
             if self.dead_counter == 0 and not self.mute:
                 self.death_sound.play()
 
             self.dead_counter += 2
-            self.rect.x -= 1 # enemy can't move while dead, but the animation must align with the scrolling screen
+
+            # enemy can't move while dead, but the animation must align with the scrolling screen
+            self.move(-1, 0, bypass=True)
 
             for i in range(0, len(self.dead_images)):
                 if (i+1)*DEAD_STEP < self.dead_counter < (i+2)*DEAD_STEP:
@@ -118,14 +120,15 @@ class Enemy(pygame.sprite.Sprite):
         """
         pass
 
-    def move(self, x, y):
-        """ Moves the enemy. Very barebones.
+    def move(self, x, y, bypass=False):
+        """ Moves the enemy if enemy is not dead.
 
         Arguments:
             x (int): x coord to move
             y (int): y coord to move
+            bypass (bool) : if bypass is True, allow movement even when the enemy is dead
         """
-        if self.dead_counter == 0:
+        if self.dead_counter == 0 or bypass:
             self.rect.x += x
             self.rect.y += y
 
