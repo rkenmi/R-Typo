@@ -71,18 +71,8 @@ def collision_beam_handler(beam, obj):
         return False
 
 
-def collision_player_handler(player, obj):
-    if pygame.sprite.collide_rect(player, obj):
-        if isinstance(obj, Enemy):
-            if obj.dead_timer > 0:
-                return False # don't kill player, enemy death animation is triggered but enemy is actually dead!
-        return True
-    else:
-        return False
-
-
 def collision_player(surface, player, hitboxes):
-    if len(pygame.sprite.spritecollide(player, hitboxes, False, collision_player_handler)) > 0:
+    if len(pygame.sprite.spritecollide(player, hitboxes, False, pygame.sprite.collide_rect)) > 0:
         if not player.invincible:
             player.death()
         else:
@@ -102,13 +92,14 @@ def enemy_handler(surface, player, enemies, hitbox):
     if not player.dead:
         for enemy in enemies:
             enemy.move(-1, 0)
-            hitbox.add(enemy)
+            if enemy.dead_counter == 0:
+                hitbox.add(enemy)
 
     for enemy in enemies:
         if player.rect.x - enemy.rect.x > surface.get_width(): # if player has passed enemy far enough, kill enemy
-            enemy.death(sound=False) # start dead_timer on enemy
+            enemy.death(sound=False) # start dead_counter on enemy
 
-        if enemy.dead_timer < enemy.dead_timer_max:
+        if enemy.dead_counter < enemy.dead_counter_max:
             enemy.draw(surface)
         else:
             enemies.remove(enemy)
@@ -205,7 +196,7 @@ def main():
     cooldown_counter = 0
     
     # round fail timer (player died)
-    rf_timer = 0
+    rf_counter = 0
 
     tiled_map = load_pygame('rtype_tile.tmx')
     alpha_surface = Surface((800, 600)) # The custom-surface of the size of the screen.
@@ -247,28 +238,28 @@ def main():
         ####### Round Fail #######
         if player.dead:
             pygame.mixer.music.stop()
-            rf_timer += 1
+            rf_counter += 1
 
-            if 300 > rf_timer > 200:
+            if 300 > rf_counter > 200:
                 alpha += 4
                 alpha_surface.set_alpha(alpha) # Fade out
 
-            elif 350 > rf_timer > 300:
+            elif 350 > rf_counter > 300:
                 scroll_x = 0
                 lives -= 1
                 enemies = create_enemies.get_group(surface)
                 if lives == 0:
                     sys.exit()
-                rf_timer = 350
+                rf_counter = 350
 
-            elif 450 > rf_timer > 350:
+            elif 450 > rf_counter > 350:
                 alpha -= 4
                 alpha_surface.set_alpha(alpha)  # Fade in
 
-            elif rf_timer > 450 and lives > 0:
+            elif rf_counter > 450 and lives > 0:
                 pygame.mixer.music.play(-1, 0.2) # resume music
                 player.respawn()
-                rf_timer = 0
+                rf_counter = 0
 
             surface.blit(alpha_surface, (0, 0))
         else:

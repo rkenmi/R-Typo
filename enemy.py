@@ -4,13 +4,13 @@ from pygame.locals import *
 
 
 ANIMATION_STEP = 15 # time between each animation sprite
-ANIMATION_TIMER_MAX = 200 # time after which animation is looped (back to the starting animation)
+ANIMATION_COUNTER_MAX = 200 # time after which animation is looped (back to the starting animation)
 DEAD_STEP = 10 # time between each death sprite
-DEAD_TIMER_MAX = 70 # time after which
+DEAD_COUNTER_MAX = 70 # time after which
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, x, y, eid=0, animation_timer_max=ANIMATION_TIMER_MAX, dead_timer_max=DEAD_TIMER_MAX):
+    def __init__(self, x, y, eid=0, animation_counter_max=ANIMATION_COUNTER_MAX, dead_counter_max=DEAD_COUNTER_MAX):
         # Don't forget to call the super constructor
         super().__init__()
 
@@ -40,9 +40,9 @@ class Enemy(pygame.sprite.Sprite):
         self.mute = False # mute death sound
 
         # Used as a timer for animation sequences
-        self.animation_timer, self.dead_timer = 0, 0
-        self.animation_timer_max, self.dead_timer_max = animation_timer_max, dead_timer_max
-        self.hit_timer = 0
+        self.animation_counter, self.dead_counter = 0, 0
+        self.animation_counter_max, self.dead_counter_max = animation_counter_max, dead_counter_max
+        self.hit_counter = 0
         self.hit_animation = False
         self.out_of_screen = False
 
@@ -52,21 +52,21 @@ class Enemy(pygame.sprite.Sprite):
         Arguments:
             surface: Screen pygame object
         """
-        if not self.dead:
-            self.animation_timer += 1
-
-            ##### Got Hit! animation #####
-            self.draw_hit_timer()
+        if not self.dead: # enemy is alive
+            self.animation_counter += 1
+            
+            if self.hit_animation: # enemy is hit
+                self.hit_timer() # start hit timer
 
             for i in range(0, len(self.images)+1):
-                if i == len(self.images) and self.animation_timer > (i+1)*ANIMATION_STEP:
+                if i == len(self.images) and self.animation_counter > (i+1)*ANIMATION_STEP:
                     self.image = self.images[0][1]
-                elif self.animation_timer > (i+1)*ANIMATION_STEP and not self.images[i][0]:
+                elif self.animation_counter > (i+1)*ANIMATION_STEP and not self.images[i][0]:
                     self.images[i][0] = True
                     self.image = self.images[i][1]
 
-            if self.animation_timer > self.animation_timer_max:
-                self.animation_timer = 0
+            if self.animation_counter > self.animation_counter_max:
+                self.animation_counter = 0
                 for i in range(0, len(self.images)):
                     self.images[i][0] = False
 
@@ -78,17 +78,18 @@ class Enemy(pygame.sprite.Sprite):
                 surface.blit(self.image, (self.rect.x, self.rect.y))
             else:
                 surface.blit(self.image, (self.rect.x, self.rect.y), None, BLEND_RGB_ADD)
-        else:
-            if self.dead_timer == 0 and not self.mute:
+        else: # enemy is about to die
+            if self.dead_counter == 0 and not self.mute:
                 self.death_sound.play()
 
-            self.dead_timer += 2
+            self.dead_counter += 2
+            self.rect.x -= 1 # enemy can't move while dead, but the animation must align with the scrolling screen
 
             for i in range(0, len(self.dead_images)):
-                if (i+1)*DEAD_STEP < self.dead_timer < (i+2)*DEAD_STEP:
+                if (i+1)*DEAD_STEP < self.dead_counter < (i+2)*DEAD_STEP:
                     self.image = self.dead_images[i]
 
-            if self.dead_timer < self.dead_timer_max:
+            if self.dead_counter < self.dead_counter_max:
                 surface.blit(self.image, (self.rect.x, self.rect.y))
 
     def death(self, sound=True):
@@ -124,10 +125,11 @@ class Enemy(pygame.sprite.Sprite):
             x (int): x coord to move
             y (int): y coord to move
         """
-        self.rect.x += x
-        self.rect.y += y
+        if self.dead_counter == 0:
+            self.rect.x += x
+            self.rect.y += y
 
-    def draw_hit_timer(self):
+    def hit_timer(self):
         """ If Enemy is hit, start the hit timer which will cause it to give a flashing animation
         handled by .draw(). This function does not actually draw anything, but it is a helper
         function for .draw().
@@ -136,11 +138,10 @@ class Enemy(pygame.sprite.Sprite):
             x (int): x coord to move
             y (int): y coord to move
         """
-        if self.hit_animation:
-            self.hit_timer += 1
-            if self.hit_timer > 5:
-                self.hit_timer = 0
-                self.hit_animation = False
+        self.hit_counter += 1
+        if self.hit_counter > 5:
+            self.hit_counter = 0
+            self.hit_animation = False
 
     def take_damage(self, damage):
         """ Enemy takes damage, losing 1 HP.
