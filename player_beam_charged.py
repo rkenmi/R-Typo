@@ -118,7 +118,6 @@ class ChargedBeam(Beam):
                 self.charge_sound.stop()
                 self.charge_timer = 0
                 self.shot_ready = False
-
                 if self.charge_level > 0:
                     self.sound.play()
 
@@ -132,7 +131,7 @@ class ChargedBeam(Beam):
                     self.rect.y -= 15
 
             x, y = self.rect.x, self.rect.y
-            self.rect = self.image.get_rect() # update rect to fix moving hitboxes
+            self.rect = self.image.get_rect()  # update rect to fix moving hitboxes
             self.rect.x, self.rect.y = x, y
 
             #  Only trigger once, when drawn for the first time
@@ -166,14 +165,14 @@ class ChargedBeam(Beam):
             image = self.image
             image_x, image_y = self.image.get_width(), self.image.get_height()
             x += 10
-            y -= 2
+            y -= 16
             if 3 <= self.charge_level < 6:
-                x += 40
-                y -= 8
+                x += 35
+                y -= 14
                 image = pygame.transform.scale(self.image, (image_x * 2, image_y * 2))
             elif self.charge_level == 6:
-                x += 90
-                y -= 18
+                x += 35
+                y -= 32
                 image = pygame.transform.scale(self.image, (image_x * 3, image_y * 3))
 
             surface.blit(image, (x, y))

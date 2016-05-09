@@ -51,13 +51,10 @@ def update_beams(surface, beams, hitbox, debug=0):
                 pygame.draw.rect(surface, (0, 0, 255),
                      (beam.rect.x, beam.rect.y, beam.image.get_width(), beam.image.get_height() ))
         else:
-            #impact_images = beam.impact_images
-            #x, y = beam.rect.x, beam.rect.y
             if not beam.dead:
                 beam.impact(surface)
             else:
                 beams.remove(beam)
-            #.blit(impact_images[0], (x, y))
 
 
 def collision_beam_handler(beam, obj):
@@ -176,7 +173,7 @@ def main():
 
     # set up the music
     pygame.mixer.music.load('sounds/music/solo_sortie.mp3')
-    pygame.mixer.music.play(-1, 0.2) # loop music
+    pygame.mixer.music.play(-1, 0.2)  # loop music
 
     # set mixer channel to 4 for performance and to prevent sound conflicts
     pygame.mixer.set_num_channels(4)

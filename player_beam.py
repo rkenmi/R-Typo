@@ -101,7 +101,7 @@ class Beam(pygame.sprite.Sprite):
                 if i*impact_step < self.impact_timer < (i+1)*impact_step:
                     self.image = self.impact_images[i]
 
-            surface.blit(self.image, (self.rect.x+15, self.rect.y-3))
+            surface.blit(self.image, (self.rect.x+15, self.rect.y-10))
 
             if self.impact_timer > 6:
                 self.dead = True
