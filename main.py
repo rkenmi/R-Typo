@@ -9,6 +9,7 @@ from icon import Icon
 from player_beam_charged import ChargedBeam
 from enemy import Enemy
 import create_enemies
+from enemy_script import enemy_script
 import sys,random
 
 # CONSTANTS
@@ -43,20 +44,28 @@ def update_beams(surface, beams, hitbox, debug=0):
             beam.draw(surface)
         elif not beam.charging and \
                 len(pygame.sprite.spritecollide(beam, hitbox, False, collision_beam_handler)) == 0 \
-                and not beam.out_of_screen:
+                and not beam.out_of_screen and not beam.dead:
             beam.draw(surface)
             beam.move(surface)
             if debug:
                 pygame.draw.rect(surface, (0, 0, 255),
                      (beam.rect.x, beam.rect.y, beam.image.get_width(), beam.image.get_height() ))
         else:
-            beams.remove(beam)
+            #impact_images = beam.impact_images
+            #x, y = beam.rect.x, beam.rect.y
+            if not beam.dead:
+                beam.impact(surface)
+            else:
+                beams.remove(beam)
+            #.blit(impact_images[0], (x, y))
 
 
-def collision_beam_handler(a, b):
-    if pygame.sprite.collide_rect(a, b):
-        if isinstance(b, Enemy):
-            b.take_damage(a.damage)
+def collision_beam_handler(beam, obj):
+    if pygame.sprite.collide_rect(beam, obj):
+        if isinstance(obj, Enemy):
+            obj.take_damage(beam.damage)
+            if obj.dead:
+                return False
         return True
     else:
         return False
@@ -93,13 +102,6 @@ def enemy_handler(surface, player, enemies, hitbox):
             enemy.draw(surface)
         else:
             enemies.remove(enemy)
-
-
-def enemy_triggers(scroll_x, enemies):
-    if -700 < scroll_x < -500:
-        for enemy in enemies:
-            if enemy.id == 2:
-                enemy.move(-1, 0)
 
 
 def player_keys_move(surface, player, keys):
@@ -261,11 +263,11 @@ def main():
             surface.blit(alpha_surface, (0, 0))
         else:
             alpha = 0
-            scroll_x -= 1   # Scroll the background to the right by decrementing offset scroll_x
+            scroll_x -= 1 # Scroll the background to the right by decrementing offset scroll_x
 
-        enemy_triggers(scroll_x, enemies)
+        enemy_script(scroll_x, enemies) # Actions enemies make depending on where the screen is
 
-        pygame.display.update()  # Update the display when all events have been processed
+        pygame.display.update() # Update the display when all events have been processed
         FPS_CLOCK.tick(FPS)
 
 if __name__ == "__main__":

@@ -33,10 +33,14 @@ class ChargedBeam(Beam):
                         pygame.image.load("sprites/player_wpn2_shoot"+str(i+1)+"b.gif").convert()
                     )
                 )
+                self.impact_images = []
 
-        self.image = pygame.image.load("sprites/black.gif").convert() # temporary sprite
+        for i in range(0, 5):
+            self.impact_images.append(pygame.image.load("sprites/player_wpn2_impact"+str(i+1)+".gif").convert())
 
-        self.charge_image = self.charge_images[0]
+        self.image =  pygame.image.load("sprites/black.gif").convert() # temporary sprite
+
+        self.charge_image = pygame.image.load("sprites/player_wpn1.gif").convert()
         #self.image = pygame.image.load("sprites/player_wpn2_shoot5a.gif").convert() # temporary sprite
 
         # Set the color that should be transparent
@@ -50,16 +54,32 @@ class ChargedBeam(Beam):
         self.rect.y = y
 
         # Charged beams will have varying damage
-        self.damage = 0
+        self.charge_level = 0
         
         # Used as a timer for animation sequences
         self.animation_timer = 0
 
-        # Used as a timer for duration of charge
+        # Used as a timer for duration of charge and charging animation sequences
         self.charge_timer = 0
+
+        # Charged beams can fail (i.e. player dies while charging), with no displayed output
+        self.fail = 0
         
         # A flag to use up the charged shot if True
         self.shot_ready = False
+
+    def move(self, surface):
+        """ Player 1 beam (lvl 1) moves only in the +x direction
+
+        Arguments:
+            surface (pygame.Surface) : the screen to display
+        """
+        if self.charge_level != 0:
+            self.rect.x += self.vx
+            if self.rect.x > surface.get_width():
+                self.out_of_screen = True
+        else:
+            self.dead = True
 
     def draw(self, surface):
         """ Draws to screen
@@ -76,12 +96,13 @@ class ChargedBeam(Beam):
             self.shot_ready = True
 
             for i in range(0, len(self.charge_images)):
-                if (charge_step*i) / (self.damage+1) <= self.charge_timer < (charge_step*(i+1)) / (self.damage+1):
+                if (charge_step*i) / (self.charge_level+1) <= self.charge_timer < (charge_step*(i+1)) / (self.charge_level+1):
                     self.charge_image = self.charge_images[i]
                     if i == 5:
                         self.charge_timer = 0
-                        if self.damage < 6:
-                            self.damage += 1
+                        if self.charge_level < 6:
+                            self.charge_level += 1
+                            self.damage = self.charge_level * 3
 
             surface.blit(self.charge_image, (self.rect.x, self.rect.y - 20))
             self.charge_image.set_colorkey(pygame.Color(0, 0, 0))
@@ -91,7 +112,7 @@ class ChargedBeam(Beam):
             self.animation_timer += 1
 
             for i in range(0, 6):
-                if self.damage == i+1:
+                if self.charge_level == i+1:
                     if self.animation_timer % 3 == 0:
                         self.image = self.shoot_images[i][1]
                     else:
@@ -102,16 +123,16 @@ class ChargedBeam(Beam):
                 self.charge_timer = 0
                 self.shot_ready = False
 
-                if self.damage > 0:
+                if self.charge_level > 0:
                     self.sound.play()
 
-                if self.damage == 3:
+                if self.charge_level == 3:
                     self.rect.y -= 2
-                elif self.damage == 4:
+                elif self.charge_level == 4:
                     self.rect.y -= 5
-                elif self.damage == 5:
+                elif self.charge_level == 5:
                     self.rect.y -= 10
-                elif self.damage == 6:
+                elif self.charge_level == 6:
                     self.rect.y -= 15
 
             x, y = self.rect.x, self.rect.y
@@ -126,3 +147,32 @@ class ChargedBeam(Beam):
                 self.charge_sound.stop()
                 self.charge_timer = 0
                 self.shot_ready = False
+
+    def impact(self, surface):
+        self.damage = 0 # prevent damage from triggering multiple times
+        impact_step = 2
+        if not self.dead:
+            self.impact_timer += 1
+            for i in range(0, len(self.impact_images)):
+                if i*impact_step < self.impact_timer < (i+1)*impact_step:
+                    self.image = self.impact_images[i]
+
+            x, y = self.rect.x, self.rect.y
+            image = self.image
+            image_x, image_y = self.image.get_width(), self.image.get_height()
+            x += 10
+            y -= 2
+            if 3 <= self.charge_level < 6:
+                x += 40
+                y -= 8
+                image = pygame.transform.scale(self.image, (image_x * 2, image_y * 2))
+            elif self.charge_level == 6:
+                x += 90
+                y -= 18
+                image = pygame.transform.scale(self.image, (image_x * 3, image_y * 3))
+
+            surface.blit(image, (x, y))
+
+            if self.impact_timer > 6:
+                self.dead = True
+

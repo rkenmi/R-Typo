@@ -96,6 +96,27 @@ class Enemy(pygame.sprite.Sprite):
         if not sound:
             self.mute = True
 
+    def shoot(self, beam_x, beam_y, charged=False):
+        """
+        Arguments:
+            beam_x (int): x coordinate of where beam will be drawn
+            beam_y (int): y coordinate of where beam will be drawn
+            charged (bool): True/False depending on whether it is a charged beam or not
+
+        Returns:
+            A newly created beam object
+        """
+        """
+        if not charged:
+            b = Beam(beam_x, beam_y)
+        else:
+            b = ChargedBeam(beam_x, beam_y)
+            b.charging = True
+            self.charged_beam = b
+        return b
+        """
+        pass
+
     def move(self, x, y):
         """ Moves the enemy. Very barebones.
 
@@ -128,6 +149,7 @@ class Enemy(pygame.sprite.Sprite):
             damage (int) : Integer amount that the
 
         """
+        #print(damage)
         self.hp -= damage
         if self.hp <= 0:
             self.death()

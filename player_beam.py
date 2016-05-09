@@ -24,6 +24,9 @@ class Beam(pygame.sprite.Sprite):
 
         # Load image
         self.image = pygame.image.load("sprites/player_wpn1.gif").convert()
+        self.impact_images = []
+        for i in range(0, 2):
+            self.impact_images.append(pygame.image.load("sprites/player_wpn1_impact"+str(i+1)+".gif").convert())
 
         # Set the color that should be transparent
         self.image.set_colorkey(pygame.Color(0, 0, 0))
@@ -37,20 +40,21 @@ class Beam(pygame.sprite.Sprite):
         # By default, beams do not charge but fire rapidly
         self.charging = False
 
-        # Beams can fail, with no displayed output
-        self.fail = False
+        # Flag to remove beam
+        self.dead = False
 
         # Variables
+        self.impact_timer = 0
         self.damage = 1
         self.out_of_screen = False
 
-    def draw(self, SCREEN):
+    def draw(self, surface):
         """ Draws to screen
 
         Arguments:
-            SCREEN: Screen pygame object
+            surface: Screen pygame object
         """
-        SCREEN.blit(self.image, (self.rect.x, self.rect.y))
+        surface.blit(self.image, (self.rect.x, self.rect.y))
 
     def bounce(self):
         """ Bounces the ball by inverting the angles.
@@ -64,14 +68,27 @@ class Beam(pygame.sprite.Sprite):
 
         self.hit = not self.hit
 
-    def move(self, SCREEN):
+    def move(self, surface):
         """ Player 1 beam (lvl 1) moves only in the +x direction
 
         Arguments:
-            x (int): x coord to move
-            y (int): y coord to move
+            surface (pygame.Surface) : the screen to display
         """
 
         self.rect.x += self.vx
-        if self.rect.x > SCREEN.get_width():
+        if self.rect.x > surface.get_width():
             self.out_of_screen = True
+
+    def impact(self, surface):
+        self.damage = 0 # prevent damage from triggering multiple times
+        impact_step = 2
+        if not self.dead:
+            self.impact_timer += 1
+            for i in range(0, len(self.impact_images)):
+                if i*impact_step < self.impact_timer < (i+1)*impact_step:
+                    self.image = self.impact_images[i]
+
+            surface.blit(self.image, (self.rect.x+15, self.rect.y-3))
+
+            if self.impact_timer > 6:
+                self.dead = True
