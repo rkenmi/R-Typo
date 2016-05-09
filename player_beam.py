@@ -43,6 +43,9 @@ class Beam(pygame.sprite.Sprite):
         # Flag to remove beam
         self.dead = False
 
+        # Out of screen coords for the beam, to be determined when first drawn
+        self.oos_x, self.oos_y = -1, -1
+
         # Variables
         self.impact_timer = 0
         self.damage = 1
@@ -54,6 +57,11 @@ class Beam(pygame.sprite.Sprite):
         Arguments:
             surface: Screen pygame object
         """
+        # Only trigger once, when drawn for the first time
+        if self.oos_x == -1 and self.oos_y == -1:
+                self.oos_x, self.oos_y = surface.get_width() - self.image.get_width()/2, \
+                                         surface.get_height() - self.image.get_height()/2
+
         surface.blit(self.image, (self.rect.x, self.rect.y))
 
     def bounce(self):
@@ -68,7 +76,7 @@ class Beam(pygame.sprite.Sprite):
 
         self.hit = not self.hit
 
-    def move(self, surface):
+    def move(self):
         """ Player 1 beam (lvl 1) moves only in the +x direction
 
         Arguments:
@@ -76,13 +84,16 @@ class Beam(pygame.sprite.Sprite):
         """
 
         self.rect.x += self.vx
-        if self.rect.x > surface.get_width():
+        if self.rect.x > self.oos_x:
             self.out_of_screen = True
 
     def impact(self, surface):
         self.damage = 0 # prevent damage from triggering multiple times
         impact_step = 2
-        if not self.dead:
+
+        if self.out_of_screen:
+            self.dead = True
+        elif not self.dead:
             self.impact_timer += 1
             for i in range(0, len(self.impact_images)):
                 if i*impact_step < self.impact_timer < (i+1)*impact_step:

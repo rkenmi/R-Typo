@@ -55,7 +55,7 @@ class Enemy(pygame.sprite.Sprite):
         if not self.dead:
             self.animation_timer += 1
 
-            ##### Hit Animation #####
+            ##### Got Hit! animation #####
             self.draw_hit_timer()
 
             for i in range(0, len(self.images)+1):

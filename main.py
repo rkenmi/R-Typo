@@ -46,7 +46,7 @@ def update_beams(surface, beams, hitbox, debug=0):
                 len(pygame.sprite.spritecollide(beam, hitbox, False, collision_beam_handler)) == 0 \
                 and not beam.out_of_screen and not beam.dead:
             beam.draw(surface)
-            beam.move(surface)
+            beam.move()
             if debug:
                 pygame.draw.rect(surface, (0, 0, 255),
                      (beam.rect.x, beam.rect.y, beam.image.get_width(), beam.image.get_height() ))
@@ -71,8 +71,18 @@ def collision_beam_handler(beam, obj):
         return False
 
 
-def collision_player(surface, player, hitbox):
-    if len(pygame.sprite.spritecollide(player, hitbox, False, pygame.sprite.collide_rect)) > 0:
+def collision_player_handler(player, obj):
+    if pygame.sprite.collide_rect(player, obj):
+        if isinstance(obj, Enemy):
+            if obj.dead_timer > 0:
+                return False # don't kill player, enemy death animation is triggered but enemy is actually dead!
+        return True
+    else:
+        return False
+
+
+def collision_player(surface, player, hitboxes):
+    if len(pygame.sprite.spritecollide(player, hitboxes, False, collision_player_handler)) > 0:
         if not player.invincible:
             player.death()
         else:
