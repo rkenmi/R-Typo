@@ -8,17 +8,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/player_wpn2_charge1.ogg.sfl" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/player_wpn2_charge2.ogg.sfl" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/player_wpn2_shoot.ogg.sfl" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sprites/enemy_wpn1_shoot1.gif" afterPath="$PROJECT_DIR$/sprites/enemy_wpn1_shoot1.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sprites/enemy_wpn1_shoot2.gif" afterPath="$PROJECT_DIR$/sprites/enemy_wpn1_shoot2.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sprites/enemy_wpn1_shoot3.gif" afterPath="$PROJECT_DIR$/sprites/enemy_wpn1_shoot3.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sprites/enemy_wpn1_shoot4.gif" afterPath="$PROJECT_DIR$/sprites/enemy_wpn1_shoot4.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_enemies.py" afterPath="$PROJECT_DIR$/create_enemies.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enemy.py" afterPath="$PROJECT_DIR$/enemy.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enemy_script.py" afterPath="$PROJECT_DIR$/enemy_script.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player.py" afterPath="$PROJECT_DIR$/player.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player_beam_charged.py" afterPath="$PROJECT_DIR$/player_beam_charged.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sounds/player_dead.ogg" afterPath="$PROJECT_DIR$/sounds/player_dead.ogg" />
     </list>
     <ignored path="r-typu.iws" />
     <ignored path=".idea/workspace.xml" />
