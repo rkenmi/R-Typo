@@ -61,6 +61,7 @@ def collision_beam_handler(beam, obj):
     if pygame.sprite.collide_rect(beam, obj):
         if isinstance(obj, Enemy):
             obj.take_damage(beam.damage)
+            beam.draw_impact = False
             if obj.dead:
                 return False
         return True

@@ -41,6 +41,9 @@ class Beam(pygame.sprite.Sprite):
         # By default, beams do not charge but fire rapidly
         self.charging = False
 
+        # By default, display impact animation for beams
+        self.draw_impact = True
+
         # Flag to remove beam
         self.dead = False
 
@@ -101,7 +104,8 @@ class Beam(pygame.sprite.Sprite):
                 if i*impact_step < self.impact_timer < (i+1)*impact_step:
                     self.image = self.impact_images[i]
 
-            surface.blit(self.image, (self.rect.x+15, self.rect.y-10))
+            if self.draw_impact:
+                surface.blit(self.image, (self.rect.x+15, self.rect.y-10))
 
             if self.impact_timer > 6:
                 self.dead = True

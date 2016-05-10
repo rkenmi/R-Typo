@@ -175,7 +175,8 @@ class ChargedBeam(Beam):
                 y -= 32
                 image = pygame.transform.scale(self.image, (image_x * 3, image_y * 3))
 
-            surface.blit(image, (x, y))
+            if self.draw_impact:
+                surface.blit(image, (x, y))
 
             if self.impact_timer > 6:
                 self.dead = True
