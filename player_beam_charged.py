@@ -55,10 +55,10 @@ class ChargedBeam(Beam):
         self.charge_level = 0
         
         # Used as a timer for animation sequences
-        self.animation_timer = 0
+        self.animation_counter = 0
 
         # Used as a timer for duration of charge and charging animation sequences
-        self.charge_timer = 0
+        self.charge_counter = 0
 
         # Charged beams can fail (i.e. player dies while charging), with no displayed output
         self.fail = 0
@@ -88,14 +88,14 @@ class ChargedBeam(Beam):
             if not self.shot_ready:
                 self.charge_sound.play(-1)
 
-            self.charge_timer += 1
+            self.charge_counter += 1
             self.shot_ready = True
 
             for i in range(0, len(self.charge_images)):
-                if (charge_step*i) / (self.charge_level+1) <= self.charge_timer < (charge_step*(i+1)) / (self.charge_level+1):
+                if (charge_step*i) / (self.charge_level+1) <= self.charge_counter < (charge_step*(i+1)) / (self.charge_level+1):
                     self.charge_image = self.charge_images[i]
                     if i == 5:
-                        self.charge_timer = 0
+                        self.charge_counter = 0
                         if self.charge_level < 6:
                             self.charge_level += 1
                             self.damage = self.charge_level * 3
@@ -105,18 +105,18 @@ class ChargedBeam(Beam):
 
         elif not self.fail and not self.charging: # key is let go, or beam is about to shoot
             self.charge_image = None
-            self.animation_timer += 1
+            self.animation_counter += 1
 
             for i in range(0, 6):
                 if self.charge_level == i+1:
-                    if self.animation_timer % 3 == 0:
+                    if self.animation_counter % 3 == 0:
                         self.image = self.shoot_images[i][1]
                     else:
                         self.image = self.shoot_images[i][0]
 
             if self.shot_ready:
                 self.charge_sound.stop()
-                self.charge_timer = 0
+                self.charge_counter = 0
                 self.shot_ready = False
                 if self.charge_level > 0:
                     self.sound.play()
@@ -146,10 +146,11 @@ class ChargedBeam(Beam):
         elif self.fail:
             if self.shot_ready:
                 self.charge_sound.stop()
-                self.charge_timer = 0
+                self.charge_counter = 0
                 self.shot_ready = False
 
     def impact(self, surface):
+        print(self.collide_distance)
         self.damage = 0  # prevent damage from triggering multiple times
         impact_step = 2
 
@@ -175,7 +176,7 @@ class ChargedBeam(Beam):
                 y -= 32
                 image = pygame.transform.scale(self.image, (image_x * 3, image_y * 3))
 
-            if self.draw_impact:
+            if self.draw_impact and self.collide_distance > 100:  # only show impact if distance is far enough
                 surface.blit(image, (x, y))
 
             if self.impact_timer > 6:

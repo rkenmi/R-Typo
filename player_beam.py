@@ -51,6 +51,7 @@ class Beam(pygame.sprite.Sprite):
         self.oos_x, self.oos_y = -1, -1
 
         # Variables
+        self.collide_distance = 0  # this value gets filled when the beam hits something (like a wall)
         self.impact_timer = 0
         self.damage = 1
         self.out_of_screen = False

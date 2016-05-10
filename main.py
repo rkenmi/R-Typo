@@ -60,16 +60,25 @@ def update_projectiles(surface, projectiles, hitbox, debug=0):
                 projectiles.remove(projectile)
 
 
-def collision_projectile(projectile, obj):
-    if pygame.sprite.collide_rect(projectile, obj):
-        if isinstance(projectile, Beam) and isinstance(obj, Enemy):
-            obj.take_damage(projectile.damage)
+def collision_projectile(projectile, target):
+    if pygame.sprite.collide_rect(projectile, target):
+        # if the player projectile hits the enemy...
+        if isinstance(projectile, Beam) and isinstance(target, Enemy):
+            target.take_damage(projectile.damage)
             projectile.draw_impact = False
-            if obj.dead:
+            if target.dead:
                 return False
-        elif isinstance(projectile, Bullet) and (isinstance(obj, Enemy) or isinstance(obj, Player)):
+
+        # enemy projectiles shouldn't kill the enemy itself if they are touching
+        elif isinstance(projectile, Bullet) and isinstance(target, Enemy):
             return False
 
+        # player projectiles and enemy projectiles should pass through each other
+        elif isinstance(projectile, Beam) and isinstance(target, Bullet):
+            return False
+
+        #print(target.rect[0])
+        projectile.collide_distance = target.rect[0] - projectile.rect.x
         return True
     else:
         return False

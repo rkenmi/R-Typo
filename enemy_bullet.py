@@ -2,6 +2,8 @@ import pygame
 import math
 from pygame.locals import *
 
+ANIMATION_STEP = 3
+
 
 #  Derive your class from the Sprite super class
 class Bullet(pygame.sprite.Sprite):
@@ -53,7 +55,8 @@ class Bullet(pygame.sprite.Sprite):
         self.oos_x, self.oos_y = -1, -1
 
         # Variables
-        self.impact_timer = 0
+        self.animation_counter = 0
+        self.impact_counter = 0
         self.damage = 1
         self.out_of_screen = False
 
@@ -63,6 +66,15 @@ class Bullet(pygame.sprite.Sprite):
         Arguments:
             surface: Screen pygame object
         """
+        self.animation_counter += 1
+
+        for i in range(0, len(self.shoot_images)):
+            if self.animation_counter > (i+1)*ANIMATION_STEP:
+                self.image = self.shoot_images[i]
+
+        if self.animation_counter > ANIMATION_STEP * 5:
+            self.animation_counter = 0
+
         surface.blit(self.image, (self.rect.x, self.rect.y))
         self.move()
 
@@ -99,13 +111,13 @@ class Bullet(pygame.sprite.Sprite):
         if self.out_of_screen:
             self.dead = True
         elif not self.dead:
-            self.impact_timer += 1
+            self.impact_counter += 1
             for i in range(0, len(self.impact_images)):
-                if i*impact_step < self.impact_timer < (i+1)*impact_step:
+                if i*impact_step < self.impact_counter < (i+1)*impact_step:
                     self.image = self.impact_images[i]
 
             if self.draw_impact:
                 surface.blit(self.image, (self.rect.x+15, self.rect.y-10))
 
-            if self.impact_timer > 6:
+            if self.impact_counter > 6:
                 self.dead = True

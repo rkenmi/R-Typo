@@ -27,7 +27,7 @@ class Enemy(pygame.sprite.Sprite):
         self.image.set_colorkey(pygame.Color(0, 0, 0))
 
         # Sounds
-        self.death_sound = pygame.mixer.Sound('sounds/player_dead.ogg')
+        self.death_sound = pygame.mixer.Sound('sounds/enemy_dead.wav')
 
         # Required for collision detection
         self.rect = self.image.get_rect()
@@ -35,9 +35,10 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.y = y
 
         # Variables
-        self.id = eid
+        self.id = eid # enemy id used in scripting
         self.hp = 1 # default 1 hp
         self.dead = False
+        self.can_shoot = True
         self.mute = False # mute death sound
 
         # Used as a timer for animation sequences
@@ -101,16 +102,16 @@ class Enemy(pygame.sprite.Sprite):
             self.mute = True
 
     def shoot(self, target_x, target_y, charged=False):
-        """
+        """ The enemy shoots some projectile at the player. Some enemies can do this, others can't.
         Arguments:
             target_x (int): x coordinate of the aimed location
             target_y (int): y coordinate of the aimed location
             charged (bool): True/False depending on whether it is a charged beam or not
 
         Returns:
-            A newly created beam object
+            A newly created Bullet object
         """
-        if 0 < self.rect.x - target_x < 800:
+        if self.can_shoot and 0 < self.rect.x - target_x < 800:
             return Bullet(self.rect.x, self.rect.y, target_x, target_y)
 
     def move(self, x, y, bypass=False):
@@ -127,8 +128,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def hit_timer(self):
         """ If Enemy is hit, start the hit timer which will cause it to give a flashing animation
-        handled by .draw(). This function does not actually draw anything, but it is a helper
-        function for .draw().
+        handled by .draw().
 
         Arguments:
             x (int): x coord to move
@@ -140,13 +140,11 @@ class Enemy(pygame.sprite.Sprite):
             self.hit_animation = False
 
     def take_damage(self, damage):
-        """ Enemy takes damage, losing 1 HP.
+        """ Enemy takes damage, losing HP. If HP falls to 0 or lower, the enemy dies.
 
         Parameters:
-            damage (int) : Integer amount that the
-
+            damage (int) : Integer amount that the enemy takes as damage
         """
-        #print(damage)
         self.hp -= damage
         if self.hp <= 0:
             self.death()
