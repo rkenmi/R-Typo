@@ -1,6 +1,7 @@
 import pygame
 import math
 from pygame.locals import *
+from enemy_bullet import Bullet
 
 
 ANIMATION_STEP = 15 # time between each animation sprite
@@ -99,26 +100,18 @@ class Enemy(pygame.sprite.Sprite):
         if not sound:
             self.mute = True
 
-    def shoot(self, beam_x, beam_y, charged=False):
+    def shoot(self, target_x, target_y, charged=False):
         """
         Arguments:
-            beam_x (int): x coordinate of where beam will be drawn
-            beam_y (int): y coordinate of where beam will be drawn
+            target_x (int): x coordinate of the aimed location
+            target_y (int): y coordinate of the aimed location
             charged (bool): True/False depending on whether it is a charged beam or not
 
         Returns:
             A newly created beam object
         """
-        """
-        if not charged:
-            b = Beam(beam_x, beam_y)
-        else:
-            b = ChargedBeam(beam_x, beam_y)
-            b.charging = True
-            self.charged_beam = b
-        return b
-        """
-        pass
+        if 0 < self.rect.x - target_x < 800:
+            return Bullet(self.rect.x, self.rect.y, target_x, target_y)
 
     def move(self, x, y, bypass=False):
         """ Moves the enemy if enemy is not dead.

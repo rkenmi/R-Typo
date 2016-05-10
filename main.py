@@ -9,6 +9,7 @@ from icon import Icon
 from player_beam_charged import ChargedBeam
 from enemy import Enemy
 import create_enemies
+from enemy_bullet import Bullet
 from enemy_script import enemy_script
 import sys,random
 
@@ -38,32 +39,37 @@ def draw_scrolling_hitbox(surface, tiled_map, hitbox, scroll_x, debug=0):
                 hitbox.add(spr) # add pytmx map platforms
 
 
-def update_beams(surface, beams, hitbox, debug=0):
-    for beam in beams:
-        if beam.charging:
-            beam.draw(surface)
-        elif not beam.charging and \
-                len(pygame.sprite.spritecollide(beam, hitbox, False, collision_beam_handler)) == 0 \
-                and not beam.out_of_screen and not beam.dead:
-            beam.draw(surface)
-            beam.move()
+def update_projectiles(surface, projectiles, hitbox, debug=0):
+    for projectile in projectiles:
+        if projectile.charging:
+            projectile.draw(surface)
+        elif not projectile.charging and \
+                len(pygame.sprite.spritecollide(projectile, hitbox, False, collision_projectile)) == 0 \
+                and not projectile.out_of_screen and not projectile.dead:
+            if isinstance(projectile, Bullet):
+                hitbox.add(projectile)
+            projectile.draw(surface)
+            projectile.move()
             if debug:
                 pygame.draw.rect(surface, (0, 0, 255),
-                     (beam.rect.x, beam.rect.y, beam.image.get_width(), beam.image.get_height() ))
+                     (projectile.rect.x, projectile.rect.y, projectile.image.get_width(), projectile.image.get_height() ))
         else:
-            if not beam.dead:
-                beam.impact(surface)
+            if not projectile.dead and isinstance(projectile, Beam):
+                projectile.impact(surface)
             else:
-                beams.remove(beam)
+                projectiles.remove(projectile)
 
 
-def collision_beam_handler(beam, obj):
-    if pygame.sprite.collide_rect(beam, obj):
-        if isinstance(obj, Enemy):
-            obj.take_damage(beam.damage)
-            beam.draw_impact = False
+def collision_projectile(projectile, obj):
+    if pygame.sprite.collide_rect(projectile, obj):
+        if isinstance(projectile, Beam) and isinstance(obj, Enemy):
+            obj.take_damage(projectile.damage)
+            projectile.draw_impact = False
             if obj.dead:
                 return False
+        elif isinstance(projectile, Bullet) and (isinstance(obj, Enemy) or isinstance(obj, Player)):
+            return False
+
         return True
     else:
         return False
@@ -120,16 +126,16 @@ def player_keys_move(surface, player, keys):
     player.move(surface, vx, vy)
 
 
-def player_keys_shoot(surface, player, keys, beams, cooldown_counter):
+def player_keys_shoot(surface, player, keys, projectiles, cooldown_counter):
     if keys[pygame.K_SPACE] and not player.charged_beam:
         if cooldown_counter == 0 and not player.dead:
-            beams.add(
+            projectiles.add(
                 player.shoot(player.rect.x+player.image.get_width(), player.rect.y+player.image.get_height()/2)
             )
             cooldown_counter += 1 # Initiate cooldown sequence
     elif keys[pygame.K_e]:
         if not player.charged_beam and not player.dead:
-            beams.add(
+            projectiles.add(
                 player.shoot(player.rect.x+player.image.get_width()-5, player.rect.y+player.image.get_height()/2, True)
             )
     else:
@@ -180,7 +186,7 @@ def main():
     pygame.mixer.set_num_channels(4)
 
     hitbox = pygame.sprite.Group()
-    beams = pygame.sprite.Group()
+    projectiles = pygame.sprite.Group()
 
     player = Player(100, 280)
     player.draw(surface)
@@ -207,7 +213,7 @@ def main():
         ####### Key Events #######
         keys = pygame.key.get_pressed()
         player_keys_move(surface, player, keys)
-        cooldown_counter = player_keys_shoot(surface, player, keys, beams, cooldown_counter)
+        cooldown_counter = player_keys_shoot(surface, player, keys, projectiles, cooldown_counter)
 
         ####### Normal Events #######
         for event in pygame.event.get():
@@ -221,7 +227,7 @@ def main():
 
         ####### Collisions #######
         enemy_handler(surface, player, enemies, hitbox)
-        update_beams(surface, beams, hitbox)
+        update_projectiles(surface, projectiles, hitbox)
         player.draw(surface)
 
         collision_player(surface, player, hitbox)
@@ -236,6 +242,7 @@ def main():
         ####### Round Fail #######
         if player.dead:
             pygame.mixer.music.stop()
+            projectiles.empty()
             rf_counter += 1
 
             if 300 > rf_counter > 200:
@@ -263,8 +270,8 @@ def main():
         else:
             alpha = 0
             scroll_x -= 1 # Scroll the background to the right by decrementing offset scroll_x
-
-        enemy_script(scroll_x, enemies) # Actions enemies make depending on where the screen is
+        #print(scroll_x)
+        enemy_script(scroll_x, player, enemies, projectiles) # Actions enemies make depending on where the screen is
 
         pygame.display.update() # Update the display when all events have been processed
         FPS_CLOCK.tick(FPS)
