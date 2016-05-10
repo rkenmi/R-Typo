@@ -22,7 +22,7 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load("sprites/player.gif").convert()
         self.dead_images = []
         for i in range(0, 6):
-            self.dead_images.append(pygame.image.load("sprites/enemy_dead"+str(i+1)+".gif").convert())
+            self.dead_images.append(pygame.image.load("sprites/player_dead"+str(i+1)+".gif").convert())
 
         # Set the color that should be transparent
         self.image.set_colorkey(pygame.Color(0, 0, 0))
@@ -68,12 +68,12 @@ class Player(pygame.sprite.Sprite):
 
             self.dead_timer += 1
 
-            death_step = 10
+            death_step = 5
             for i in range(0, len(self.dead_images)):
                 if (i+1)*death_step < self.dead_timer < (i+2)*death_step:
                     self.image = self.dead_images[i]
 
-            if self.dead_timer < 70:
+            if self.dead_timer < 35:
                 surface.blit(self.image, (self.rect.x, self.rect.y))
 
     def death(self):

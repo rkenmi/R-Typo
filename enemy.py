@@ -47,6 +47,7 @@ class Enemy(pygame.sprite.Sprite):
         self.hit_counter = 0
         self.hit_animation = False
         self.out_of_screen = False
+        self.idle_animation = True
 
     def draw(self, surface):
         """ Draws to screen
@@ -60,17 +61,18 @@ class Enemy(pygame.sprite.Sprite):
             if self.hit_animation: # enemy was hit with a beam
                 self.hit_timer() # start hit timer
 
-            for i in range(0, len(self.images)+1):
-                if i == len(self.images) and self.animation_counter > (i+1)*ANIMATION_STEP:
-                    self.image = self.images[0][1]
-                elif self.animation_counter > (i+1)*ANIMATION_STEP and not self.images[i][0]:
-                    self.images[i][0] = True
-                    self.image = self.images[i][1]
+            if self.idle_animation:
+                for i in range(0, len(self.images)+1):
+                    if i == len(self.images) and self.animation_counter > (i+1)*ANIMATION_STEP:
+                        self.image = self.images[0][1]
+                    elif self.animation_counter > (i+1)*ANIMATION_STEP and not self.images[i][0]:
+                        self.images[i][0] = True
+                        self.image = self.images[i][1]
 
-            if self.animation_counter > self.animation_counter_max:
-                self.animation_counter = 0
-                for i in range(0, len(self.images)):
-                    self.images[i][0] = False
+                if self.animation_counter > self.animation_counter_max:
+                    self.animation_counter = 0
+                    for i in range(0, len(self.images)):
+                        self.images[i][0] = False
 
             x, y = self.rect.x, self.rect.y
             self.rect = self.image.get_rect() # update rect to fix moving hitboxes
@@ -79,7 +81,7 @@ class Enemy(pygame.sprite.Sprite):
             if not self.hit_animation:
                 surface.blit(self.image, (self.rect.x, self.rect.y))
             else:
-                surface.blit(self.image, (self.rect.x, self.rect.y), None, BLEND_RGB_ADD)
+                surface.blit(self.image, (self.rect.x, self.rect.y), None, BLEND_RGBA_ADD)
         else: # enemy is about to die, start dead timer
             if self.dead_counter == 0 and not self.mute:
                 self.death_sound.play()

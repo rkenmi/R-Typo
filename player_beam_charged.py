@@ -150,7 +150,6 @@ class ChargedBeam(Beam):
                 self.shot_ready = False
 
     def impact(self, surface):
-        print(self.collide_distance)
         self.damage = 0  # prevent damage from triggering multiple times
         impact_step = 2
 

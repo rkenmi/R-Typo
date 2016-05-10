@@ -6,7 +6,6 @@ from player import Player
 from player_beam import Beam
 from block import Block
 from icon import Icon
-from player_beam_charged import ChargedBeam
 from enemy import Enemy
 import create_enemies
 from enemy_bullet import Bullet
@@ -102,13 +101,11 @@ def enemy_handler(surface, player, enemies, hitbox):
         enemies (pygame.sprite.Group) : group of enemy sprites
         hitbox (pygame.sprite.Group) : group of hitbox sprites
     """
-    if not player.dead:
-        for enemy in enemies:
-            enemy.move(-1, 0)
-            if enemy.dead_counter == 0:
-                hitbox.add(enemy)
-
     for enemy in enemies:
+        enemy.move(-1, 0)
+        if enemy.dead_counter == 0:
+            hitbox.add(enemy)
+
         if player.rect.x - enemy.rect.x > surface.get_width(): # if player has passed enemy far enough, kill enemy
             enemy.death(sound=False) # start dead_counter on enemy
 
@@ -278,9 +275,10 @@ def main():
             surface.blit(alpha_surface, (0, 0))
         else:
             alpha = 0
-            scroll_x -= 1 # Scroll the background to the right by decrementing offset scroll_x
+
+        scroll_x -= 1 # Scroll the background to the right by decrementing offset scroll_x
         #print(scroll_x)
-        enemy_script(scroll_x, player, enemies, projectiles) # Actions enemies make depending on where the screen is
+        enemy_script(scroll_x, pygame.time.get_ticks(), player, enemies, projectiles) # Actions enemies make depending on where the screen is
 
         pygame.display.update() # Update the display when all events have been processed
         FPS_CLOCK.tick(FPS)
