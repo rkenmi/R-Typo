@@ -24,32 +24,12 @@ class ChargedBeam(Beam):
 
         # Load images
         self.charge_images, self.shoot_images = [], []
-        for i in range (0, 7):
-            self.charge_images.append(pygame.image.load("sprites/player_wpn2_charge"+str(i+1)+".gif").convert())
-            if i < 6:
-                self.shoot_images.append(
-                    (
-                        pygame.image.load("sprites/player_wpn2_shoot"+str(i+1)+"a.gif").convert(),
-                        pygame.image.load("sprites/player_wpn2_shoot"+str(i+1)+"b.gif").convert()
-                    )
-                )
-                self.impact_images = []
-
-        for i in range(0, 5):
-            self.impact_images.append(pygame.image.load("sprites/player_wpn2_impact"+str(i+1)+".gif").convert())
-
-        self.image =  pygame.image.load("sprites/black.gif").convert() # temporary sprite
-        self.charge_image = pygame.image.load("sprites/player_wpn1.gif").convert()
-
-        # Set the color that should be transparent
-        self.image.set_colorkey(pygame.Color(0, 0, 0))
-        self.charge_image.set_colorkey(pygame.Color(0, 0, 0))
+        self.charge_image = None
+        self.load_images()
 
         # Required for collision detection
         self.rect = self.image.get_rect()
-
-        self.rect.x = x
-        self.rect.y = y
+        self.rect.x, self.rect.y = x, y
 
         # Charged beams will have varying damage
         self.charge_level = 0
@@ -181,3 +161,26 @@ class ChargedBeam(Beam):
             if self.impact_timer > 6:
                 self.dead = True
 
+    def load_images(self):
+        self.charge_images, self.shoot_images = [], []
+
+        for i in range(0, 7):
+            self.charge_images.append(pygame.image.load("sprites/player_wpn2_charge"+str(i+1)+".gif").convert())
+            if i < 6:
+                self.shoot_images.append(
+                    (
+                        pygame.image.load("sprites/player_wpn2_shoot"+str(i+1)+"a.gif").convert(),
+                        pygame.image.load("sprites/player_wpn2_shoot"+str(i+1)+"b.gif").convert()
+                    )
+                )
+                self.impact_images = []
+
+        for i in range(0, 5):
+            self.impact_images.append(pygame.image.load("sprites/player_wpn2_impact"+str(i+1)+".gif").convert())
+
+        self.image = pygame.image.load("sprites/black.gif").convert() # temporary sprite
+        self.charge_image = pygame.image.load("sprites/player_wpn1.gif").convert()
+
+        # Set the color that should be transparent
+        self.image.set_colorkey(pygame.Color(0, 0, 0))
+        self.charge_image.set_colorkey(pygame.Color(0, 0, 0))

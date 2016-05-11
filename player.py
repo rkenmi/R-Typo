@@ -21,11 +21,7 @@ class Player(pygame.sprite.Sprite):
         # Load images
         self.image = pygame.image.load("sprites/player.gif").convert()
         self.dead_images = []
-        for i in range(0, 6):
-            self.dead_images.append(pygame.image.load("sprites/player_dead"+str(i+1)+".gif").convert())
-
-        # Set the color that should be transparent
-        self.image.set_colorkey(pygame.Color(0, 0, 0))
+        self.load_images()
 
         # Required for collision detection
         self.rect = self.image.get_rect()
@@ -136,3 +132,12 @@ class Player(pygame.sprite.Sprite):
                 self.rect.y += y
                 if self.charged_beam:
                     self.charged_beam.rect.y += y
+
+    def load_images(self):
+        self.image = pygame.image.load("sprites/player.gif").convert()
+        self.dead_images = []
+        for i in range(0, 6):
+            self.dead_images.append(pygame.image.load("sprites/player_dead"+str(i+1)+".gif").convert())
+
+        # Set the color that should be transparent
+        self.image.set_colorkey(pygame.Color(0, 0, 0))

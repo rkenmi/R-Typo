@@ -11,19 +11,15 @@ class Giru(Enemy):
         # Don't forget to call the super constructor
         super().__init__(x, y, eid, animation_counter_max, dead_counter_max, animation_step, dead_step)
 
-        # Load images
-        self.images = []
-        for i in range(0, 3):
-            self.images.append(
-                [
-                    False, pygame.image.load("sprites/enemy_giru"+str(i+1)+".gif").convert()
-                ]
-            )
-        self.images.append([False, pygame.image.load("sprites/enemy_giru2.gif").convert()])
-        self.image = self.images[0][1]
+        # Enemy Configuration
+        self.hp = 3
+        self.can_shoot = True
+        self.idle_animation = True
+        self.stand_y = y - 14
+        self.idle_y = y
 
-        # Set the color that should be transparent
-        self.image.set_colorkey(pygame.Color(0, 0, 0))
+        # Load images
+        self.load_images()
 
         # Required for collision detection
         self.rect = self.image.get_rect()
@@ -32,15 +28,6 @@ class Giru(Enemy):
 
         # Used as a timer for animation sequences
         self.animation_counter = animation_counter
-
-        # Enemy Configuration
-        self.hp = 3
-        self.can_shoot = True
-        self.idle_animation = True
-        self.stand_y = y - 14
-        self.idle_y = y
-
-        print(self.id)
 
     def draw(self, surface):
         """ Draws to screen
@@ -56,24 +43,20 @@ class Giru(Enemy):
                 self.hit_timer() # start hit timer
 
             if self.idle_animation:
-                if self.animation_step > self.animation_counter > 0:
+                if self.animation_step > self.animation_counter >= 0: #  0-9
                     self.images[0][0] = True
                     self.image = self.images[0][1]
-                elif self.animation_step * 3 > self.animation_counter > self.animation_step:
+                elif self.animation_step * 3 > self.animation_counter >= self.animation_step: #  10-29
                     self.images[1][0] = True
                     self.image = self.images[1][1]
                     stand = True
-                elif self.animation_step * 4 > self.animation_counter > self.animation_step * 3:
+                elif self.animation_step * 4 > self.animation_counter >= self.animation_step * 3:  # 30-39
                     self.images[2][0] = True
                     self.image = self.images[2][1]
-                elif self.animation_step * 6 > self.animation_counter > self.animation_step * 4:
+                elif self.animation_step * 6 >= self.animation_counter >= self.animation_step * 4:  # 40-60
                     self.images[3][0] = True
                     self.image = self.images[3][1]
                     stand = True
-
-
-
-                #if self.animation_counter > self.animation_step and not se
 
                 if stand:
                     self.rect.y = self.stand_y
@@ -81,17 +64,16 @@ class Giru(Enemy):
                 else:
                     self.rect.y = self.idle_y
 
-                if self.animation_counter > self.animation_counter_max:
+                x, y = self.rect.x, self.rect.y
+                self.rect = self.image.get_rect() # update rect to fix moving hitboxes
+                self.rect.x, self.rect.y = x, y
+
+                if self.animation_counter >= self.animation_counter_max:
                     self.animation_counter = 0
                     for i in range(0, len(self.images)):
                         self.images[i][0] = False
 
-            x, y = self.rect.x, self.rect.y
-            self.rect = self.image.get_rect() # update rect to fix moving hitboxes
-            self.rect.x, self.rect.y = x, y
-
             self.image.set_colorkey(pygame.Color(0, 0, 0))
-
             if not self.hit_animation:
                 surface.blit(self.image, (self.rect.x, self.rect.y))
             else:
@@ -109,7 +91,35 @@ class Giru(Enemy):
                 if (i+1)*self.dead_step < self.dead_counter < (i+2)*self.dead_step:
                     self.image = self.dead_images[i]
 
+            self.image.set_colorkey(pygame.Color(0, 0, 0))
             if self.dead_counter < self.dead_counter_max:
                 surface.blit(self.image, (self.rect.x, self.rect.y))
 
+    def flip_sprite(self):
+        if self.facing == 'left':
+            self.facing = 'right'
+        else:
+            self.facing = 'left'
 
+        self.load_images()
+
+    def load_images(self):
+        self.images = []
+        if self.facing == 'right':
+            for i in range(0, 3):
+                self.images.append(
+                    [
+                        False, pygame.image.load("sprites/enemy_giru"+str(i+1)+"r.gif").convert()
+                    ]
+                )
+            self.images.append([False, pygame.image.load("sprites/enemy_giru2r.gif").convert()])
+        else:  # if facing left
+            for i in range(0, 3):
+                self.images.append(
+                    [
+                        False, pygame.image.load("sprites/enemy_giru"+str(i+1)+".gif").convert()
+                    ]
+                )
+            self.images.append([False, pygame.image.load("sprites/enemy_giru2.gif").convert()])
+
+        self.image = self.images[0][1]

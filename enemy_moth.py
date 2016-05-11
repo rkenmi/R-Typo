@@ -9,18 +9,7 @@ class Moth(Enemy):
 
         # Load images
         self.images = []
-        for i in range(0, 4):
-            if i == 2:
-                self.images.append([False, pygame.image.load("sprites/enemy_moth_225.gif").convert()])
-            self.images.append(
-                [
-                    False, pygame.image.load("sprites/enemy_moth_"+str(i*30+180)+".gif").convert()
-                ]
-            )
-        self.image = self.images[4][1]
-
-        # Set the color that should be transparent
-        self.image.set_colorkey(pygame.Color(0, 0, 0))
+        self.load_images()
 
         # Required for collision detection
         self.rect = self.image.get_rect()
@@ -35,6 +24,14 @@ class Moth(Enemy):
         self.can_shoot = False  # Does not shoot!
         self.idle_animation = False
 
-        print(self.id)
-    #def draw(self, surface):
-    #    surface.blit(self.image, (self.rect.x, self.rect.y))
+    def load_images(self):
+        self.images = []
+        for i in range(0, 4):
+            if i == 2:
+                self.images.append([False, pygame.image.load("sprites/enemy_moth_225.gif").convert()])
+            self.images.append(
+                [
+                    False, pygame.image.load("sprites/enemy_moth_"+str(i*30+180)+".gif").convert()
+                ]
+            )
+        self.image = self.images[4][1]

@@ -17,7 +17,7 @@ def get_group(surface):
     enemies = pygame.sprite.Group()
     enemies.add(SitBot(1250, 265, eid=2, animation_counter=15))
     enemies.add(SitBot(2000, 360, eid=3, animation_counter=10))
-    enemies.add(Giru(1800, 450, eid=1, animation_counter=5))
+    enemies.add(Giru(1800, 460, eid=1, animation_counter=5))
     for i in range(4, 10):
         enemies.add(Moth(1430, -50, eid=i))
     return enemies

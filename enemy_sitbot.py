@@ -9,17 +9,7 @@ class SitBot(Enemy):
 
         # Load images
         self.images = []
-        for i in range(0, 3):
-            self.images.append(
-                [
-                    False,
-                    pygame.image.load("sprites/enemy_sitbot_stand"+str(i+1)+".gif").convert()
-                ]
-            )
-        self.image = self.images[0][1]
-
-        # Set the color that should be transparent
-        self.image.set_colorkey(pygame.Color(0, 0, 0))
+        self.load_images()
 
         # Required for collision detection
         self.rect = self.image.get_rect()
@@ -32,5 +22,13 @@ class SitBot(Enemy):
         # Used as a timer for animation sequences
         self.animation_counter = animation_counter
 
-
-
+    def load_images(self):
+        self.images = []
+        for i in range(0, 3):
+            self.images.append(
+                [
+                    False,
+                    pygame.image.load("sprites/enemy_sitbot_stand"+str(i+1)+".gif").convert()
+                ]
+            )
+        self.image = self.images[0][1]

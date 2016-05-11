@@ -26,11 +26,7 @@ class Beam(pygame.sprite.Sprite):
         # Load image
         self.image = pygame.image.load("sprites/player_wpn1.gif").convert()
         self.impact_images = []
-        for i in range(0, 2):
-            self.impact_images.append(pygame.image.load("sprites/player_wpn1_impact"+str(i+1)+".gif").convert())
-
-        # Set the color that should be transparent
-        self.image.set_colorkey(pygame.Color(0, 0, 0))
+        self.load_images()
 
         # Required for collision detection
         self.rect = self.image.get_rect()
@@ -110,3 +106,12 @@ class Beam(pygame.sprite.Sprite):
 
             if self.impact_timer > 6:
                 self.dead = True
+
+    def load_images(self):
+        self.image = pygame.image.load("sprites/player_wpn1.gif").convert()
+        self.impact_images.clear()
+        for i in range(0, 2):
+            self.impact_images.append(pygame.image.load("sprites/player_wpn1_impact"+str(i+1)+".gif").convert())
+
+        # Set the color that should be transparent
+        self.image.set_colorkey(pygame.Color(0, 0, 0))

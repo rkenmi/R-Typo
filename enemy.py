@@ -16,16 +16,20 @@ class Enemy(pygame.sprite.Sprite):
         # Don't forget to call the super constructor
         super().__init__()
 
-        self.image = pygame.image.load("sprites/black.gif").convert() # temporary sprite
+        # Enemy Configuration
+        self.id = eid  # enemy id used in scripting
+        self.hp = 1  # default 1 hp
+        self.dead = False
+        self.can_shoot = True
+        self.mute = False  # mute death sound
+        self.idle_animation = True
+        self.facing = 'left'
 
         # Load default images
-        self.images = []
-        self.dead_images = []
-        for i in range(0, 6):
-            self.dead_images.append(pygame.image.load("sprites/enemy_dead"+str(i+1)+".gif").convert())
-
-        # Set the color that should be transparent
-        self.image.set_colorkey(pygame.Color(0, 0, 0))
+        self.image = pygame.image.load("sprites/black.gif").convert()  # temporary sprite
+        self.images, self.dead_images = [], []
+        self.load_images()
+        self.load_dead_images()
 
         # Sounds
         self.death_sound = pygame.mixer.Sound('sounds/enemy_dead.wav')
@@ -34,14 +38,6 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-
-        # Enemy Configuration
-        self.id = eid # enemy id used in scripting
-        self.hp = 1 # default 1 hp
-        self.dead = False
-        self.can_shoot = True
-        self.mute = False # mute death sound
-        self.idle_animation = True
 
         # Used as a timer for animation sequences
         self.animation_step, self.dead_step = animation_step, dead_step
@@ -81,7 +77,6 @@ class Enemy(pygame.sprite.Sprite):
             self.rect.x, self.rect.y = x, y
 
             self.image.set_colorkey(pygame.Color(0, 0, 0))
-
             if not self.hit_animation:
                 surface.blit(self.image, (self.rect.x, self.rect.y))
             else:
@@ -100,6 +95,7 @@ class Enemy(pygame.sprite.Sprite):
                     self.image = self.dead_images[i]
 
             if self.dead_counter < self.dead_counter_max:
+                self.image.set_colorkey(pygame.Color(0, 0, 0))
                 surface.blit(self.image, (self.rect.x, self.rect.y))
 
     def death(self, sound=True):
@@ -117,8 +113,12 @@ class Enemy(pygame.sprite.Sprite):
         Returns:
             A newly created Bullet object
         """
-        if self.can_shoot and 0 < self.rect.x - target_x < 800:
-            return Bullet(self.rect.x, self.rect.y, target_x, target_y)
+        if self.facing == 'right':
+            if self.can_shoot and -800 < self.rect.x - target_x < 0:
+                return Bullet(self.rect.x, self.rect.y, target_x, target_y)
+        else:
+            if self.can_shoot and 0 < self.rect.x - target_x < 800:
+                return Bullet(self.rect.x, self.rect.y, target_x, target_y)
 
     def move(self, x, y, bypass=False):
         """ Moves the enemy if enemy is not dead.
@@ -157,5 +157,19 @@ class Enemy(pygame.sprite.Sprite):
         elif not self.hit_animation:
             self.hit_animation = True
 
-    def stop(self):
+    def pause(self):
         self.idle_animation = False
+
+    def unpause(self):
+        self.idle_animation = True
+
+    def flip_sprite(self):
+        pass
+
+    def load_images(self):
+        pass
+
+    def load_dead_images(self):
+        self.dead_images = []
+        for i in range(0, 6):
+            self.dead_images.append(pygame.image.load("sprites/enemy_dead"+str(i+1)+".gif").convert())
