@@ -76,14 +76,22 @@ def collision_projectile(projectile, target):
         elif isinstance(projectile, Beam) and isinstance(target, Bullet):
             return False
 
-        #print(target.rect[0])
+        #elif isinstance(projectile, Bullet) and isinstance(target, Player):
+            #print('wtf!')
         projectile.collide_distance = target.rect[0] - projectile.rect.x
         return True
     else:
         return False
 
 
-def collision_player(surface, player, hitboxes):
+def collision_player(player, target):
+    if pygame.sprite.collide_rect(player, target):
+        return True
+    else:
+        return False
+
+
+def player_handler(surface, player, hitboxes):
     if len(pygame.sprite.spritecollide(player, hitboxes, False, pygame.sprite.collide_rect)) > 0:
         if not player.invincible:
             player.death()
@@ -236,7 +244,7 @@ def main():
         update_projectiles(surface, projectiles, hitbox)
         player.draw(surface)
 
-        collision_player(surface, player, hitbox)
+        player_handler(surface, player, hitbox)
 
         ####### UI #######
         pygame.draw.rect(surface, BLACK, (0, 560, 800, 40))
@@ -248,7 +256,7 @@ def main():
         ####### Round Fail #######
         if player.dead:
             pygame.mixer.music.stop()
-            projectiles.empty()
+            #projectiles.empty()
             rf_counter += 1
 
             if 300 > rf_counter > 200:

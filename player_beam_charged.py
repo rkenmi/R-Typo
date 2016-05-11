@@ -87,20 +87,12 @@ class ChargedBeam(Beam):
             self.charge_image = None
             self.animation_counter += 1
 
-            for i in range(0, 6):
-                if self.charge_level == i+1:
-                    if self.animation_counter % 3 == 0:
-                        self.image = self.shoot_images[i][1]
-                    else:
-                        self.image = self.shoot_images[i][0]
-
             if self.shot_ready:
                 self.charge_sound.stop()
                 self.charge_counter = 0
                 self.shot_ready = False
                 if self.charge_level > 0:
                     self.sound.play()
-
                 if self.charge_level == 3:
                     self.rect.y -= 2
                 elif self.charge_level == 4:
@@ -109,6 +101,13 @@ class ChargedBeam(Beam):
                     self.rect.y -= 10
                 elif self.charge_level == 6:
                     self.rect.y -= 15
+
+            for i in range(0, 6):
+                if self.charge_level == i+1:
+                    if self.animation_counter % 3 == 0:
+                        self.image = self.shoot_images[i][1]
+                    else:
+                        self.image = self.shoot_images[i][0]
 
             x, y = self.rect.x, self.rect.y
             self.rect = self.image.get_rect()  # update rect to fix moving hitboxes
@@ -180,7 +179,3 @@ class ChargedBeam(Beam):
 
         self.image = pygame.image.load("sprites/black.gif").convert() # temporary sprite
         self.charge_image = pygame.image.load("sprites/player_wpn1.gif").convert()
-
-        # Set the color that should be transparent
-        self.image.set_colorkey(pygame.Color(0, 0, 0))
-        self.charge_image.set_colorkey(pygame.Color(0, 0, 0))
