@@ -11,7 +11,8 @@ DEAD_COUNTER_MAX = 70 # time after which
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, x, y, eid=0, animation_counter_max=ANIMATION_COUNTER_MAX, dead_counter_max=DEAD_COUNTER_MAX):
+    def __init__(self, x, y, eid=0, animation_counter_max=ANIMATION_COUNTER_MAX, dead_counter_max=DEAD_COUNTER_MAX
+                 , animation_step=ANIMATION_STEP, dead_step=DEAD_STEP):
         # Don't forget to call the super constructor
         super().__init__()
 
@@ -34,20 +35,21 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-        # Variables
+        # Enemy Configuration
         self.id = eid # enemy id used in scripting
         self.hp = 1 # default 1 hp
         self.dead = False
         self.can_shoot = True
         self.mute = False # mute death sound
+        self.idle_animation = True
 
         # Used as a timer for animation sequences
+        self.animation_step, self.dead_step = animation_step, dead_step
         self.animation_counter, self.dead_counter = 0, 0
         self.animation_counter_max, self.dead_counter_max = animation_counter_max, dead_counter_max
         self.hit_counter = 0
         self.hit_animation = False
         self.out_of_screen = False
-        self.idle_animation = True
 
     def draw(self, surface):
         """ Draws to screen
@@ -63,9 +65,9 @@ class Enemy(pygame.sprite.Sprite):
 
             if self.idle_animation:
                 for i in range(0, len(self.images)+1):
-                    if i == len(self.images) and self.animation_counter > (i+1)*ANIMATION_STEP:
+                    if i == len(self.images) and self.animation_counter > (i+1)*self.animation_step:
                         self.image = self.images[0][1]
-                    elif self.animation_counter > (i+1)*ANIMATION_STEP and not self.images[i][0]:
+                    elif self.animation_counter > (i+1)*self.animation_step and not self.images[i][0]:
                         self.images[i][0] = True
                         self.image = self.images[i][1]
 
@@ -77,6 +79,8 @@ class Enemy(pygame.sprite.Sprite):
             x, y = self.rect.x, self.rect.y
             self.rect = self.image.get_rect() # update rect to fix moving hitboxes
             self.rect.x, self.rect.y = x, y
+
+            self.image.set_colorkey(pygame.Color(0, 0, 0))
 
             if not self.hit_animation:
                 surface.blit(self.image, (self.rect.x, self.rect.y))
@@ -92,7 +96,7 @@ class Enemy(pygame.sprite.Sprite):
             self.move(-1, 0, bypass=True)
 
             for i in range(0, len(self.dead_images)):
-                if (i+1)*DEAD_STEP < self.dead_counter < (i+2)*DEAD_STEP:
+                if (i+1)*self.dead_step < self.dead_counter < (i+2)*self.dead_step:
                     self.image = self.dead_images[i]
 
             if self.dead_counter < self.dead_counter_max:
@@ -152,3 +156,6 @@ class Enemy(pygame.sprite.Sprite):
             self.death()
         elif not self.hit_animation:
             self.hit_animation = True
+
+    def stop(self):
+        self.idle_animation = False

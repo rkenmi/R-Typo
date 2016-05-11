@@ -50,7 +50,7 @@ def enemy_script(scroll_x, game_time, player, enemies, projectiles):
             if bullet:
                 projectiles.add(bullet)
 
-        if -600 < scroll_x < -500:
+        if -800 < scroll_x < -700:
             if enemy.id == 2:
                 enemy.move(1, 0)
                 if scroll_x % 50 == 0:
@@ -60,5 +60,12 @@ def enemy_script(scroll_x, game_time, player, enemies, projectiles):
         for i in range(4, 10):
             moth_group(scroll_x, enemy, i, -650 + (i-4)*(-25))
 
+        if -1200 < scroll_x < -900:
+            if enemy.id == 1:
+                enemy.move(-1, 0)
+
+        if scroll_x == -1201:
+            if enemy.id == 1:
+                enemy.stop()
 
 

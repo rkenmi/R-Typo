@@ -26,7 +26,7 @@ class SitBot(Enemy):
         self.rect.x = x
         self.rect.y = y
 
-        # Variables
+        # Enemy Configuration
         self.hp = 15
 
         # Used as a timer for animation sequences

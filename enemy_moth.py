@@ -27,11 +27,12 @@ class Moth(Enemy):
         self.rect.x = x
         self.rect.y = y
 
-        # Variables
-        self.hp = 3
-        self.can_shoot = False  # Does not shoot!
         # Used as a timer for animation sequences
         self.animation_counter = animation_counter
+
+        # Enemy Configuration
+        self.hp = 3
+        self.can_shoot = False  # Does not shoot!
         self.idle_animation = False
 
         print(self.id)

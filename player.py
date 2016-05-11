@@ -73,6 +73,7 @@ class Player(pygame.sprite.Sprite):
                 if (i+1)*death_step < self.dead_timer < (i+2)*death_step:
                     self.image = self.dead_images[i]
 
+            self.rect.x -= 1
             if self.dead_timer < 35:
                 surface.blit(self.image, (self.rect.x, self.rect.y))
 
