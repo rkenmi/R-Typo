@@ -68,12 +68,14 @@ def enemy_script(scroll_x, game_time, player, enemies, projectiles):
             if enemy.id == 1:
                 enemy.flip_sprite()
                 enemy.pause()
-
-        if scroll_x == -1249:
+        elif scroll_x == -1400:
             if enemy.id == 1:
                 enemy.unpause()
 
-        if -1500 < scroll_x < -1250:
+        if -1500 < scroll_x < -1400:
             if enemy.id == 1:
-                enemy.move(1, 0)
+                if scroll_x == -1499:
+                    enemy.pause()
+                else:
+                    enemy.move(1, 0)
 

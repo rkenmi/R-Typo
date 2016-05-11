@@ -105,6 +105,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def shoot(self, target_x, target_y, charged=False):
         """ The enemy shoots some projectile at the player. Some enemies can do this, others can't.
+
         Arguments:
             target_x (int): x coordinate of the aimed location
             target_y (int): y coordinate of the aimed location
@@ -115,8 +116,9 @@ class Enemy(pygame.sprite.Sprite):
         """
         if self.facing == 'right':
             if self.can_shoot and -800 < self.rect.x - target_x < 0:
-                return Bullet(self.rect.x, self.rect.y, target_x, target_y)
-        else:
+                return Bullet(self.rect.x + self.image.get_width(), self.rect.y, target_x, target_y)
+
+        elif self.facing == 'left':
             if self.can_shoot and 0 < self.rect.x - target_x < 800:
                 return Bullet(self.rect.x, self.rect.y, target_x, target_y)
 
