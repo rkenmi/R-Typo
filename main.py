@@ -185,8 +185,8 @@ def main():
     pygame.display.set_caption("R-Typu")
 
     # set up the music
-    pygame.mixer.music.load('sounds/music/solo_sortie.mp3')
-    pygame.mixer.music.play(-1, 0.2)  # loop music
+    pygame.mixer.music.load('sounds/music/as_wet_as_a_fish.mp3')
+    pygame.mixer.music.play(-1, 1)  # loop music
 
     # set mixer channel to 4 for performance and to prevent sound conflicts
     pygame.mixer.set_num_channels(4)
