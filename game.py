@@ -69,7 +69,7 @@ def collision_projectile(projectile, target):
         if isinstance(projectile, Beam) and isinstance(target, Enemy):
             target.take_damage(projectile.damage)
             projectile.draw_impact = False
-            if projectile.damage < 12:  # weaker beams will not pierce through enemy kills (includes basic beam)
+            if projectile.damage < 13:  # weaker beams will not pierce through enemy kills (includes basic beam)
                 projectile.dead = True
             if target.dead:
                 return False
@@ -147,7 +147,7 @@ def player_keys_shoot(surface, player, keys, projectiles, cooldown_counter):
             projectiles.add(
                 player.shoot(player.rect.x+player.image.get_width(), player.rect.y+player.image.get_height()/2)
             )
-            cooldown_counter += 1 # Initiate cooldown sequence
+            cooldown_counter += 1  # Initiate cooldown sequence
     elif keys[pygame.K_e]:
         if not player.charged_beam and not player.dead:
             projectiles.add(
@@ -155,7 +155,7 @@ def player_keys_shoot(surface, player, keys, projectiles, cooldown_counter):
             )
     else:
         if player.charged_beam:
-            player.charged_beam.charging = False # reset charge if no keys are pressed
+            player.charged_beam.charging = False  # reset charge if no keys are pressed
         player.charged_beam = None  # delete charged beam
 
     if cooldown_counter == RESET_COOLDOWN:
@@ -265,7 +265,7 @@ def start_level(surface):
                 alpha_surface.set_alpha(alpha)
 
             elif rf_counter >= 400 and lives > 0:
-                pygame.mixer.music.play(-1, 1)  # resume music
+                pygame.mixer.music.play(-1, 1.2)  # resume music
                 projectiles.empty()
                 player.respawn()
                 rf_counter = 0
