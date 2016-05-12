@@ -190,7 +190,7 @@ def start_level(surface):
 
     # game settings
     lives, scroll_x, stop_enemies = 3, 0, False
-    first_play = True
+    game_start = True
 
     # counters
     cooldown_counter = 0
@@ -205,39 +205,38 @@ def start_level(surface):
     alpha_surface.set_alpha(alpha)  # Fade out
 
     while True:  # <--- main game loop
-
-        ####### Key Events #######
-        if not first_play:  # disable keys until the game screen loads properly when first time playing
+        if not game_start:  # the following are not needed when the game first starts
+            ####### Key Events #######
             keys = pygame.key.get_pressed()
             player_keys_move(surface, player, keys)
             cooldown_counter = player_keys_shoot(surface, player, keys, projectiles, cooldown_counter)
+    
+            ####### Normal Events #######
+            for event in pygame.event.get():
+                if event.type == QUIT:  # QUIT event to exit the game
+                    pygame.quit()
+                    sys.exit()
+    
+            surface.blit(bg, (scroll_x, 0)) # SCROLL the background in +x direction
+    
+            draw_scrolling_hitbox(surface, tiled_map, hitbox, scroll_x)
+    
+            ####### Collisions #######
+            enemy_handler(surface, player, enemies, hitbox)
+            update_projectiles(surface, projectiles, hitbox)
+            player.draw(surface)
+    
+            player_handler(surface, player, hitbox)
 
-        ####### Normal Events #######
-        for event in pygame.event.get():
-            if event.type == QUIT:  # QUIT event to exit the game
-                pygame.quit()
-                sys.exit()
-
-        surface.blit(bg, (scroll_x, 0)) # SCROLL the background in +x direction
-
-        draw_scrolling_hitbox(surface, tiled_map, hitbox, scroll_x)
-
-        ####### Collisions #######
-        enemy_handler(surface, player, enemies, hitbox)
-        update_projectiles(surface, projectiles, hitbox)
-        player.draw(surface)
-
-        player_handler(surface, player, hitbox)
-
-        ####### UI #######
-        pygame.draw.rect(surface, BLACK, (0, 560, 800, 40))
-        for i in range (0, lives):
-            lives_img = pygame.image.load("sprites/life_icon.gif").convert()
-            lives_ico = Icon(100 + (i * 30), 565, lives_img)
-            lives_ico.draw(surface)
+            ####### UI #######
+            pygame.draw.rect(surface, BLACK, (0, 560, 800, 40))
+            for i in range (0, lives):
+                lives_img = pygame.image.load("sprites/life_icon.gif").convert()
+                lives_ico = Icon(100 + (i * 30), 565, lives_img)
+                lives_ico.draw(surface)
 
         ####### Start Round #######
-        if player.dead or first_play:
+        if player.dead or game_start:
             pygame.mixer.music.stop()
             rf_counter += 1
             if 250 > rf_counter > 200:    # fade out
@@ -246,7 +245,7 @@ def start_level(surface):
 
             elif 300 > rf_counter > 250:
                 scroll_x = 0  # stop the scrolling screen
-                if not first_play:
+                if not game_start:
                     lives -= 1  # don't deduct life on our first game
 
                 if lives == 0:
@@ -257,6 +256,7 @@ def start_level(surface):
                                                     surface.get_height()/2-ready_logo.get_height()/2))
 
                 enemies = create_enemies.get_group(surface)  # spawn/re-spawn new enemies
+                projectiles.empty()
                 rf_counter = 300
 
             elif 400 > rf_counter > 350 and lives > 0:  # fade in
@@ -266,10 +266,9 @@ def start_level(surface):
 
             elif rf_counter >= 400 and lives > 0:
                 pygame.mixer.music.play(-1, 1.2)  # resume music
-                projectiles.empty()
                 player.respawn()
                 rf_counter = 0
-                first_play = False
+                game_start = False
             elif 600 > rf_counter > 500 and lives == 0:  # game over screen
                 alpha_surface.fill((0, 0, 0))
             elif rf_counter > 600 and lives == 0:  # back to beginning game menu
