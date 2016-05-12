@@ -25,6 +25,7 @@ def draw_scrolling_hitbox(surface, tiled_map, hitbox, scroll_x, debug=0):
         if isinstance(layer, pytmx.TiledObjectGroup):
             # iterate over all the objects in the layer
             for obj in layer:
+                #print(obj.x, obj.y, obj.width, obj.height)
                 if debug:
                     spr = Block(
                             pygame.draw.rect(surface, (0, 0, 255),
@@ -36,6 +37,17 @@ def draw_scrolling_hitbox(surface, tiled_map, hitbox, scroll_x, debug=0):
                     )
 
                 hitbox.add(spr) # add pytmx map platforms
+                """
+                s = pygame.Rect(400, 425, 30, 55)
+                t = pygame.Rect(420, 300, 55, 10)
+                z = Block(
+                    pygame.draw.rect(surface, (0, 0, 255),
+                                     s.union_ip(t))
+                )
+
+                hitbox.add(z)
+                #hitbox.add(s)
+                """
 
 
 def update_projectiles(surface, projectiles, hitbox, debug=0):
@@ -78,21 +90,14 @@ def collision_projectile(projectile, target):
 
         #elif isinstance(projectile, Bullet) and isinstance(target, Player):
             #print('wtf!')
-        projectile.collide_distance = target.rect[0] - projectile.rect.x
-        return True
-    else:
-        return False
-
-
-def collision_player(player, target):
-    if pygame.sprite.collide_rect(player, target):
+        projectile.collide_distance = target.rect.x - projectile.rect.x
         return True
     else:
         return False
 
 
 def player_handler(surface, player, hitboxes):
-    if len(pygame.sprite.spritecollide(player, hitboxes, False, pygame.sprite.collide_rect)) > 0:
+    if len(pygame.sprite.spritecollide(player, hitboxes, False, pygame.sprite.collide_mask)) > 0:
         if not player.invincible:
             player.death()
         else:
@@ -256,7 +261,6 @@ def main():
         ####### Round Fail #######
         if player.dead:
             pygame.mixer.music.stop()
-            #projectiles.empty()
             rf_counter += 1
 
             if 300 > rf_counter > 200:
@@ -276,7 +280,8 @@ def main():
                 alpha_surface.set_alpha(alpha)  # Fade in
 
             elif rf_counter > 450 and lives > 0:
-                pygame.mixer.music.play(-1, 0.2) # resume music
+                pygame.mixer.music.play(-1, 1) # resume music
+                projectiles.empty()
                 player.respawn()
                 rf_counter = 0
 
@@ -285,8 +290,11 @@ def main():
             alpha = 0
 
         scroll_x -= 1 # Scroll the background to the right by decrementing offset scroll_x
-        #print(scroll_x)
-        enemy_script(scroll_x, pygame.time.get_ticks(), player, enemies, projectiles) # Actions enemies make depending on where the screen is
+
+        #  Enemies react depending on certain locations
+        enemy_script(scroll_x, pygame.time.get_ticks(), player, enemies, projectiles)
+
+        #pygame.draw.lines(surface,(200,150,150),1, player.mask.outline())
 
         pygame.display.update() # Update the display when all events have been processed
         FPS_CLOCK.tick(FPS)

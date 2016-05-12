@@ -29,6 +29,8 @@ class Bullet(pygame.sprite.Sprite):
         # Set the color that should be transparent
         self.image.set_colorkey(pygame.Color(0, 0, 0))
 
+        self.mask = pygame.mask.from_surface(self.image, 0)
+
         # Required for collision detection
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = x, y + 35

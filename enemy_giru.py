@@ -12,7 +12,7 @@ class Giru(Enemy):
         super().__init__(x, y, eid, animation_counter_max, dead_counter_max, animation_step, dead_step)
 
         # Enemy Configuration
-        self.hp = 3
+        self.hp = 6
         self.can_shoot = True
         self.idle_animation = True
         self.stand_y = y - 14

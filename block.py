@@ -17,4 +17,7 @@ class Block(pygame.sprite.Sprite):
         super().__init__();
 
         # Required for collision detection
-        self.rect = rect
+        self.rect = pygame.Rect(rect)
+        w, h = int(rect[2]), int(rect[3])
+        self.mask = pygame.mask.Mask((w, h))
+        self.mask.fill()

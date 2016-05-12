@@ -20,4 +20,8 @@ def get_group(surface):
     enemies.add(Giru(1800, 460, eid=1, animation_counter=5))
     for i in range(4, 10):
         enemies.add(Moth(1430, -50, eid=i))
+    enemies.add(Giru(2700, 460, eid=11, animation_counter=5))
+    enemies.add(Giru(2900, 460, eid=12, animation_counter=5))
+    enemies.add(Giru(2800, 280, eid=13, animation_counter=10))
+    enemies.add(Giru(3000, 280, eid=14, animation_counter=10))
     return enemies

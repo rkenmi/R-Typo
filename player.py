@@ -28,6 +28,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+        self.mask = pygame.mask.from_surface(self.image, 0)
+        #print(self.mask.outline())
         # Position to respawn at
         self.respawn_pos = (x, y)
         self.last_pos = (0, 0) # for wall collision

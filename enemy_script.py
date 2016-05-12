@@ -43,7 +43,7 @@ def moth_group(scroll_x, enemy, eid, x0, step=-25):
 
 
 def enemy_script(scroll_x, game_time, player, enemies, projectiles):
-    timer = 0
+    #print(scroll_x)
     for enemy in enemies:
         if scroll_x != 0 and scroll_x % 150 == 0: # avoid bullet overflow when scroll_x = 0 (i.e. after player dies)
             bullet = enemy.shoot(player.rect.x, player.rect.y)
@@ -79,3 +79,9 @@ def enemy_script(scroll_x, game_time, player, enemies, projectiles):
                 else:
                     enemy.move(1, 0)
 
+        if -2000 < scroll_x < -1800:
+            if enemy.id == 11 or enemy.id == 12 or enemy.id == 13 or enemy.id == 14:
+                if scroll_x == -1999:
+                    enemy.pause()
+                else:
+                    enemy.move(-1, 0)
