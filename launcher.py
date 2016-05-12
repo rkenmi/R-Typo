@@ -6,7 +6,7 @@ Rick Miyamoto
 """
 from pygame import *
 import pygame, sys
-from main import start_level
+import game
 from player import Player
 
 FPS = 60
@@ -74,7 +74,7 @@ def main():
                 alpha += 5
                 alpha_surface.set_alpha(alpha)  # fade out
             elif start_timer >= 200:
-                start_level(surface)
+                game.start_level(surface)
 
         for event in pygame.event.get():
             if event.type == KEYDOWN:
