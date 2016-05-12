@@ -111,7 +111,7 @@ class Player(pygame.sprite.Sprite):
             self.charged_beam = b
         return b
 
-    def move(self, surface, x, y):
+    def move(self, surface, x, y, bypass_wall=False):
         """ Moves the beam by altering the x and y coordinates.
 
         Arguments:
@@ -125,15 +125,19 @@ class Player(pygame.sprite.Sprite):
             t_collide = self.rect.y < 0
             b_collide = self.rect.y + self.image.get_height() > surface.get_height() - 40
 
-            if not ((r_collide and x > 0) or (l_collide and x < 0)):
+            if bypass_wall:
                 self.rect.x += x
-                if self.charged_beam:
-                    self.charged_beam.rect.x += x
-
-            if not ((t_collide and y < 0) or (b_collide and y > 0)):
                 self.rect.y += y
-                if self.charged_beam:
-                    self.charged_beam.rect.y += y
+            else:
+                if not ((r_collide and x > 0) or (l_collide and x < 0)):
+                    self.rect.x += x
+                    if self.charged_beam:
+                        self.charged_beam.rect.x += x
+
+                if not ((t_collide and y < 0) or (b_collide and y > 0)):
+                    self.rect.y += y
+                    if self.charged_beam:
+                        self.charged_beam.rect.y += y
 
     def load_images(self):
         self.image = pygame.image.load("sprites/player.gif").convert()

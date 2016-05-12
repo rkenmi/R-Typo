@@ -16,7 +16,9 @@ import sys,random
 SPEED = 5
 RESET_COOLDOWN = 10
 RECT_COLOR = (0, 255, 255)
-
+FPS = 60
+FPS_CLOCK = pygame.time.Clock()
+BLACK = pygame.Color(0, 0, 0)
 
 def draw_scrolling_hitbox(surface, tiled_map, hitbox, scroll_x, debug=0):
     hitbox.empty()   # refresh hitbox sprites (due to scrolling)
@@ -88,8 +90,10 @@ def collision_projectile(projectile, target):
         elif isinstance(projectile, Beam) and isinstance(target, Bullet):
             return False
 
-        #elif isinstance(projectile, Bullet) and isinstance(target, Player):
-            #print('wtf!')
+        # same goes for enemy projectiles and other enemy projectiles!
+        elif isinstance(projectile, Bullet) and isinstance(target, Bullet):
+            return False
+
         projectile.collide_distance = target.rect.x - projectile.rect.x
         return True
     else:
@@ -101,7 +105,7 @@ def player_handler(surface, player, hitboxes):
         if not player.invincible:
             player.death()
         else:
-            player.rect.x = player.last_pos[0] - 1 # offset for screen side-scroll to the right
+            player.rect.x = player.last_pos[0] - 1  # offset to compensate for automatic right-scrolling screen
             player.rect.y = player.last_pos[1]
 
 
@@ -119,8 +123,8 @@ def enemy_handler(surface, player, enemies, hitbox):
         if enemy.dead_counter == 0:
             hitbox.add(enemy)
 
-        if player.rect.x - enemy.rect.x > surface.get_width(): # if player has passed enemy far enough, kill enemy
-            enemy.death(sound=False) # start dead_counter on enemy
+        if player.rect.x - enemy.rect.x > surface.get_width():  # if player has passed enemy far enough, kill enemy
+            enemy.death(sound=False)  # start dead_counter on enemy
 
         if enemy.dead_counter < enemy.dead_counter_max:
             enemy.draw(surface)
@@ -169,33 +173,14 @@ def player_keys_shoot(surface, player, keys, projectiles, cooldown_counter):
     return cooldown_counter
 
 
-def main():
-    """ Starts bouncing ball animation with kapparinos. Plays a sound if a ball aligns perfectly with corner.
-    Balls do bounce fine but they often get stuck to each other and spaz out. Over time, it usually gets itself out.
-    Balls may also be generated on top of one another, in which case I would recommend just removing it (minus key)
-    and creating a new one (plus key). Numpad keys only.
-
-    Recommended balls: 5-7
-    """
-    pygame.init()
-
-    FPS = 60
-    FPS_CLOCK = pygame.time.Clock()
-
-    # COLOR LIST
-    WHITE = pygame.Color(255, 255, 255)
-    BLUE = pygame.Color(0, 0, 255)
-    BLACK = pygame.Color(0, 0, 0)
-
+def start_level(surface):
     # Code to create the initial window
     window_size = (800, 600)
-    surface = pygame.display.set_mode(window_size)
+    #surface = pygame.display.set_mode(window_size)
+    surface.fill((0, 0, 0))  # wipe the screen
     bg = pygame.image.load("img/stage.png").convert()
-    ready_img = pygame.image.load("img/ready.gif").convert()
-    #bg = pygame.image.load("img/test.bmp").convert()
-
-    # set the title of the window
-    pygame.display.set_caption("R-Typu")
+    ready_logo = pygame.image.load("img/ready.gif").convert()
+    game_over_logo = pygame.image.load("img/game_over.gif").convert()
 
     # set up the music
     pygame.mixer.music.load('sounds/music/as_wet_as_a_fish.mp3')
@@ -217,7 +202,7 @@ def main():
 
     # counters
     cooldown_counter = 0
-    
+
     # round fail timer (player died)
     rf_counter = 0
 
@@ -225,7 +210,6 @@ def main():
     alpha_surface = Surface((800, 600)) # The custom-surface of the size of the screen.
     alpha_surface.fill((0, 0, 0))
     alpha_surface.set_alpha(0)
-    alpha_surface.blit(ready_img, (400-162,300-27))
     alpha = 0
 
     while True:  # <--- main game loop
@@ -263,27 +247,161 @@ def main():
             pygame.mixer.music.stop()
             rf_counter += 1
 
-            if 300 > rf_counter > 200:
-                alpha += 4
-                alpha_surface.set_alpha(alpha) # Fade out
+            if 250 > rf_counter > 200:
+                alpha += 5
+                alpha_surface.set_alpha(alpha)  # Fade out
 
-            elif 350 > rf_counter > 300:
+            elif 300 > rf_counter > 250:
                 scroll_x = 0
                 lives -= 1
-                enemies = create_enemies.get_group(surface)
-                if lives == 0:
-                    sys.exit()
-                rf_counter = 350
 
-            elif 450 > rf_counter > 350:
-                alpha -= 4
+                if lives == 0:
+                    alpha_surface.blit(game_over_logo, (surface.get_width()/2-game_over_logo.get_width()/2,
+                                                        surface.get_height()/2-game_over_logo.get_height()/2))
+                else:
+                    alpha_surface.blit(ready_logo, (surface.get_width()/2-ready_logo.get_width()/2,
+                                                        surface.get_height()/2-ready_logo.get_height()/2))
+
+                enemies = create_enemies.get_group(surface)
+                rf_counter = 300
+
+            elif 400 > rf_counter > 350:
+                alpha_surface.fill((0, 0, 0))
+                alpha -= 5
                 alpha_surface.set_alpha(alpha)  # Fade in
 
-            elif rf_counter > 450 and lives > 0:
-                pygame.mixer.music.play(-1, 1) # resume music
+            elif rf_counter > 400 and lives > 0:
+                pygame.mixer.music.play(-1, 1)  # resume music
                 projectiles.empty()
                 player.respawn()
                 rf_counter = 0
+            elif lives == 0:
+                sys.exit()
+
+            surface.blit(alpha_surface, (0, 0))
+        else:
+            alpha = 0
+
+        scroll_x -= 1 # Scroll the background to the right by decrementing offset scroll_x
+
+        #  Enemies react depending on certain locations
+        enemy_script(scroll_x, pygame.time.get_ticks(), player, enemies, projectiles)
+
+        #pygame.draw.lines(surface,(200,150,150),1, player.mask.outline())
+
+        pygame.display.update() # Update the display when all events have been processed
+        FPS_CLOCK.tick(FPS)
+
+
+def main():
+    pygame.init()
+
+    # Code to create the initial window
+    window_size = (800, 600)
+    surface = pygame.display.set_mode(window_size)
+    bg = pygame.image.load("img/stage.png").convert()
+    ready_logo = pygame.image.load("img/ready.gif").convert()
+    game_over_logo = pygame.image.load("img/game_over.gif").convert()
+    #bg = pygame.image.load("img/test.bmp").convert()
+
+    # set the title of the window
+    pygame.display.set_caption("R-Typu")
+
+    # set up the music
+    pygame.mixer.music.load('sounds/music/as_wet_as_a_fish.mp3')
+    pygame.mixer.music.play(-1, 1)  # loop music
+
+    # set mixer channel to 4 for performance and to prevent sound conflicts
+    pygame.mixer.set_num_channels(4)
+
+    hitbox = pygame.sprite.Group()
+    projectiles = pygame.sprite.Group()
+
+    player = Player(100, 280)
+    player.draw(surface)
+
+    enemies = create_enemies.get_group(surface)
+
+    # game settings
+    lives, scroll_x, stop_enemies = 3, 0, False
+
+    # counters
+    cooldown_counter = 0
+    
+    # round fail timer (player died)
+    rf_counter = 0
+
+    tiled_map = load_pygame('rtype_tile.tmx')
+    alpha_surface = Surface((800, 600)) # The custom-surface of the size of the screen.
+    alpha_surface.fill((0, 0, 0))
+    alpha_surface.set_alpha(0)
+    alpha = 0
+
+    while True:  # <--- main game loop
+        ####### Key Events #######
+        keys = pygame.key.get_pressed()
+        player_keys_move(surface, player, keys)
+        cooldown_counter = player_keys_shoot(surface, player, keys, projectiles, cooldown_counter)
+
+        ####### Normal Events #######
+        for event in pygame.event.get():
+            if event.type == QUIT:  # QUIT event to exit the game
+                pygame.quit()
+                sys.exit()
+
+        surface.blit(bg, (scroll_x, 0)) # SCROLL the background in +x direction
+
+        draw_scrolling_hitbox(surface, tiled_map, hitbox, scroll_x)
+
+        ####### Collisions #######
+        enemy_handler(surface, player, enemies, hitbox)
+        update_projectiles(surface, projectiles, hitbox)
+        player.draw(surface)
+
+        player_handler(surface, player, hitbox)
+
+        ####### UI #######
+        pygame.draw.rect(surface, BLACK, (0, 560, 800, 40))
+        for i in range (0, lives):
+            lives_img = pygame.image.load("sprites/life_icon.gif").convert()
+            lives_ico = Icon(100 + (i * 30), 565, lives_img)
+            lives_ico.draw(surface)
+
+        ####### Round Fail #######
+        if player.dead:
+            pygame.mixer.music.stop()
+            rf_counter += 1
+
+            if 250 > rf_counter > 200:
+                alpha += 5
+                alpha_surface.set_alpha(alpha)  # Fade out
+
+            elif 300 > rf_counter > 250:
+                scroll_x = 0
+                lives -= 1
+
+                if lives == 0:
+                    alpha_surface.blit(game_over_logo, (surface.get_width()/2-game_over_logo.get_width()/2,
+                                                        surface.get_height()/2-game_over_logo.get_height()/2))
+                else:
+                    alpha_surface.blit(ready_logo, (surface.get_width()/2-ready_logo.get_width()/2,
+                                                        surface.get_height()/2-ready_logo.get_height()/2))
+
+                enemies = create_enemies.get_group(surface)
+                rf_counter = 300
+
+            elif 400 > rf_counter > 350:
+                alpha_surface.fill((0, 0, 0))
+                alpha -= 5
+                alpha_surface.set_alpha(alpha)  # Fade in
+
+            elif rf_counter > 400 and lives > 0:
+                pygame.mixer.music.play(-1, 1)  # resume music
+                projectiles.empty()
+                player.respawn()
+                rf_counter = 0
+            elif lives == 0:
+                sys.exit()
 
             surface.blit(alpha_surface, (0, 0))
         else:
