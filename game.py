@@ -278,7 +278,8 @@ def start_level(surface):
         else:
             alpha = 0
 
-        scroll_x -= 1  # Scroll the background to the right by decrementing offset scroll_x
+        if not game_start:
+            scroll_x -= 1  # Scroll the background to the right by decrementing offset scroll_x
 
         #  AI for enemies (just a bunch of scripted moves depending on screen location)
         enemy_script(scroll_x, pygame.time.get_ticks(), player, enemies, projectiles)
