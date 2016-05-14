@@ -3,12 +3,13 @@ from pygame import *
 import pytmx
 from pytmx.util_pygame import load_pygame
 from player import Player
-from player_beam import Beam
+from player_beam import PlayerWeapon
 from block import Block
 from icon import Icon
-from player_beam_charged import ChargedBeam
+from player_beam_charged import PlayerWeaponCharged
 from enemy_sitbot import SitBot
 import sys
+import random
 
 
 def moth_group(scroll_x, enemy, eid, velocities, x0, step=-25, dir='SW'):
@@ -46,10 +47,30 @@ def moth_group(scroll_x, enemy, eid, velocities, x0, step=-25, dir='SW'):
     enemy.rect.x, enemy.rect.y = x, y
 
 
-def enemy_script(scroll_x, game_time, player, enemies, projectiles):
+def boss_fight(boss_timer, player, enemy, projectiles):
+        if boss_timer % 50 == 0:
+            beam = enemy.shoot(player.rect.x, player.rect.y)
+            if beam:
+                projectiles.add(beam)
+
+        if boss_timer < 75:
+            enemy.move(1, -2)
+        elif 75 <= boss_timer < 150:
+            enemy.move(-1, 2)
+        elif 150 <= boss_timer < 200:
+            enemy.move(-9, 0)
+        elif 200 <= boss_timer < 225:
+            enemy.move(3, -4)
+        elif 225 <= boss_timer < 275:
+            enemy.move(9, 0)
+        elif 275 <= boss_timer < 300:
+            enemy.move(-3, 4)
+
+
+def enemy_script(scroll_x, boss_timer, player, enemies, projectiles):
     #print(scroll_x)
     for enemy in enemies:
-        if scroll_x != 0 and scroll_x % 150 == 0: # avoid bullet overflow when scroll_x = 0 (i.e. after player dies)
+        if enemy.id != 100 and scroll_x != 0 and scroll_x % 150 == 0: # avoid bullet overflow when scroll_x = 0 (i.e. after player dies)
             bullet = enemy.shoot(player.rect.x, player.rect.y)
             if bullet:
                 projectiles.add(bullet)
@@ -57,7 +78,7 @@ def enemy_script(scroll_x, game_time, player, enemies, projectiles):
         if -800 < scroll_x < -700:
             if enemy.id == 2:
                 enemy.move(1, 0)
-                if scroll_x % 50 == 0:
+                if scroll_x % 30 == 0:
                     pass
                     #projectiles.add(enemy.shoot(player.rect.x, player.rect.y))
 
@@ -98,3 +119,16 @@ def enemy_script(scroll_x, game_time, player, enemies, projectiles):
         velocities = [(-2, -7), (-4, -7), (-4, -3), (-4, 0)]
         for i in range(21, 27):
             moth_group(scroll_x, enemy, i, velocities, -2500 + (i-4)*(-25), dir='NW')
+
+        if scroll_x <= -5850:
+            if enemy.id == 100 and boss_timer != 0:
+                if not enemy.dead:
+                    if enemy.invincible:
+                        enemy.invincible = False
+                    boss_fight(boss_timer, player, enemy, projectiles)
+                else:
+                    pygame.mixer.music.fadeout(1000)
+                    return True
+
+
+

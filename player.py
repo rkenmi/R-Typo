@@ -1,7 +1,7 @@
 import pygame
 import math
-from player_beam import Beam
-from player_beam_charged import ChargedBeam
+from player_beam import PlayerWeapon
+from player_beam_charged import PlayerWeaponCharged
 from pygame.locals import *
 
 #Derive your class from the Sprite super class
@@ -104,9 +104,9 @@ class Player(pygame.sprite.Sprite):
             A newly created beam object
         """
         if not charged:
-            b = Beam(beam_x, beam_y)
+            b = PlayerWeapon(beam_x, beam_y)
         else:
-            b = ChargedBeam(beam_x, beam_y)
+            b = PlayerWeaponCharged(beam_x, beam_y)
             b.charging = True
             self.charged_beam = b
         return b

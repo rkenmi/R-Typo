@@ -3,12 +3,12 @@ from pygame import *
 import pytmx
 from pytmx.util_pygame import load_pygame
 from player import Player
-from player_beam import Beam
+from player_beam import PlayerWeapon
 from block import Block
 from icon import Icon
 from enemy import Enemy
 import create_enemies
-from enemy_bullet import Bullet
+from enemy_bullet import EnemyWeapon
 from enemy_script import enemy_script
 import sys,random
 import launcher
@@ -49,7 +49,7 @@ def update_projectiles(surface, projectiles, hitbox, debug=0):
         elif not projectile.charging and \
                 len(pygame.sprite.spritecollide(projectile, hitbox, False, collision_projectile)) == 0 \
                 and not projectile.out_of_screen and not projectile.dead:
-            if isinstance(projectile, Bullet):
+            if isinstance(projectile, EnemyWeapon):
                 hitbox.add(projectile)
             projectile.draw(surface)
             projectile.move()
@@ -57,7 +57,7 @@ def update_projectiles(surface, projectiles, hitbox, debug=0):
                 pygame.draw.rect(surface, (0, 0, 255),
                      (projectile.rect.x, projectile.rect.y, projectile.image.get_width(), projectile.image.get_height() ))
         else:
-            if not projectile.dead and isinstance(projectile, Beam):
+            if not projectile.dead and isinstance(projectile, PlayerWeapon):
                 projectile.impact(surface)
             else:
                 projectiles.remove(projectile)
@@ -66,24 +66,28 @@ def update_projectiles(surface, projectiles, hitbox, debug=0):
 def collision_projectile(projectile, target):
     if pygame.sprite.collide_rect(projectile, target):
         # if the player projectile hits the enemy...
-        if isinstance(projectile, Beam) and isinstance(target, Enemy):
-            target.take_damage(projectile.damage)
+        if isinstance(projectile, PlayerWeapon) and isinstance(target, Enemy):
+            if target.invincible:
+                return False
+            else:
+                target.take_damage(projectile.damage)
+
             projectile.draw_impact = False
             if projectile.damage < 13:  # weaker beams will not pierce through enemy kills (includes basic beam)
                 projectile.dead = True
-            if target.dead:
+            if target.dead:  # allows projectile to pass through after a kill
                 return False
 
         # enemy projectiles shouldn't kill the enemy itself if they are touching
-        elif isinstance(projectile, Bullet) and isinstance(target, Enemy):
+        elif isinstance(projectile, EnemyWeapon) and isinstance(target, Enemy):
             return False
 
         # player projectiles and enemy projectiles should pass through each other
-        elif isinstance(projectile, Beam) and isinstance(target, Bullet):
+        elif isinstance(projectile, PlayerWeapon) and isinstance(target, EnemyWeapon):
             return False
 
         # same goes for enemy projectiles and other enemy projectiles!
-        elif isinstance(projectile, Bullet) and isinstance(target, Bullet):
+        elif isinstance(projectile, EnemyWeapon) and isinstance(target, EnemyWeapon):
             return False
 
         projectile.collide_distance = target.rect.x - projectile.rect.x
@@ -92,16 +96,19 @@ def collision_projectile(projectile, target):
         return False
 
 
-def player_handler(surface, player, hitboxes):
+def player_handler(surface, player, hitboxes, scroll):
     if len(pygame.sprite.spritecollide(player, hitboxes, False, pygame.sprite.collide_mask)) > 0:
         if not player.invincible:
             player.death()
         else:
-            player.rect.x = player.last_pos[0] - 1  # offset to compensate for automatic right-scrolling screen
+            if scroll:
+                player.rect.x = player.last_pos[0] - 1  # offset to compensate for automatic right-scrolling screen
+            else:
+                player.rect.x = player.last_pos[0]
             player.rect.y = player.last_pos[1]
 
 
-def enemy_handler(surface, player, enemies, hitbox):
+def enemy_handler(surface, player, enemies, hitbox, scroll):
     """ Handles enemy movements on surface, giving them rectangle blocks, drawing them, deleting them, etc.
 
     Parameters:
@@ -109,9 +116,11 @@ def enemy_handler(surface, player, enemies, hitbox):
         player (pygame.sprite) : the player sprite
         enemies (pygame.sprite.Group) : group of enemy sprites
         hitbox (pygame.sprite.Group) : group of hitbox sprites
+        scroll (bool) : True if the screen is scrolling, False if the screen is paused and fixed.
     """
     for enemy in enemies:
-        enemy.move(-1, 0)
+        if scroll:
+            enemy.move(-1, 0)
         if enemy.dead_counter == 0:
             hitbox.add(enemy)
 
@@ -173,6 +182,8 @@ def start_level(surface):
     bg = pygame.image.load("img/stage.png").convert()
     ready_logo = pygame.image.load("img/ready.gif").convert()
     game_over_logo = pygame.image.load("img/game_over.gif").convert()
+    boss_stage = pygame.image.load("img/stage_boss_alpha.png").convert()
+    boss_stage.set_colorkey(pygame.Color(0, 0, 0))
 
     # set up the music
     pygame.mixer.music.load('sounds/music/as_wet_as_a_fish.mp3')
@@ -186,11 +197,21 @@ def start_level(surface):
     player = Player(100, 280)
     player.draw(surface)
 
-    enemies = create_enemies.get_group(surface)
-
     # game settings
-    lives, scroll_x, stop_enemies = 3, 0, False
-    game_start = True
+    lives, scroll, scroll_x, stop_enemies = 3, True, 0, False
+    game_start = True  # a flag that is checked before the very first play-through
+    game_pause, boss_pause = False, False  # flags that pause the game.
+    # game pause is caused by user.
+    # boss pause is event triggered.
+
+    player_lock = False  # locks player keyboard actions only
+    boss_timer = 0  # a timer that keeps track of the boss's action sequences (see enemy_script.py)
+    boss_pause_timer, win_pause_timer = 0, 0  # timers for pauses caused by game events
+    round_clear = False  # a flag for the game to start ending
+    play_win_theme = False  # a flag to play the victory theme
+
+    enemies = create_enemies.get_group(surface, scroll_x)
+
 
     # counters
     cooldown_counter = 0
@@ -205,28 +226,35 @@ def start_level(surface):
     alpha_surface.set_alpha(alpha)  # Fade out
 
     while True:  # <--- main game loop
-        if not game_start:  # the following are not needed when the game first starts
+        ####### Normal Events #######
+        for event in pygame.event.get():
+
+            if event.type == KEYDOWN:
+                if event.key == K_RETURN:  # enter key
+                    game_pause = not game_pause
+                    pygame.mixer.Sound('sounds/start.ogg').play()
+
+            if event.type == QUIT:  # QUIT event to exit the game
+                pygame.quit()
+                sys.exit()
+
+        if not game_start and not game_pause:  # the following are not needed when the game first starts
             ####### Key Events #######
-            keys = pygame.key.get_pressed()
-            player_keys_move(surface, player, keys)
-            cooldown_counter = player_keys_shoot(surface, player, keys, projectiles, cooldown_counter)
-    
-            ####### Normal Events #######
-            for event in pygame.event.get():
-                if event.type == QUIT:  # QUIT event to exit the game
-                    pygame.quit()
-                    sys.exit()
+            if not player_lock:
+                keys = pygame.key.get_pressed()
+                player_keys_move(surface, player, keys)
+                cooldown_counter = player_keys_shoot(surface, player, keys, projectiles, cooldown_counter)
     
             surface.blit(bg, (scroll_x, 0)) # SCROLL the background in +x direction
     
             draw_scrolling_hitbox(surface, tiled_map, hitbox, scroll_x)
     
             ####### Collisions #######
-            enemy_handler(surface, player, enemies, hitbox)
+            enemy_handler(surface, player, enemies, hitbox, scroll)
             update_projectiles(surface, projectiles, hitbox)
             player.draw(surface)
     
-            player_handler(surface, player, hitbox)
+            player_handler(surface, player, hitbox, scroll)
 
             ####### UI #######
             pygame.draw.rect(surface, BLACK, (0, 560, 800, 40))
@@ -244,7 +272,9 @@ def start_level(surface):
                 alpha_surface.set_alpha(alpha)
 
             elif 300 > rf_counter > 250:
-                scroll_x = 0  # stop the scrolling screen
+                scroll_x = 0  # reset scrolling screen
+                scroll = True
+                boss_timer = 0
                 if not game_start:
                     lives -= 1  # don't deduct life on our first game
 
@@ -255,7 +285,7 @@ def start_level(surface):
                     alpha_surface.blit(ready_logo, (surface.get_width()/2-ready_logo.get_width()/2,
                                                     surface.get_height()/2-ready_logo.get_height()/2))
 
-                enemies = create_enemies.get_group(surface)  # spawn/re-spawn new enemies
+                enemies = create_enemies.get_group(surface, scroll_x)  # spawn/re-spawn new enemies
                 projectiles.empty()
                 rf_counter = 300
 
@@ -265,6 +295,7 @@ def start_level(surface):
                 alpha_surface.set_alpha(alpha)
 
             elif rf_counter >= 400 and lives > 0:
+                pygame.mixer.music.load('sounds/music/as_wet_as_a_fish.mp3')
                 pygame.mixer.music.play(-1, 1.2)  # resume music
                 player.respawn()
                 rf_counter = 0
@@ -276,13 +307,50 @@ def start_level(surface):
 
             surface.blit(alpha_surface, (0, 0))
         else:
-            alpha = 0
+            if not round_clear:
+                alpha = 0
 
-        if not game_start:
+        #print(scroll_x)
+        if not game_start and not game_pause and scroll_x > -5800:
             scroll_x -= 1  # Scroll the background to the right by decrementing offset scroll_x
+        elif -5850 < scroll_x <= -5800:
+            pygame.mixer.music.fadeout(1000)
+            scroll_x -= 1
+        elif scroll_x <= -5850:
+            if scroll:
+                pygame.mixer.music.load('sounds/music/boss.mp3')
+                pygame.mixer.music.play()
+                scroll = False
+                boss_pause_timer = 4000 + pygame.time.get_ticks()
+                player_lock = True
+            if pygame.time.get_ticks() >= boss_pause_timer:
+                if player_lock:
+                    player_lock = False
 
-        #  AI for enemies (just a bunch of scripted moves depending on screen location)
-        enemy_script(scroll_x, pygame.time.get_ticks(), player, enemies, projectiles)
+                if not game_pause:
+                    boss_timer += 1
+                    if boss_timer > 300:
+                        boss_timer = 1
+
+        #  Enemies follow a script until the stage is cleared (or the game is paused)
+        if not round_clear and not game_pause:
+            round_clear = enemy_script(scroll_x, boss_timer, player, enemies, projectiles)
+
+        if round_clear:
+            if not play_win_theme:
+                player.invincible = True
+                play_win_theme = True
+                pygame.mixer.music.load('sounds/music/victory.mp3')
+                pygame.mixer.music.play()
+                boss_pause_timer = 6000 + pygame.time.get_ticks()
+                alpha_surface.blit(game_over_logo, (surface.get_width()/2-game_over_logo.get_width()/2,
+                                                    surface.get_height()/2-game_over_logo.get_height()/2))
+            if pygame.time.get_ticks() >= boss_pause_timer:
+                alpha += 2
+                alpha_surface.set_alpha(alpha)
+                surface.blit(alpha_surface, (0, 0))
+                if alpha > 800:
+                    launcher.main()
 
         pygame.display.update()  # Update the display when all events have been processed
         FPS_CLOCK.tick(FPS)

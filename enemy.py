@@ -1,7 +1,7 @@
 import pygame
 import math
 from pygame.locals import *
-from enemy_bullet import Bullet
+from enemy_bullet import EnemyWeapon
 
 
 ANIMATION_STEP = 15 # time between each animation sprite
@@ -24,6 +24,7 @@ class Enemy(pygame.sprite.Sprite):
         self.mute = False  # mute death sound
         self.idle_animation = True
         self.facing = 'left'
+        self.invincible = False
 
         # Load default images
         self.image = pygame.image.load("sprites/black.gif").convert()  # temporary sprite
@@ -100,6 +101,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def death(self, sound=True):
         self.dead = True
+        self.can_shoot = False
         if not sound:
             self.mute = True
 
@@ -112,15 +114,15 @@ class Enemy(pygame.sprite.Sprite):
             charged (bool): True/False depending on whether it is a charged beam or not
 
         Returns:
-            A newly created Bullet object
+            A newly created EnemyWeapon object
         """
         if self.facing == 'right':
             if self.can_shoot and -800 < self.rect.x - target_x < 0:
-                return Bullet(self.rect.x + self.image.get_width(), self.rect.y, target_x, target_y)
+                return EnemyWeapon(self.rect.x + self.image.get_width(), self.rect.y, target_x, target_y)
 
         elif self.facing == 'left':
             if self.can_shoot and 0 < self.rect.x - target_x < 800:
-                return Bullet(self.rect.x, self.rect.y, target_x, target_y)
+                return EnemyWeapon(self.rect.x, self.rect.y, target_x, target_y)
 
     def move(self, x, y, bypass=False):
         """ Moves the enemy if enemy is not dead.

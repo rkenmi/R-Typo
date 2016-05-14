@@ -4,7 +4,7 @@ from pygame.locals import *
 
 
 #  Derive your class from the Sprite super class
-class Beam(pygame.sprite.Sprite):
+class PlayerWeapon(pygame.sprite.Sprite):
     def __init__(self, x, y, play_sound=True):
         """ Creates a beam (level 1)
 

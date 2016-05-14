@@ -6,7 +6,7 @@ ANIMATION_STEP = 3
 
 
 #  Derive your class from the Sprite super class
-class Bullet(pygame.sprite.Sprite):
+class EnemyWeapon(pygame.sprite.Sprite):
     def __init__(self, x, y, target_x, target_y, play_sound=True):
         """ Creates a circular red bullet used by regular mobs/enemies
 
@@ -20,11 +20,9 @@ class Bullet(pygame.sprite.Sprite):
         super().__init__();
 
         # Load image
-
+        self.image = None
         self.shoot_images = []
-        for i in range(0, 4):
-            self.shoot_images.append(pygame.image.load("sprites/enemy_wpn1_shoot"+str(i+1)+".gif").convert())
-        self.image = self.shoot_images[0]
+        self.load_images()
 
         # Set the color that should be transparent
         self.image.set_colorkey(pygame.Color(0, 0, 0))
@@ -123,3 +121,9 @@ class Bullet(pygame.sprite.Sprite):
 
             if self.impact_counter > 6:
                 self.dead = True
+
+    def load_images(self):
+        self.shoot_images = []
+        for i in range(0, 4):
+            self.shoot_images.append(pygame.image.load("sprites/enemy_wpn1_shoot"+str(i+1)+".gif").convert())
+        self.image = self.shoot_images[0]

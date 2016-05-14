@@ -1,12 +1,12 @@
 import pygame
 import math
-from player_beam import Beam
+from player_beam import PlayerWeapon
 from pygame.locals import *
 
 CHARGE_STEP_TIME = 4
 
 
-class ChargedBeam(Beam):
+class PlayerWeaponCharged(PlayerWeapon):
     def __init__(self, x, y):
         """ Creates a beam (level 1)
 
