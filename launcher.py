@@ -19,7 +19,7 @@ def main():
     # Code to create the initial window
 
     # set up the music
-    pygame.mixer.music.load('sounds/music/solo_sortie.mp3')
+    pygame.mixer.music.load('sounds/music/medley.mp3')
     pygame.mixer.music.play(-1, 0.2)  # loop music
 
     window_size = (800, 600)

@@ -70,12 +70,13 @@ def boss_fight(boss_timer, player, enemy, projectiles):
 
 def enemy_script(scroll_x, boss_timer, player, enemies, projectiles):
     for enemy in enemies:
-        if enemy.id < 39 and scroll_x != 0 and scroll_x % 150 == 0: # avoid bullet overflow when scroll_x = 0 (i.e. after player dies)
+        if enemy.id < 39 and scroll_x != 0 and scroll_x % (150+random.randint(0, 2)*25) == 0: # avoid bullet overflow when scroll_x = 0 (i.e. after player dies)
             bullet = enemy.shoot(player.rect.x, player.rect.y)
+
             if bullet:
                 projectiles.add(bullet)
 
-        if 39 <= enemy.id < 43 and scroll_x % (100+random.randint(0, 2)*25) == 0:
+        if 39 <= enemy.id < 44 and scroll_x % (100+random.randint(0, 2)*25) == 0:
             bullet = enemy.shoot(player.rect.x, player.rect.y)
             if bullet:
                 projectiles.add(bullet)
@@ -125,6 +126,11 @@ def enemy_script(scroll_x, boss_timer, player, enemies, projectiles):
         for i in range(21, 27):
             moth_group(scroll_x, enemy, i, velocities, -2500 + (i-4)*(-25), dir='NW')
         #print(scroll_x)
+        if -2500 < scroll_x < -2300:
+            if enemy.id == 43:
+                enemy.pause()
+                enemy.siege_mode()
+
         velocities = [(-2, 8), (-4, 7), (-4, 2), (-4, 0)]
         for i in range(27, 37):
             moth_group(scroll_x, enemy, i, velocities, -3200 + (i-4)*(-25), dir='SW')

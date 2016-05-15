@@ -182,14 +182,9 @@ def start_level(surface):
     bg = pygame.image.load("img/stage.png").convert()
     ready_logo = pygame.image.load("img/ready.gif").convert()
     game_over_logo = pygame.image.load("img/game_over.gif").convert()
-    boss_stage = pygame.image.load("img/stage_boss_alpha.png").convert()
-    boss_stage.set_colorkey(pygame.Color(0, 0, 0))
 
     # set up the music
-    pygame.mixer.music.load('sounds/music/as_wet_as_a_fish.mp3')
-
-    # set mixer channel to 4 for performance and to prevent sound conflicts
-    pygame.mixer.set_num_channels(4)
+    pygame.mixer.music.load('sounds/music/solo_sortie.mp3')
 
     hitbox = pygame.sprite.Group()
     projectiles = pygame.sprite.Group()
@@ -295,8 +290,8 @@ def start_level(surface):
                 alpha_surface.set_alpha(alpha)
 
             elif rf_counter >= 400 and lives > 0:
-                pygame.mixer.music.load('sounds/music/as_wet_as_a_fish.mp3')
-                pygame.mixer.music.play(-1, 1.2)  # resume music
+                pygame.mixer.music.load('sounds/music/solo_sortie.mp3')
+                pygame.mixer.music.play(-1, 0.2)  # resume music
                 player.respawn()
                 rf_counter = 0
                 game_start = False

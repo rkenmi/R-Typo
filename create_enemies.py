@@ -41,5 +41,7 @@ def get_group(surface, scroll_x):
     enemies.add(MissileBot(scroll_x + 5400, 465, eid=40, animation_counter=0))
     enemies.add(MissileBot(scroll_x + 5500, 465, eid=41, animation_counter=0))
     enemies.add(MissileBot(scroll_x + 5600, 465, eid=42, animation_counter=0))
+
+    enemies.add(MissileBot(scroll_x + 3320, 465, eid=43, animation_counter=0))
     enemies.add(Boss(scroll_x + 6400, 250, eid=100, animation_counter=5))
     return enemies

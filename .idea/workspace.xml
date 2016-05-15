@@ -2,15 +2,92 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84ee9eda-9b6a-4efc-b041-7425a8c27f5a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enemy_missile.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enemy_transformer.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/ART_89_arc_n7.bmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/R-type_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/alpha_r.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/logo_s.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/stage_boss.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/stage_boss_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/r2/r-level2.s" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/r2/r2.BMP" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L3/ART_89_arc_n3.bmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L3/l3.BMP" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L3/l3.s" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L4/ART_89_arc_n4.bmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L4/l4.BMP" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L4/l4.s" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L5/ART_89_arc_n5.bmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L5/l5.BMP" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L5/l5.s" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L6/ART_89_arc_n6 - Copy.bmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L6/ART_89_arc_n6.bmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L6/ART_89_arc_n6_560.bmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L6/l6.BMP" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L6/l6.s" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L7/l7.BMP" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L7/l7.s" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L8/ART_89_arc_n8.bmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L8/level8.BMP" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L8/level8.s" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type EXS Readme.rtf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 1.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 1.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 2.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 2.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 3.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 4.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 4.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 5.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 5.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Coin Drop.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Coin Drop.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Into Music.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Into Music.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Into Sweep.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Into Sweep.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer 1.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer 1.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer 2.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer 2.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer 3.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer 3.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer Collect.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer Collect.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Music Loop 1.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Music Loop 2.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/R-Type Die.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/R-Type Die.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Wobwobwob.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Wobwobwob.aif.sfk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/Sampler Instruments/R-Type.exs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/._R-Type EXS Readme.rtf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._.DS_Store" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Blast 1.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Blast 2.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Blast 3.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Blast 4.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Blast 5.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Coin Drop.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Into Music.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Into Sweep.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Lazer 1.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Lazer 2.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Lazer 3.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Lazer Collect.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Music Loop 1.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Music Loop 2.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._R-Type Die.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Wobwobwob.aif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/Sampler Instruments/._R-Type.exs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/as_wet_as_a_fish.mp3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/solo_sortie.mp3.sfk" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rtype-l3-8/L7/ART_89_arc_n7.bmp" afterPath="$PROJECT_DIR$/rtype-l3-8/L7/ART_89_arc_n7.bmp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_enemies.py" afterPath="$PROJECT_DIR$/create_enemies.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enemy_beam.py" afterPath="$PROJECT_DIR$/enemy_beam.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enemy_boss.py" afterPath="$PROJECT_DIR$/enemy_boss.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enemy_script.py" afterPath="$PROJECT_DIR$/enemy_script.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game.py" afterPath="$PROJECT_DIR$/game.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player.py" afterPath="$PROJECT_DIR$/player.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher.py" afterPath="$PROJECT_DIR$/launcher.py" />
     </list>
     <ignored path="r-typu.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,11 +111,21 @@
       <file leaf-file-name="game.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="274" column="27" selection-start-line="274" selection-start-column="27" selection-end-line="274" selection-end-column="27" />
+            <state vertical-scroll-proportion="26.689655">
+              <caret line="275" column="30" selection-start-line="275" selection-start-column="30" selection-end-line="275" selection-end-column="30" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="util_pygame.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/pytmx/util_pygame.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -47,7 +134,7 @@
         <entry file="file://$PROJECT_DIR$/launcher.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+              <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -57,7 +144,7 @@
         <entry file="file://$PROJECT_DIR$/create_enemies.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="41" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="41" />
+              <caret line="44" column="42" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -65,37 +152,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enemy_boss.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/enemy_boss.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32971507">
-              <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="enemy_script.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="enemy_script.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/enemy_script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="82" column="34" selection-start-line="82" selection-start-column="34" selection-end-line="82" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.7883311">
+              <caret line="127" column="9" selection-start-line="127" selection-start-column="9" selection-end-line="127" selection-end-column="9" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1463273401366" expanded="true" signature="4323:4324" placeholder="..." />
+                <marker date="1463293140590" expanded="true" signature="4350:4351" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enemy_beam.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/enemy_beam.py">
+      <file leaf-file-name="enemy_boss.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enemy_boss.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="53" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
+              <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -161,7 +236,6 @@
         <option value="$PROJECT_DIR$/enemy_giru.py" />
         <option value="$PROJECT_DIR$/block.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/launcher.py" />
         <option value="$PROJECT_DIR$/enemy_moth.py" />
         <option value="$PROJECT_DIR$/enemy_gundam.py" />
         <option value="$PROJECT_DIR$/player_beam_charged.py" />
@@ -169,13 +243,14 @@
         <option value="$PROJECT_DIR$/enemy.py" />
         <option value="$PROJECT_DIR$/player_beam.py" />
         <option value="$PROJECT_DIR$/enemy_beam.py" />
-        <option value="$PROJECT_DIR$/create_enemies.py" />
         <option value="$PROJECT_DIR$/player.py" />
         <option value="$PROJECT_DIR$/enemy_missile.py" />
         <option value="$PROJECT_DIR$/enemy_transformer.py" />
-        <option value="$PROJECT_DIR$/enemy_script.py" />
-        <option value="$PROJECT_DIR$/game.py" />
         <option value="$PROJECT_DIR$/enemy_boss.py" />
+        <option value="$PROJECT_DIR$/launcher.py" />
+        <option value="$PROJECT_DIR$/create_enemies.py" />
+        <option value="$PROJECT_DIR$/game.py" />
+        <option value="$PROJECT_DIR$/enemy_script.py" />
       </list>
     </option>
   </component>
@@ -596,16 +671,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/launcher.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -630,7 +695,7 @@
           <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1463273401366" expanded="true" signature="4323:4324" placeholder="..." />
+            <marker date="1463293140590" expanded="true" signature="4350:4351" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -715,7 +780,7 @@
           <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1463273401366" expanded="true" signature="4323:4324" placeholder="..." />
+            <marker date="1463293140590" expanded="true" signature="4350:4351" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -965,9 +1030,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="39" column="53" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1007,18 +1070,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/enemy_boss.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/pytmx/util_pygame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/launcher.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+          <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="26.689655">
+          <caret line="275" column="30" selection-start-line="275" selection-start-column="30" selection-end-line="275" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/create_enemies.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="41" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="41" />
+          <caret line="44" column="42" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -1027,30 +1116,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/enemy_script.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="82" column="34" selection-start-line="82" selection-start-column="34" selection-end-line="82" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.7883311">
+          <caret line="127" column="9" selection-start-line="127" selection-start-column="9" selection-end-line="127" selection-end-column="9" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1463273401366" expanded="true" signature="4323:4324" placeholder="..." />
+            <marker date="1463293140590" expanded="true" signature="4350:4351" placeholder="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="274" column="27" selection-start-line="274" selection-start-column="27" selection-end-line="274" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/enemy_boss.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32971507">
-          <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
