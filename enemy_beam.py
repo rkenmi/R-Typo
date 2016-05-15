@@ -1,6 +1,4 @@
 import pygame
-import math, random
-from pygame.locals import *
 from enemy_bullet import EnemyWeapon
 
 ANIMATION_STEP = 3

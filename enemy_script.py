@@ -10,6 +10,7 @@ from player_beam_charged import PlayerWeaponCharged
 from enemy_sitbot import SitBot
 import sys
 import random
+from enemy_transformer import MissileBot
 
 
 def moth_group(scroll_x, enemy, eid, velocities, x0, step=-25, dir='SW'):
@@ -68,9 +69,13 @@ def boss_fight(boss_timer, player, enemy, projectiles):
 
 
 def enemy_script(scroll_x, boss_timer, player, enemies, projectiles):
-    #print(scroll_x)
     for enemy in enemies:
-        if enemy.id != 100 and scroll_x != 0 and scroll_x % 150 == 0: # avoid bullet overflow when scroll_x = 0 (i.e. after player dies)
+        if enemy.id < 39 and scroll_x != 0 and scroll_x % 150 == 0: # avoid bullet overflow when scroll_x = 0 (i.e. after player dies)
+            bullet = enemy.shoot(player.rect.x, player.rect.y)
+            if bullet:
+                projectiles.add(bullet)
+
+        if 39 <= enemy.id < 43 and scroll_x % (100+random.randint(0, 2)*25) == 0:
             bullet = enemy.shoot(player.rect.x, player.rect.y)
             if bullet:
                 projectiles.add(bullet)
@@ -119,6 +124,36 @@ def enemy_script(scroll_x, boss_timer, player, enemies, projectiles):
         velocities = [(-2, -7), (-4, -7), (-4, -3), (-4, 0)]
         for i in range(21, 27):
             moth_group(scroll_x, enemy, i, velocities, -2500 + (i-4)*(-25), dir='NW')
+        #print(scroll_x)
+        velocities = [(-2, 8), (-4, 7), (-4, 2), (-4, 0)]
+        for i in range(27, 37):
+            moth_group(scroll_x, enemy, i, velocities, -3200 + (i-4)*(-25), dir='SW')
+
+        if -4500 < scroll_x <= -4400:
+            if enemy.id == 39 and isinstance(enemy, MissileBot):
+                enemy.move(-1, 0)
+        if -4600 < scroll_x <= -4500:
+            if enemy.id == 39 and isinstance(enemy, MissileBot):
+                enemy.pause()
+                enemy.siege_mode()
+            if enemy.id == 40 and isinstance(enemy, MissileBot):
+                enemy.move(-1, 0)
+        if -4700 < scroll_x <= -4600:
+            if enemy.id == 40 and isinstance(enemy, MissileBot):
+                enemy.pause()
+                enemy.siege_mode()
+            if enemy.id == 41 and isinstance(enemy, MissileBot):
+                enemy.move(-1, 0)
+        if -4800 < scroll_x <= -4700:
+            if enemy.id == 41 and isinstance(enemy, MissileBot):
+                enemy.pause()
+                enemy.siege_mode()
+            if enemy.id == 42 and isinstance(enemy, MissileBot):
+                enemy.move(-1, 0)
+        if -4900 < scroll_x <= -4800:
+            if enemy.id == 42 and isinstance(enemy, MissileBot):
+                enemy.pause()
+                enemy.siege_mode()
 
         if scroll_x <= -5850:
             if enemy.id == 100 and boss_timer != 0:

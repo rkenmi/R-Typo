@@ -338,7 +338,7 @@ def start_level(surface):
 
         if round_clear:
             if not play_win_theme:
-                player.invincible = True
+                player.be_invincible(animation=False)
                 play_win_theme = True
                 pygame.mixer.music.load('sounds/music/victory.mp3')
                 pygame.mixer.music.play()

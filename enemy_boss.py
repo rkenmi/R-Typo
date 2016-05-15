@@ -91,7 +91,7 @@ class Boss(Enemy):
             y (int): y coord to move
             bypass (bool) : if bypass is True, allow movement even when the enemy is dead
         """
-        if self.dead_counter == 0 or bypass:
+        if not self.dead or bypass:
             if x > 0:
                 self.image = self.images[0][1]
             else:
@@ -117,6 +117,5 @@ class Boss(Enemy):
                     False, pygame.image.load("sprites/enemy_boss"+str(i+1)+".gif").convert()
                 ]
             )
-        self.images.append([False, pygame.image.load("sprites/enemy_giru2.gif").convert()])
 
         self.image = self.images[0][1]

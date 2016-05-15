@@ -40,7 +40,7 @@ class Player(pygame.sprite.Sprite):
         # Variables
         self.dead = False
         self.dead_timer = 0
-        self.invincible = False
+        self.invincible, self.invincible_animation = False, False
         self.invincible_timer = 0
 
     def draw(self, surface):
@@ -52,7 +52,8 @@ class Player(pygame.sprite.Sprite):
         if not self.dead and not self.invincible:
             surface.blit(self.image, (self.rect.x, self.rect.y))
         elif not self.dead and self.invincible:
-            self.invincible_timer += 1
+            if self.invincible_animation:
+                self.invincible_timer += 1
 
             if self.invincible_timer % 5 == 0:
                 surface.blit(self.image, (self.rect.x, self.rect.y))
@@ -86,7 +87,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = self.respawn_pos[1]
         self.dead = False
         self.dead_timer = 0
-        self.invincible = True
+        self.be_invincible()
 
         # Revert original sprite
         self.image = pygame.image.load("sprites/player.gif").convert()
@@ -138,6 +139,10 @@ class Player(pygame.sprite.Sprite):
                     self.rect.y += y
                     if self.charged_beam:
                         self.charged_beam.rect.y += y
+
+    def be_invincible(self, animation=True):
+        self.invincible = True
+        self.invincible_animation = animation
 
     def load_images(self):
         self.image = pygame.image.load("sprites/player.gif").convert()
