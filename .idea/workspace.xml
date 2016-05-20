@@ -2,86 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84ee9eda-9b6a-4efc-b041-7425a8c27f5a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/ART_89_arc_n7.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/R-type_logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/alpha_r.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/logo_s.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/stage_boss.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/stage_boss_alpha.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/r2/r-level2.s" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/r2/r2.BMP" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L3/ART_89_arc_n3.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L3/l3.BMP" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L3/l3.s" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L4/ART_89_arc_n4.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L4/l4.BMP" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L4/l4.s" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L5/ART_89_arc_n5.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L5/l5.BMP" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L5/l5.s" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L6/ART_89_arc_n6 - Copy.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L6/ART_89_arc_n6.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L6/ART_89_arc_n6_560.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L6/l6.BMP" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L6/l6.s" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L7/l7.BMP" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L7/l7.s" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L8/ART_89_arc_n8.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L8/level8.BMP" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L8/level8.s" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type EXS Readme.rtf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 1.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 1.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 2.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 2.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 3.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 4.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 4.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 5.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 5.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Coin Drop.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Coin Drop.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Into Music.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Into Music.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Into Sweep.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Into Sweep.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer 1.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer 1.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer 2.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer 2.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer 3.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer 3.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer Collect.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Lazer Collect.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Music Loop 1.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Music Loop 2.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/R-Type Die.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/R-Type Die.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Wobwobwob.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Wobwobwob.aif.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/Sampler Instruments/R-Type.exs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/._R-Type EXS Readme.rtf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._.DS_Store" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Blast 1.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Blast 2.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Blast 3.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Blast 4.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Blast 5.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Coin Drop.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Into Music.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Into Sweep.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Lazer 1.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Lazer 2.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Lazer 3.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Lazer Collect.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Music Loop 1.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Music Loop 2.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._R-Type Die.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/R-Type/._Wobwobwob.aif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/Sampler Instruments/._R-Type.exs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/as_wet_as_a_fish.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/solo_sortie.mp3.sfk" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="r-typu.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -102,14 +23,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="game.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="game.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.8548168">
+            <state vertical-scroll-proportion="0.0">
               <caret line="302" column="0" selection-start-line="302" selection-start-column="0" selection-end-line="302" selection-end-column="0" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3052917">
+              <caret line="15" column="83" selection-start-line="15" selection-start-column="83" selection-end-line="15" selection-end-column="83" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -250,6 +181,7 @@
         <option value="$PROJECT_DIR$/src/enemy/unit/enemy_missilebot.py" />
         <option value="$PROJECT_DIR$/enemy_script.py" />
         <option value="$PROJECT_DIR$/src/game.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -555,9 +487,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14699684" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14699684" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -994,11 +926,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.8548168">
+        <state vertical-scroll-proportion="0.0">
           <caret line="302" column="0" selection-start-line="302" selection-start-column="0" selection-end-line="302" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3052917">
+          <caret line="15" column="83" selection-start-line="15" selection-start-column="83" selection-end-line="15" selection-end-column="83" />
+          <folding />
         </state>
       </provider>
     </entry>
