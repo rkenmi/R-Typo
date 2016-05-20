@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84ee9eda-9b6a-4efc-b041-7425a8c27f5a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/create_enemies.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/img/ART_89_arc_n7.bmp" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/img/R-type_logo.png" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/img/alpha.png" afterPath="" />
@@ -31,7 +30,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L8/ART_89_arc_n8.bmp" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L8/level8.BMP" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/rtype-l3-8/L8/level8.s" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/enemy_dead.ogg.sfl" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type EXS Readme.rtf" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 1.aif" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/R-Type EXS/R-Type/Blast 1.aif.sfk" afterPath="" />
@@ -84,41 +82,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/R-Type EXS/__MACOSX/R-Type EXS/Sampler Instruments/._R-Type.exs" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/as_wet_as_a_fish.mp3" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/music/solo_sortie.mp3.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/player_dead.ogg.sfl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/player_wpn1.ogg.sfl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/player_wpn2.ogg.sfl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/player_wpn2_charge1.ogg.sfl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/player_wpn2_charge2.ogg.sfl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/player_wpn2_shoot.ogg.sfk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/player_wpn2_shoot.ogg.sfl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sprites/r-typesheet1.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sprites/r-typesheet10.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sprites/r-typesheet11.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sprites/r-typesheet43.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sprites/r-typesheet7.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sprites/r-typesheet8.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sprites/r-typesheet9.gif" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/block.py" afterPath="$PROJECT_DIR$/src/misc/block.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enemy.py" afterPath="$PROJECT_DIR$/src/enemy/unit/enemy.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enemy_beam.py" afterPath="$PROJECT_DIR$/src/enemy/weapon/enemy_beam.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enemy_boss.py" afterPath="$PROJECT_DIR$/src/enemy/unit/enemy_boss.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enemy_bullet.py" afterPath="$PROJECT_DIR$/src/enemy/weapon/enemy_bullet.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enemy_giru.py" afterPath="$PROJECT_DIR$/src/enemy/unit/enemy_giru.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enemy_missile.py" afterPath="$PROJECT_DIR$/src/enemy/weapon/enemy_missile.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enemy_moth.py" afterPath="$PROJECT_DIR$/src/enemy/unit/enemy_moth.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enemy_script.py" afterPath="$PROJECT_DIR$/src/enemy/enemy_script.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enemy_sitbot.py" afterPath="$PROJECT_DIR$/src/enemy/unit/enemy_sitbot.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enemy_transformer.py" afterPath="$PROJECT_DIR$/src/enemy/unit/enemy_missilebot.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/game.py" afterPath="$PROJECT_DIR$/src/game.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/icon.py" afterPath="$PROJECT_DIR$/src/misc/icon.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/test.bmp" afterPath="$PROJECT_DIR$/tilemap/img/tileset.bmp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/player.py" afterPath="$PROJECT_DIR$/src/player/unit/player.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/player_beam.py" afterPath="$PROJECT_DIR$/src/player/weapon/player_beam.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/player_beam_charged.py" afterPath="$PROJECT_DIR$/src/player/weapon/player_beam_charged.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rtype-l3-8/L7/ART_89_arc_n7.bmp" afterPath="$PROJECT_DIR$/tilemap/img/stage.bmp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rtype_tile.tmx" afterPath="$PROJECT_DIR$/tilemap/rtype_tile.tmx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher.py" afterPath="$PROJECT_DIR$/launcher.py" />
     </list>
     <ignored path="r-typu.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -337,204 +300,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tilemap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tilemap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="player" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="weapon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="player" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="unit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="misc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="enemy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="enemy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="weapon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="enemy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="unit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sprites" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="r-typu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sounds" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -790,9 +555,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14699684" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14699684" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
