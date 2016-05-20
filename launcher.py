@@ -4,10 +4,12 @@ CS332L, Spring 2016
 
 Rick Miyamoto
 """
-from pygame import *
-import pygame, sys
-import game
-from player import Player
+import sys
+
+import pygame
+
+from src import game
+from src.player.unit import Player
 
 FPS = 60
 
@@ -31,14 +33,12 @@ def main():
     r_type_logo = pygame.image.load("img/main_logo.png").convert()
     r_type_logo.set_colorkey(pygame.Color(0, 0, 0))
     enter_logo = pygame.image.load("img/x-Enter.gif").convert()
-    #ship = pygame.image.load("sprites/player.gif").convert()
-    #ship.set_colorkey(pygame.Color(0, 0, 0))
     ship = Player(window_size[0]/2 - 30, window_size[1]/2 - 15)
     bg = pygame.image.load("img/space_bg.png")
-    text_timer, start_timer  = 0, 0
+    text_timer, start_timer = 0, 0
     scroll_x = 0
     game_start = False
-    alpha_surface = Surface((800, 600)) # The custom-surface of the size of the screen.
+    alpha_surface = pygame.Surface((800, 600)) # The custom-surface of the size of the screen.
     alpha_surface.fill((0, 0, 0))
     alpha_surface.set_alpha(0)
     alpha = 0
@@ -77,13 +77,13 @@ def main():
                 game.start_level(surface)
 
         for event in pygame.event.get():
-            if event.type == KEYDOWN:
-                if event.key == K_RETURN:  # enter key
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:  # enter key
                     game_start = True
                     pygame.mixer.Sound('sounds/start.ogg').play()
                     start_timer = 0
 
-            if event.type == QUIT:  # QUIT event to exit the game
+            if event.type == pygame.QUIT:  # QUIT event to exit the game
                 pygame.quit()
                 sys.exit()
 
