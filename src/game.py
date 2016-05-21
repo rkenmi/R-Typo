@@ -183,6 +183,9 @@ def start_level(surface):
     # set up the music
     pygame.mixer.music.load('sounds/music/solo_sortie.mp3')
 
+    # set up sounds
+    victory_tune = pygame.mixer.Sound('sounds/victory.wav')
+
     hitbox = pygame.sprite.Group()
     projectiles = pygame.sprite.Group()
 
@@ -330,8 +333,8 @@ def start_level(surface):
             if not play_win_theme:
                 player.be_invincible(animation=False)
                 play_win_theme = True
-                pygame.mixer.music.load('sounds/music/victory.mp3')
-                pygame.mixer.music.play()
+                pygame.time.wait(1000)
+                victory_tune.play()
                 boss_pause_timer = 6000 + pygame.time.get_ticks()
                 alpha_surface.blit(game_over_logo, (surface.get_width()/2-game_over_logo.get_width()/2,
                                                     surface.get_height()/2-game_over_logo.get_height()/2))
