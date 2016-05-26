@@ -1,19 +1,17 @@
 import pygame
 
-from src.player.weapon.player_beam import PlayerWeapon
+from src.player.weapon.player_wpn import PlayerWeapon
 
 CHARGE_STEP_TIME = 4
 
 
 class PlayerWeaponCharged(PlayerWeapon):
     def __init__(self, x, y):
-        """ Creates a beam (level 1)
+        """ Creates a charged beam that can produce more damage output and covers more area, but requires charge time.
 
         Arguments:
-            x (int) : x coordinate of screen
-            y (int) : y coordinate of screen
-            vx (int) : velocity in x-direction of ball
-            vy (int) : velocity in y-direction of ball
+            x (int): x coordinate of screen
+            y (int): y coordinate of screen
         """
         # Don't forget to call the super constructor
         super().__init__(x, y, play_sound=False)
@@ -46,7 +44,7 @@ class PlayerWeaponCharged(PlayerWeapon):
         self.shot_ready = False
 
     def move(self):
-        """ Player 1 beam (lvl 1) moves only in the +x direction
+        """ Beam moves only in the +x direction
 
         """
         if self.charge_level != 0:
@@ -60,7 +58,7 @@ class PlayerWeaponCharged(PlayerWeapon):
         """ Draws to screen
 
         Arguments:
-            surface: Screen pygame object
+            surface (pygame.Surface): Screen pygame object
         """
         charge_step = 9
         if not self.fail and self.charging:
@@ -82,7 +80,7 @@ class PlayerWeaponCharged(PlayerWeapon):
             surface.blit(self.charge_image, (self.rect.x, self.rect.y - 20))
             self.charge_image.set_colorkey(pygame.Color(0, 0, 0))
 
-        elif not self.fail and not self.charging: # key is let go, or beam is about to shoot
+        elif not self.fail and not self.charging:  # key is let go, or beam is about to shoot
             self.charge_image = None
             self.animation_counter += 1
 
@@ -128,6 +126,12 @@ class PlayerWeaponCharged(PlayerWeapon):
                 self.shot_ready = False
 
     def impact(self, surface):
+        """ Responsible for impact effects, i.e. animation and rectangle adjustments.
+
+        Parameters:
+            surface (pygame.Surface): the game screen
+
+        """
         self.damage = 0  # prevent damage from triggering multiple times
         impact_step = 2
 
@@ -160,6 +164,9 @@ class PlayerWeaponCharged(PlayerWeapon):
                 self.dead = True
 
     def load_images(self):
+        """ A simple method that loads all images for future use.
+
+        """
         self.charge_images, self.shoot_images = [], []
 
         for i in range(0, 7):
@@ -176,5 +183,5 @@ class PlayerWeaponCharged(PlayerWeapon):
         for i in range(0, 5):
             self.impact_images.append(pygame.image.load("sprites/player_wpn2_impact"+str(i+1)+".gif").convert())
 
-        self.image = pygame.image.load("sprites/black.gif").convert() # temporary sprite
+        self.image = pygame.image.load("sprites/black.gif").convert()  # temporary sprite
         self.charge_image = pygame.image.load("sprites/player_wpn1.gif").convert()

@@ -1,17 +1,24 @@
 import pygame
 from pygame.locals import *
 
-from src.enemy.weapon.enemy_bullet import EnemyWeapon
+from src.enemy.weapon.enemy_wpn import EnemyWeapon
 
-ANIMATION_STEP = 15 # time between each animation sprite
-ANIMATION_COUNTER_MAX = 200 # time after which animation is looped (back to the starting animation)
-DEAD_STEP = 10 # time between each death sprite
-DEAD_COUNTER_MAX = 70 # time after which
+ANIMATION_COUNTER_MAX = 200  # time after which animation is looped (back to the starting animation)
+DEAD_COUNTER_MAX = 70  # time after which
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, x, y, eid=0, animation_counter_max=ANIMATION_COUNTER_MAX, dead_counter_max=DEAD_COUNTER_MAX
-                 , animation_step=ANIMATION_STEP, dead_step=DEAD_STEP):
+    def __init__(self, x, y, eid=0, animation_counter_max=ANIMATION_COUNTER_MAX, dead_counter_max=DEAD_COUNTER_MAX,
+                 animation_counter=0):
+        """ A basic enemy unit
+
+        Arguments:
+            x (int): x coordinate of screen
+            y (int): y coordinate of screen
+            eid (int): an integer id representation of the particular enemy unit
+            animation_counter_max (int): the max counter value before the animation is reset
+            dead_counter_max (int): the max counter value before the death animation ends
+        """
         # Don't forget to call the super constructor
         super().__init__()
 
@@ -40,8 +47,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.y = y
 
         # Used as a timer for animation sequences
-        self.animation_step, self.dead_step = animation_step, dead_step
-        self.animation_counter, self.dead_counter = 0, 0
+        self.animation_counter, self.dead_counter = animation_counter, 0
         self.animation_counter_max, self.dead_counter_max = animation_counter_max, dead_counter_max
         self.hit_counter = 0
         self.hit_animation = False
@@ -51,9 +57,10 @@ class Enemy(pygame.sprite.Sprite):
         """ Draws to screen
 
         Arguments:
-            surface: Screen pygame object
+            surface (pygame.Surface): Screen pygame object
         """
         if not self.dead: # enemy is alive
+            animation_step = 15
             self.animation_counter += 1
             
             if self.hit_animation: # enemy was hit with a beam
@@ -61,9 +68,9 @@ class Enemy(pygame.sprite.Sprite):
 
             if self.idle_animation:
                 for i in range(0, len(self.images)+1):
-                    if i == len(self.images) and self.animation_counter > (i+1)*self.animation_step:
+                    if i == len(self.images) and self.animation_counter > (i+1)*animation_step:
                         self.image = self.images[0][1]
-                    elif self.animation_counter > (i+1)*self.animation_step and not self.images[i][0]:
+                    elif self.animation_counter > (i+1)*animation_step and not self.images[i][0]:
                         self.images[i][0] = True
                         self.image = self.images[i][1]
 
@@ -81,7 +88,8 @@ class Enemy(pygame.sprite.Sprite):
                 surface.blit(self.image, (self.rect.x, self.rect.y))
             else:
                 surface.blit(self.image, (self.rect.x, self.rect.y), None, BLEND_RGBA_ADD)
-        else: # enemy is about to die, start dead timer
+        else:  # enemy is about to die, start dead timer
+            dead_step = 10
             if self.dead_counter == 0 and not self.mute:
                 self.death_sound.play()
 
@@ -91,7 +99,7 @@ class Enemy(pygame.sprite.Sprite):
             self.move(-1, 0, bypass=True)
 
             for i in range(0, len(self.dead_images)):
-                if (i+1)*self.dead_step < self.dead_counter < (i+2)*self.dead_step:
+                if (i+1)*dead_step < self.dead_counter < (i+2)*dead_step:
                     self.image = self.dead_images[i]
 
             if self.dead_counter < self.dead_counter_max:
@@ -99,6 +107,12 @@ class Enemy(pygame.sprite.Sprite):
                 surface.blit(self.image, (self.rect.x, self.rect.y))
 
     def death(self, sound=True):
+        """ Kills the enemy unit.
+
+        Parameters:
+            sound (bool): if True, enable sound at death. otherwise, disable sound.
+
+        """
         self.dead = True
         self.can_shoot = False
         if not sound:
@@ -161,18 +175,40 @@ class Enemy(pygame.sprite.Sprite):
             self.hit_animation = True
 
     def pause(self):
+        """ Pauses the enemy animation so that it no longer animates (in loops)
+
+        """
         self.idle_animation = False
 
     def unpause(self):
+        """ Unpauses the enemy animation so that it resumes animation (in loops)
+
+        """
         self.idle_animation = True
 
     def flip_sprite(self):
-        pass
+        """ Flip the sprite from right to left or left to right. Also changes the facing.
+
+        """
+        if self.facing == 'left':
+            self.facing = 'right'
+        else:
+            self.facing = 'left'
+
+        self.load_images()
 
     def load_images(self):
+        """ A simple method that loads all images for future use.
+
+        """
         pass
 
     def load_dead_images(self):
+        """ A simple method that loads death images for the death animation. Since all enemy units are implemented
+        with the same death animation, but different animations otherwise, this method is kept separate from
+        load_images().
+
+        """
         self.dead_images = []
         for i in range(0, 6):
             self.dead_images.append(pygame.image.load("sprites/enemy_dead"+str(i+1)+".gif").convert())

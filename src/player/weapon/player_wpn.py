@@ -9,13 +9,12 @@ class PlayerWeapon(pygame.sprite.Sprite):
         """ Creates a beam (level 1)
 
         Arguments:
-            x (int) : x coordinate of screen
-            y (int) : y coordinate of screen
-            vx (int) : velocity in x-direction of ball
-            vy (int) : velocity in y-direction of ball
+            x (int): x coordinate of screen
+            y (int): y coordinate of screen
+            play_sound (bool): if True, play sound when the weapon starts firing.
         """
         # Don't forget to call the super constructor
-        super().__init__();
+        super().__init__()
 
         # Play the sound file
         self.sound = pygame.mixer.Sound(file="sounds/player_wpn1.ogg")
@@ -56,7 +55,7 @@ class PlayerWeapon(pygame.sprite.Sprite):
         """ Draws to screen
 
         Arguments:
-            surface: Screen pygame object
+            surface (pygame.Surface): Screen pygame object
         """
         # Only trigger once, when drawn for the first time
         offset = 50  # make it "look" like the beam is actually traveling past the screen
@@ -66,9 +65,10 @@ class PlayerWeapon(pygame.sprite.Sprite):
 
         surface.blit(self.image, (self.rect.x, self.rect.y))
 
+    """
     def bounce(self):
-        """ Bounces the ball by inverting the angles.
-        """
+        #  Bounces the ball by inverting the angles.
+
         if self.hit is False:  # sort of helps with collision/stuck issues when balls hit each other
             magnitude = math.sqrt(math.pow(self.vy, 2) + math.pow(self.vx, 2))
             theta = math.atan2(self.vy, self.vx) # get velocity direction
@@ -77,12 +77,11 @@ class PlayerWeapon(pygame.sprite.Sprite):
             self.vy = math.sin(theta) * magnitude
 
         self.hit = not self.hit
+    """
 
     def move(self):
         """ Player 1 beam (lvl 1) moves only in the +x direction
 
-        Arguments:
-            surface (pygame.Surface) : the screen to display
         """
 
         self.rect.x += self.vx
@@ -90,7 +89,13 @@ class PlayerWeapon(pygame.sprite.Sprite):
             self.out_of_screen = True
 
     def impact(self, surface):
-        self.damage = 0 # prevent damage from triggering multiple times
+        """ Responsible for impact effects, i.e. animation and rectangle adjustments.
+
+        Parameters:
+            surface (pygame.Surface): the game screen
+
+        """
+        self.damage = 0  # a dead projectile shouldn't cause damage
         impact_step = 2
 
         if self.out_of_screen:
@@ -108,6 +113,9 @@ class PlayerWeapon(pygame.sprite.Sprite):
                 self.dead = True
 
     def load_images(self):
+        """ A simple method that loads all images for future use.
+
+        """
         self.image = pygame.image.load("sprites/player_wpn1.gif").convert()
         self.impact_images.clear()
         for i in range(0, 2):

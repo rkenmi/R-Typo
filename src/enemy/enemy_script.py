@@ -6,6 +6,15 @@ from src.enemy.unit import *
 
 
 def create_enemies(surface, scroll_x):
+    """ A function to create enemies
+
+    Parameters:
+        surface (pygame.Surface): the game screen
+        scroll_x:
+
+    Returns:
+        pygame.sprites.Group : a group of enemies
+    """
     enemies = pygame.sprite.Group()
     enemies.add(SitBot(scroll_x + 1250, 265, eid=2, animation_counter=15))
     enemies.add(SitBot(scroll_x + 2000, 360, eid=3, animation_counter=10))
@@ -38,6 +47,18 @@ def create_enemies(surface, scroll_x):
 
 
 def moth_group(scroll_x, enemy, eid, velocities, x0, step=-25, dir='SW'):
+    """ A function that tells the group of moths to move a certain circular path
+
+    Parameters:
+        scroll_x:
+        enemy:
+        eid:
+        velocities (list): a list of velocity sets in the x and y direction.
+        x0 (int): initial x position
+        step (int): time between each animation sequence
+        dir (String): direction denoted by string - SW indicates southwest, NW indicates northwest
+
+    """
     images = enemy.images
     if dir == 'NW':
         images = images[::-1]
@@ -73,26 +94,46 @@ def moth_group(scroll_x, enemy, eid, velocities, x0, step=-25, dir='SW'):
 
 
 def boss_fight(boss_timer, player, enemy, projectiles):
-        if boss_timer % 50 == 0:
-            beam = enemy.shoot(player.rect.x, player.rect.y)
-            if beam:
-                projectiles.add(beam)
+    """ Boss AI. Not much of an AI. Moves in one single pattern.
 
-        if boss_timer < 75:
-            enemy.move(1, -2)
-        elif 75 <= boss_timer < 150:
-            enemy.move(-1, 2)
-        elif 150 <= boss_timer < 200:
-            enemy.move(-9, 0)
-        elif 200 <= boss_timer < 225:
-            enemy.move(3, -4)
-        elif 225 <= boss_timer < 275:
-            enemy.move(9, 0)
-        elif 275 <= boss_timer < 300:
-            enemy.move(-3, 4)
+    Parameters:
+        boss_timer (int): a timer which the boss acts on
+        player:
+        enemy:
+        projectiles:
+    """
+    if boss_timer % 50 == 0:
+        beam = enemy.shoot(player.rect.x, player.rect.y)
+        if beam:
+            projectiles.add(beam)
+
+    if boss_timer < 75:
+        enemy.move(1, -2)
+    elif 75 <= boss_timer < 150:
+        enemy.move(-1, 2)
+    elif 150 <= boss_timer < 200:
+        enemy.move(-9, 0)
+    elif 200 <= boss_timer < 225:
+        enemy.move(3, -4)
+    elif 225 <= boss_timer < 275:
+        enemy.move(9, 0)
+    elif 275 <= boss_timer < 300:
+        enemy.move(-3, 4)
 
 
 def load(scroll_x, boss_timer, player, enemies, projectiles):
+    """ load the enemy script
+
+    Parameters:
+        scroll_x
+        boss_timer (int): a timer which the boss acts on
+        player
+        enemies
+        projectiles
+
+    Returns:
+        bool : if True, the game is over (victory)
+    """
     for enemy in enemies:
         if enemy.id < 39 and scroll_x != 0 and scroll_x % (150+random.randint(0, 2)*25) == 0: # avoid bullet overflow when scroll_x = 0 (i.e. after unit dies)
             bullet = enemy.shoot(player.rect.x, player.rect.y)

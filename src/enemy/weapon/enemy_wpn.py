@@ -7,17 +7,18 @@ ANIMATION_STEP = 3
 
 #  Derive your class from the Sprite super class
 class EnemyWeapon(pygame.sprite.Sprite):
-    def __init__(self, x, y, target_x, target_y, play_sound=True):
+    def __init__(self, x, y, target_x=0, target_y=0, play_sound=True):
         """ Creates a circular red bullet used by regular mobs/enemies
 
         Arguments:
-            x (int) : x coordinate of screen
-            y (int) : y coordinate of screen
-            vx (int) : velocity in x-direction of ball
-            vy (int) : velocity in y-direction of ball
+            x (int): x coordinate of screen
+            y (int): y coordinate of screen
+            target_x (int): x coordinate of target on screen
+            target_y (int): y coordinate of target on screen
+            play_sound (bool): indicates whether or not the weapon should make sounds. (Not implemented currently)
         """
         # Don't forget to call the super constructor
-        super().__init__();
+        super().__init__()
 
         # Load image
         self.image = None
@@ -41,7 +42,6 @@ class EnemyWeapon(pygame.sprite.Sprite):
 
         self.move_counter = 0
 
-
         # By default, beams do not charge but fire rapidly
         self.charging = False
 
@@ -64,7 +64,7 @@ class EnemyWeapon(pygame.sprite.Sprite):
         """ Draws to screen
 
         Arguments:
-            surface: Screen pygame object
+            surface (pygame.Surface): Screen pygame object
         """
         self.animation_counter += 1
 
@@ -78,9 +78,10 @@ class EnemyWeapon(pygame.sprite.Sprite):
         surface.blit(self.image, (self.rect.x, self.rect.y))
         self.move()
 
+    """
     def bounce(self):
-        """ Bounces the ball by inverting the angles.
-        """
+        #  Bounces the ball by inverting the angles.
+
         if self.hit is False:  # sort of helps with collision/stuck issues when balls hit each other
             magnitude = math.sqrt(math.pow(self.vy, 2) + math.pow(self.vx, 2))
             theta = math.atan2(self.vy, self.vx) # get velocity direction
@@ -89,14 +90,11 @@ class EnemyWeapon(pygame.sprite.Sprite):
             self.vy = math.sin(theta) * magnitude
 
         self.hit = not self.hit
+    """
 
     def move(self):
         """ Player 1 beam (lvl 1) moves only in the +x direction
 
-        Arguments:
-            x (int) : x coordinate to move
-            y (int) : y coordinate to move
-            surface (pygame.Surface) : the screen to display
         """
         self.rect.x = self.x0 + self.x1 * self.move_counter
         self.rect.y = self.y0 + self.y1 * self.move_counter
@@ -105,7 +103,13 @@ class EnemyWeapon(pygame.sprite.Sprite):
             self.out_of_screen = True
 
     def impact(self, surface):
-        self.damage = 0 # prevent damage from triggering multiple times
+        """ Responsible for impact effects, i.e. animation and rectangle adjustments.
+
+        Parameters:
+            surface (pygame.Surface): the game screen
+
+        """
+        self.damage = 0  # prevent damage from triggering multiple times
         impact_step = 2
 
         if self.out_of_screen:
@@ -123,6 +127,9 @@ class EnemyWeapon(pygame.sprite.Sprite):
                 self.dead = True
 
     def load_images(self):
+        """ A simple method that loads all images for future use.
+
+        """
         self.shoot_images = []
         for i in range(0, 4):
             self.shoot_images.append(pygame.image.load("sprites/enemy_wpn1_shoot"+str(i+1)+".gif").convert())

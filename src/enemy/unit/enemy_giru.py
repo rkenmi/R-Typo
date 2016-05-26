@@ -7,10 +7,19 @@ ANIMATION_STEP = 15 # time between each animation sprite
 
 
 class Giru(Enemy):
-    def __init__(self, x, y, eid=0, animation_counter_max=60, dead_counter_max=70, animation_counter=0,
-                 animation_step=10, dead_step=10):
+    def __init__(self, x, y, eid=0, animation_counter_max=60, dead_counter_max=70, animation_counter=0):
+        """ A walking robot
+
+        Arguments:
+            x (int): x coordinate of screen
+            y (int): y coordinate of screen
+            eid (int): an integer id representation of the particular enemy unit
+            animation_counter_max (int): the max counter value before the animation is reset
+            dead_counter_max (int): the max counter value before the death animation ends
+            animation_counter (int): the current counter value that represents which animation (image) to display.
+        """
         # Don't forget to call the super constructor
-        super().__init__(x, y, eid, animation_counter_max, dead_counter_max, animation_step, dead_step)
+        super().__init__(x, y, eid, animation_counter_max, dead_counter_max)
 
         # Enemy Configuration
         self.hp = 6
@@ -37,6 +46,7 @@ class Giru(Enemy):
             surface: Screen pygame object
         """
         if not self.dead: # enemy is alive
+            animation_step = 10
             stand = False
             self.animation_counter += 1
 
@@ -44,17 +54,17 @@ class Giru(Enemy):
                 self.hit_timer() # start hit timer
 
             if self.idle_animation:
-                if self.animation_step > self.animation_counter >= 0: #  0-9
+                if animation_step > self.animation_counter >= 0: #  0-9
                     self.images[0][0] = True
                     self.image = self.images[0][1]
-                elif self.animation_step * 3 > self.animation_counter >= self.animation_step: #  10-29
+                elif animation_step * 3 > self.animation_counter >= animation_step: #  10-29
                     self.images[1][0] = True
                     self.image = self.images[1][1]
                     stand = True
-                elif self.animation_step * 4 > self.animation_counter >= self.animation_step * 3:  # 30-39
+                elif animation_step * 4 > self.animation_counter >= animation_step * 3:  # 30-39
                     self.images[2][0] = True
                     self.image = self.images[2][1]
-                elif self.animation_step * 6 >= self.animation_counter >= self.animation_step * 4:  # 40-60
+                elif animation_step * 6 >= self.animation_counter >= animation_step * 4:  # 40-60
                     self.images[3][0] = True
                     self.image = self.images[3][1]
                     stand = True
@@ -80,6 +90,7 @@ class Giru(Enemy):
             else:
                 surface.blit(self.image, (self.rect.x, self.rect.y), None, BLEND_RGBA_ADD)
         else: # enemy is about to die, start dead timer
+            dead_step = 10
             if self.dead_counter == 0 and not self.mute:
                 self.death_sound.play()
 
@@ -89,22 +100,17 @@ class Giru(Enemy):
             self.move(-1, 0, bypass=True)
 
             for i in range(0, len(self.dead_images)):
-                if (i+1)*self.dead_step < self.dead_counter < (i+2)*self.dead_step:
+                if (i+1)*dead_step < self.dead_counter < (i+2)*dead_step:
                     self.image = self.dead_images[i]
 
             self.image.set_colorkey(pygame.Color(0, 0, 0))
             if self.dead_counter < self.dead_counter_max:
                 surface.blit(self.image, (self.rect.x, self.rect.y))
 
-    def flip_sprite(self):
-        if self.facing == 'left':
-            self.facing = 'right'
-        else:
-            self.facing = 'left'
-
-        self.load_images()
-
     def load_images(self):
+        """ A simple method that loads all images for future use.
+
+        """
         self.images = []
         if self.facing == 'right':
             for i in range(0, 3):

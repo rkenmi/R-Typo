@@ -1,7 +1,7 @@
 import pygame
 
-from src.player.weapon.player_beam import PlayerWeapon
-from src.player.weapon.player_beam_charged import PlayerWeaponCharged
+from src.player.weapon.player_wpn import PlayerWeapon
+from src.player.weapon.player_wpn_charged import PlayerWeaponCharged
 
 
 class Player(pygame.sprite.Sprite):

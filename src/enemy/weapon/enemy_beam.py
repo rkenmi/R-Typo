@@ -1,6 +1,6 @@
 import pygame
 
-from src.enemy.weapon.enemy_bullet import EnemyWeapon
+from src.enemy.weapon.enemy_wpn import EnemyWeapon
 
 ANIMATION_STEP = 3
 
@@ -13,24 +13,24 @@ class EnemyWeaponBeam(EnemyWeapon):
         Arguments:
             x (int) : x coordinate of screen
             y (int) : y coordinate of screen
-            vx (int) : velocity in x-direction of ball
-            vy (int) : velocity in y-direction of ball
+            target_x (int) : x coordinate of target on screen
+            target_y (int) : y coordinate of target on screen
+            play_sound (bool) : if True, play sound of the weapon. (Not implemented yet)
+            random_aim (int) : gives the weapon a random offset to the y-distance
         """
         # Don't forget to call the super constructor
-        super().__init__(x, y, target_x, target_y, play_sound);
+        super().__init__(x, y, target_x, target_y, play_sound)
 
         self.random_aim = random_aim
         # Load image
         self.shoot_images = []
         self.load_images()
 
-        #self.move_counter
-
     def draw(self, surface):
         """ Draws to screen
 
         Arguments:
-            surface: Screen pygame object
+            surface (pygame.Surface) : the game screen
         """
         self.animation_counter += 1
 
@@ -50,7 +50,7 @@ class EnemyWeaponBeam(EnemyWeapon):
         Arguments:
             x (int) : x coordinate to move
             y (int) : y coordinate to move
-            surface (pygame.Surface) : the screen to display
+            surface (pygame.Surface) : the game screen
         """
         self.rect.x = self.rect.x - 4
         self.rect.y = self.rect.y + self.random_aim
@@ -60,6 +60,9 @@ class EnemyWeaponBeam(EnemyWeapon):
             self.out_of_screen = True
 
     def load_images(self):
+        """ A simple method that loads all images for future use.
+
+        """
         self.shoot_images = []
         for i in range(0, 3):
             self.shoot_images.append(pygame.image.load("sprites/enemy_boss_wpn2_shoot"+str(i+1)+".gif").convert())

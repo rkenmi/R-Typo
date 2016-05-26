@@ -10,10 +10,19 @@ ANIMATION_STEP = 15 # time between each animation sprite
 
 
 class Boss(Enemy):
-    def __init__(self, x, y, eid=0, animation_counter_max=60, dead_counter_max=60, animation_counter=0,
-                 animation_step=10, dead_step=10):
+    def __init__(self, x, y, eid=0, animation_counter_max=60, dead_counter_max=60, animation_counter=0):
+        """ The boss enemy unit
+
+        Arguments:
+            x (int): x coordinate of screen
+            y (int): y coordinate of screen
+            eid (int): an integer id representation of the particular enemy unit
+            animation_counter_max (int): the max counter value before the animation is reset
+            dead_counter_max (int): the max counter value before the death animation ends
+            animation_counter (int): the current counter value that represents which animation (image) to display.
+        """
         # Don't forget to call the super constructor
-        super().__init__(x, y, eid, animation_counter_max, dead_counter_max, animation_step, dead_step)
+        super().__init__(x, y, eid, animation_counter_max, dead_counter_max)
 
         # Enemy Configuration
         self.hp = 120
@@ -41,6 +50,7 @@ class Boss(Enemy):
             surface: Screen pygame object
         """
         if not self.dead: # enemy is alive
+            animation_step = 10
             stand = False
             self.animation_counter += 1
 
@@ -53,6 +63,7 @@ class Boss(Enemy):
             else:
                 surface.blit(self.image, (self.rect.x, self.rect.y), None, BLEND_RGBA_ADD)
         else: # enemy is about to die, start dead timer
+            dead_step = 10
             if self.dead_counter == 0 and not self.mute:
                 self.death_sound.play()
 
@@ -62,7 +73,7 @@ class Boss(Enemy):
             self.move(-1, 0, bypass=True)
 
             for i in range(0, len(self.dead_images)):
-                if (i+1)*self.dead_step < self.dead_counter < (i+2)*self.dead_step:
+                if (i+1)*dead_step < self.dead_counter < (i+2)*dead_step:
                     self.image = self.dead_images[i]
 
             self.image.set_colorkey(pygame.Color(0, 0, 0))
@@ -70,7 +81,7 @@ class Boss(Enemy):
                 surface.blit(self.image, (self.rect.x, self.rect.y))
 
     def shoot(self, target_x, target_y, charged=False):
-        """ The enemy shoots some projectile at the unit. Some enemies can do this, others can't.
+        """ The enemy shoots some projectile at the unit.
 
         Arguments:
             target_x (int): x coordinate of the aimed location
@@ -85,14 +96,13 @@ class Boss(Enemy):
             pygame.mixer.Sound(file="sounds/player_wpn2_shoot.ogg").play()
             return EnemyWeaponBeam(self.rect.x, self.rect.y, target_x, target_y, random_aim=random.randint(-1, 1))
 
-
     def move(self, x, y, bypass=False):
         """ Moves the enemy if enemy is not dead.
 
         Arguments:
             x (int): x coord to move
             y (int): y coord to move
-            bypass (bool) : if bypass is True, allow movement even when the enemy is dead
+            bypass (bool): if bypass is True, allow movement even when the enemy is dead
         """
         if not self.dead or bypass:
             if x > 0:
@@ -103,15 +113,10 @@ class Boss(Enemy):
             self.rect.x += x
             self.rect.y += y
 
-    def flip_sprite(self):
-        if self.facing == 'left':
-            self.facing = 'right'
-        else:
-            self.facing = 'left'
-
-        self.load_images()
-
     def load_images(self):
+        """ A simple method that loads all images for future use.
+
+        """
         self.images = []
 
         for i in range(0, 3):
