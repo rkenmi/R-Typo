@@ -2,28 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84ee9eda-9b6a-4efc-b041-7425a8c27f5a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/victory.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sounds/victory.ogg.sfl" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/sounds/victory.wav.wav" afterPath="$PROJECT_DIR$/sounds/victory.wav" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/enemy/weapon/enemy_bullet.py" afterPath="$PROJECT_DIR$/src/enemy/weapon/enemy_wpn.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/player/weapon/player_beam.py" afterPath="$PROJECT_DIR$/src/player/weapon/player_wpn.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/player/weapon/player_beam_charged.py" afterPath="$PROJECT_DIR$/src/player/weapon/player_wpn_charged.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher.py" afterPath="$PROJECT_DIR$/launcher.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/enemy/enemy_script.py" afterPath="$PROJECT_DIR$/src/enemy/enemy_script.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/enemy/unit/enemy.py" afterPath="$PROJECT_DIR$/src/enemy/unit/enemy.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/enemy/unit/enemy_boss.py" afterPath="$PROJECT_DIR$/src/enemy/unit/enemy_boss.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/enemy/unit/enemy_giru.py" afterPath="$PROJECT_DIR$/src/enemy/unit/enemy_giru.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/enemy/unit/enemy_missilebot.py" afterPath="$PROJECT_DIR$/src/enemy/unit/enemy_missilebot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/enemy/unit/enemy_moth.py" afterPath="$PROJECT_DIR$/src/enemy/unit/enemy_moth.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/enemy/unit/enemy_sitbot.py" afterPath="$PROJECT_DIR$/src/enemy/unit/enemy_sitbot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/enemy/weapon/__init__.py" afterPath="$PROJECT_DIR$/src/enemy/weapon/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/enemy/weapon/enemy_beam.py" afterPath="$PROJECT_DIR$/src/enemy/weapon/enemy_beam.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/enemy/weapon/enemy_missile.py" afterPath="$PROJECT_DIR$/src/enemy/weapon/enemy_missile.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.py" afterPath="$PROJECT_DIR$/src/game.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/misc/block.py" afterPath="$PROJECT_DIR$/src/misc/block.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/player/unit/player.py" afterPath="$PROJECT_DIR$/src/player/unit/player.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/player/weapon/player_wpn.py" afterPath="$PROJECT_DIR$/src/player/weapon/player_wpn.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/player/weapon/player_wpn_charged.py" afterPath="$PROJECT_DIR$/src/player/weapon/player_wpn_charged.py" />
     </list>
     <ignored path="r-typu.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,16 +27,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="player_wpn_charged.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/player/weapon/player_wpn_charged.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="168" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="enemy_missile.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/enemy/weapon/enemy_missile.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -64,46 +37,86 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enemy.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/enemy/unit/enemy.py">
+      <file leaf-file-name="player_wpn.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/player/weapon/player_wpn.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="197" column="26" selection-start-line="197" selection-start-column="26" selection-end-line="197" selection-end-column="26" />
+              <caret line="8" column="60" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enemy_missilebot.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/enemy/unit/enemy_missilebot.py">
+      <file leaf-file-name="player_wpn_charged.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/player/weapon/player_wpn_charged.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="114" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
+              <caret line="10" column="41" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enemy_script.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/enemy/enemy_script.py">
+      <file leaf-file-name="player.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/player/unit/player.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18776079">
-              <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="120" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-                <marker date="1464240237049" expanded="true" signature="6573:6574" placeholder="..." />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="157" column="11" selection-start-line="157" selection-start-column="11" selection-end-line="157" selection-end-column="11" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enemy_wpn.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="enemy.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/enemy/unit/enemy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="202" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="enemy_wpn.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/enemy/weapon/enemy_wpn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.4364641">
               <caret line="108" column="3" selection-start-line="108" selection-start-column="3" selection-end-line="109" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="enemy_script.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/enemy/enemy_script.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="46" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+                <marker date="1464315367967" expanded="true" signature="7322:7323" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="game.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/game.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="59" column="8" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="85" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="enemy_beam.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/enemy/weapon/enemy_beam.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="64" column="11" selection-start-line="64" selection-start-column="11" selection-end-line="64" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -114,36 +127,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="enemy_moth.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/enemy/unit/enemy_moth.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="89" selection-start-line="43" selection-start-column="89" selection-end-line="43" selection-end-column="89" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="enemy_giru.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/enemy/unit/enemy_giru.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="112" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="enemy_boss.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/enemy/unit/enemy_boss.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="118" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -186,7 +169,6 @@
         <option value="$PROJECT_DIR$/src/enemy/mob/__init__.py" />
         <option value="$PROJECT_DIR$/src/player/player/__init__.py" />
         <option value="$PROJECT_DIR$/src/enemy/weapon/__init__.py" />
-        <option value="$PROJECT_DIR$/src/player/unit/player.py" />
         <option value="$PROJECT_DIR$/icon.py" />
         <option value="$PROJECT_DIR$/src/misc/__init__.py" />
         <option value="$PROJECT_DIR$/create_enemies.py" />
@@ -200,9 +182,7 @@
         <option value="$PROJECT_DIR$/src/enemy/weapon/enemy_bullet.py" />
         <option value="$PROJECT_DIR$/src/enemy/weapon/enemy_beam.py" />
         <option value="$PROJECT_DIR$/src/enemy/weapon/enemy_missile.py" />
-        <option value="$PROJECT_DIR$/src/player/weapon/player_wpn_charged.py" />
         <option value="$PROJECT_DIR$/src/misc/block.py" />
-        <option value="$PROJECT_DIR$/src/player/weapon/player_wpn.py" />
         <option value="$PROJECT_DIR$/src/game.py" />
         <option value="$PROJECT_DIR$/src/enemy/unit/enemy_missilebot.py" />
         <option value="$PROJECT_DIR$/src/enemy/weapon/enemy_wpn.py" />
@@ -212,6 +192,9 @@
         <option value="$PROJECT_DIR$/src/enemy/unit/enemy_giru.py" />
         <option value="$PROJECT_DIR$/src/enemy/unit/enemy_sitbot.py" />
         <option value="$PROJECT_DIR$/src/enemy/enemy_script.py" />
+        <option value="$PROJECT_DIR$/src/player/unit/player.py" />
+        <option value="$PROJECT_DIR$/src/player/weapon/player_wpn.py" />
+        <option value="$PROJECT_DIR$/src/player/weapon/player_wpn_charged.py" />
       </list>
     </option>
   </component>
@@ -315,6 +298,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="player" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unit" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -423,15 +410,15 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Rick\PycharmProjects\r-typu" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Rick\PycharmProjects\r-typu\src\enemy" />
       <recent name="C:\Users\Rick\PycharmProjects\r-typu\src" />
       <recent name="C:\Users\Rick\PycharmProjects\r-typu\tilemap\img" />
       <recent name="C:\Users\Rick\PycharmProjects\r-typu\tilemap" />
       <recent name="C:\Users\Rick\PycharmProjects\r-typu\src\misc" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Rick\PycharmProjects\r-typu" />
     </key>
   </component>
   <component name="RunManager" selected="Python.launcher">
@@ -670,17 +657,17 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14840426" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19935691" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19935691" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -759,7 +746,7 @@
           <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1464240237049" expanded="true" signature="6573:6574" placeholder="..." />
+            <marker date="1464315367967" expanded="true" signature="7322:7323" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -939,14 +926,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/player/unit/player.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="91" column="52" selection-start-line="91" selection-start-column="52" selection-end-line="91" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/misc/icon.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -992,33 +971,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/enemy/weapon/enemy_beam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="11" selection-start-line="64" selection-start-column="11" selection-end-line="64" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/player/weapon/player_wpn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="157.24138">
-          <caret line="210" column="30" selection-start-line="210" selection-start-column="30" selection-end-line="210" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1026,7 +978,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="88" column="61" selection-start-line="88" selection-start-column="61" selection-end-line="88" selection-end-column="61" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1034,22 +985,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/player/weapon/player_wpn_charged.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="168" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/enemy/weapon/enemy_missile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="66" selection-start-line="12" selection-start-column="66" selection-end-line="12" selection-end-column="66" />
           <folding />
         </state>
       </provider>
@@ -1064,26 +999,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/enemy/unit/enemy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="197" column="26" selection-start-line="197" selection-start-column="26" selection-end-line="197" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/enemy/unit/enemy_boss.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="118" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/enemy/weapon/enemy_wpn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="3" selection-start-line="108" selection-start-column="3" selection-end-line="109" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1112,14 +1031,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/enemy/enemy_script.py">
+    <entry file="file://$PROJECT_DIR$/src/enemy/weapon/enemy_beam.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18776079">
-          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="120" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="11" selection-start-line="64" selection-start-column="11" selection-end-line="64" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="59" column="8" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="85" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1464240237049" expanded="true" signature="6573:6574" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/enemy/enemy_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="46" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <marker date="1464315367967" expanded="true" signature="7322:7323" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/enemy/unit/enemy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="202" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/player/unit/player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="157" column="11" selection-start-line="157" selection-start-column="11" selection-end-line="157" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/enemy/weapon/enemy_missile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="66" selection-start-line="12" selection-start-column="66" selection-end-line="12" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/player/weapon/player_wpn_charged.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="41" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/player/weapon/player_wpn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="60" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/enemy/weapon/enemy_wpn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4364641">
+          <caret line="108" column="3" selection-start-line="108" selection-start-column="3" selection-end-line="109" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

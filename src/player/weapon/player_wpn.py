@@ -6,7 +6,7 @@ from pygame.locals import *
 #  Derive your class from the Sprite super class
 class PlayerWeapon(pygame.sprite.Sprite):
     def __init__(self, x, y, play_sound=True):
-        """ Creates a beam (level 1)
+        """ Creates a mini-beam by pressing or holding down [SPACEBAR]
 
         Arguments:
             x (int): x coordinate of screen

@@ -6,13 +6,11 @@ from src.player.weapon.player_wpn_charged import PlayerWeaponCharged
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        """ Creates a ball
+        """ Creates a player unit sprite
 
         Arguments:
             x (int) : x coordinate of screen
             y (int) : y coordinate of screen
-            vx (int) : velocity in x-direction of ball
-            vy (int) : velocity in y-direction of ball
         """
         # Don't forget to call the super constructor
         super().__init__();
@@ -76,12 +74,18 @@ class Player(pygame.sprite.Sprite):
                 surface.blit(self.image, (self.rect.x, self.rect.y))
 
     def death(self):
+        """ Kills the player unit.
+
+        """
         self.dead = True
         if self.charged_beam:
             self.charged_beam.fail = True
             self.charged_beam.charge_sound.stop()
 
     def respawn(self):
+        """ Respawns the player unit at the respawn position. Grants invincibility for a short time.
+
+        """
         self.rect.x = self.respawn_pos[0]
         self.rect.y = self.respawn_pos[1]
         self.dead = False
@@ -140,10 +144,18 @@ class Player(pygame.sprite.Sprite):
                         self.charged_beam.rect.y += y
 
     def be_invincible(self, animation=True):
+        """ Grant invincibility to the player, giving it a flashing animation and immunity to death.
+
+        Parameters:
+            animation (bool): if True, give it a flashing animation (to indicate immunity).
+        """
         self.invincible = True
         self.invincible_animation = animation
 
     def load_images(self):
+        """ A simple method that loads all images for future use.
+
+        """
         self.image = pygame.image.load("sprites/player.gif").convert()
         self.dead_images = []
         for i in range(0, 6):

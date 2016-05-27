@@ -10,7 +10,8 @@ def create_enemies(surface, scroll_x):
 
     Parameters:
         surface (pygame.Surface): the game screen
-        scroll_x:
+        scroll_x (int): a value that represents how far the scrolling has taken place.
+            the lesser the value, the farther.
 
     Returns:
         pygame.sprites.Group : a group of enemies
@@ -50,9 +51,10 @@ def moth_group(scroll_x, enemy, eid, velocities, x0, step=-25, dir='SW'):
     """ A function that tells the group of moths to move a certain circular path
 
     Parameters:
-        scroll_x:
-        enemy:
-        eid:
+        scroll_x (int): a value that represents how far the scrolling has taken place.
+            the lesser the value, the farther.
+        enemy (pygame.sprite): the enemy unit sprite
+        eid (int): an integer id representation of the particular enemy unit
         velocities (list): a list of velocity sets in the x and y direction.
         x0 (int): initial x position
         step (int): time between each animation sequence
@@ -98,9 +100,9 @@ def boss_fight(boss_timer, player, enemy, projectiles):
 
     Parameters:
         boss_timer (int): a timer which the boss acts on
-        player:
-        enemy:
-        projectiles:
+        player (pygame.sprite): the player unit sprite
+        enemy (pygame.sprite): the enemy unit sprite
+        projectiles (pygame.sprites.Group): group of all sprites that are projectiles
     """
     if boss_timer % 50 == 0:
         beam = enemy.shoot(player.rect.x, player.rect.y)
@@ -125,11 +127,12 @@ def load(scroll_x, boss_timer, player, enemies, projectiles):
     """ load the enemy script
 
     Parameters:
-        scroll_x
+        scroll_x (int): a value that represents how far the scrolling has taken place.
+            the lesser the value, the farther.
         boss_timer (int): a timer which the boss acts on
-        player
-        enemies
-        projectiles
+        player (pygame.sprite): the player unit sprite
+        enemies (pygame.sprite.Group): group of all enemy sprites
+        projectiles (pygame.sprites.Group): group of all sprites that are projectiles
 
     Returns:
         bool : if True, the game is over (victory)

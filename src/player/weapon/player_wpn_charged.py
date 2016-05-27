@@ -8,6 +8,7 @@ CHARGE_STEP_TIME = 4
 class PlayerWeaponCharged(PlayerWeapon):
     def __init__(self, x, y):
         """ Creates a charged beam that can produce more damage output and covers more area, but requires charge time.
+        Hold down [E] to charge the beam.
 
         Arguments:
             x (int): x coordinate of screen
