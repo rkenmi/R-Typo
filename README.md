@@ -14,7 +14,7 @@ pygame and PyTMX are mandatory.
 
 To install PyTMX via pip: 
 
-pip install pytmx
+`pip install pytmx`
 
 To install pygame: 
 
@@ -30,7 +30,7 @@ Then they can be installed locally using pip:
 
 You can simply execute the launcher.py file, or you can go into command prompt and run: 
 
-python launcher.py
+`python launcher.py`
 
 # Backstory
 
