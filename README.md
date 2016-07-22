@@ -16,7 +16,18 @@ To install PyTMX via pip:
 
 pip install pytmx
 
-To install pygame: Please see http://www.pygame.org/download.shtml
+To install pygame: 
+
+Either one of these Python 3.5 specific versions must be downloaded locally here: http://www.lfd.uci.edu/~gohlke/pythonlibs/#pygame
+
+pygame-1.9.2b1-cp35-cp35m-win32.whl
+pygame-1.9.2b1-cp35-cp35m-win_amd64.whl
+
+Then they can be installed locally using pip:
+
+pip install pygame-1.9.2b1-cp35-cp35m-win32.whl
+- or -
+pip install pygame-1.9.2b1-cp35-cp35m-win_amd64.whl
 
 # How to Run
 
