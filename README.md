@@ -1,6 +1,8 @@
 # R-Typo
 A Python game, homage to a classic arcade shoot-em-up using PyGame
 
+<a href="https://youtu.be/_gXg7TGss5k">Youtube Link</a>
+
 Sprites ripped by Goemar (thank you!), provided by Retrogamezone.co.uk
 
 # How to Install
