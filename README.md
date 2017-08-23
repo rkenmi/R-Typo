@@ -7,8 +7,10 @@ Ripped R-Type sprites by Goemar from Retrogamezone.co.uk
 
 # How to Run/Play
 
-For Windows users, visit the <a href="https://github.com/rkenmi/R-Typo/releases">releases</a> page to download the game.
-Launching the game is as simple as double-clicking on the .exe file.
+Visit the <a href="https://github.com/rkenmi/R-Typo/releases">releases</a> page to download the game.
+
+For Windows users, simply double-click on **r-typo.exe** to launch the game and play.
+For Ubuntu/Linux users, you can download the **r-typo** binary file and launch it with `./r-typo`
 
 Alternatively, if your environment is setup correctly, you can launch the game via python using `python launcher.py`
 
@@ -21,7 +23,14 @@ The game is tested with the following:
 
 An executable file can be built by using <a href="http://www.pyinstaller.org/">pyinstaller</a>:
 
+First, install the requirements you need with `pip install -r requirements.txt`.
+Then, install **pyinstaller** via pip and run the following commands:
+
 On Windows:
+
+    pyinstaller --add-data src;src --add-data sounds;sounds --add-data img;img --add-data sprites;sprites --add-data tilemap;tilemap --onefile launcher.py
+    
+On Linux/POSIX:
 
     pyinstaller --add-data src;src --add-data sounds;sounds --add-data img;img --add-data sprites;sprites --add-data tilemap;tilemap --onefile launcher.py
 
