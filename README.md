@@ -34,6 +34,12 @@ You can simply execute the launcher.py file, or you can go into command prompt a
 
 `python launcher.py`
 
+# How to Build
+
+An executable file can be built by using `pyinstaller`:
+
+`pyinstaller --add-data src;src --add-data sounds;sounds --add-data img;img --add-data sprites;sprites --add-data tilemap;tilemap --onefile launcher.py`
+
 # Backstory
 
 The game is set in the middle of 22nd century, and the player flies a futuristic fighter craft called the R-9a "Arrowhead", named for its shape, and because it is the ninth model in the 'R' series of fighter craft (but it is the first of the series to actually be used in combat; the previous models were all prototypes). 

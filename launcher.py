@@ -5,6 +5,7 @@ https://github.com/rkenmi/R-Typo
 
 Rick Miyamoto
 """
+import os
 import sys
 
 import pygame
@@ -14,6 +15,9 @@ from src.player.unit import Player
 
 FPS = 60
 
+# A hack to get pyinstaller to work
+if getattr(sys, 'frozen', False):
+    os.chdir(sys._MEIPASS)
 
 def main():
     pygame.init()
