@@ -87,6 +87,8 @@ def main():
                 alpha_surface.set_alpha(alpha)  # fade out
             elif start_timer >= 200:
                 game.start_level(surface)
+                pygame.quit()
+                sys.exit()
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -94,10 +96,6 @@ def main():
                     game_ready = True
                     pygame.mixer.Sound('sounds/start.ogg').play()
                     start_timer = 0
-
-            if event.type == pygame.QUIT:  # QUIT event to exit the game
-                pygame.quit()
-                sys.exit()
 
         surface.blit(alpha_surface, (0, 0))
         pygame.display.update()

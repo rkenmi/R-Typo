@@ -293,10 +293,6 @@ def start_level(surface):
                     game_pause = not game_pause
                     pygame.mixer.Sound('sounds/start.ogg').play()
 
-            if event.type == pygame.QUIT:  # QUIT event to exit the game
-                pygame.quit()
-                sys.exit()
-
         if not game_start and not game_pause:  # the following are not needed when the game first starts
             #  Key Events
             if not player_lock:
@@ -361,8 +357,7 @@ def start_level(surface):
             elif 600 > rf_counter > 500 and lives == 0:  # game over screen
                 alpha_surface.fill((0, 0, 0))
             elif rf_counter > 600 and lives == 0:  # back to beginning game menu
-                exit(0)
-                # launcher.main()
+                return
 
             surface.blit(alpha_surface, (0, 0))
         else:
@@ -408,8 +403,7 @@ def start_level(surface):
                 alpha_surface.set_alpha(alpha)
                 surface.blit(alpha_surface, (0, 0))
                 if alpha > 800:
-                    exit(0)
-                    # launcher.main()
+                    return
 
         pygame.display.update()  # Update the display when all events have been processed
         FPS_CLOCK.tick(FPS)
