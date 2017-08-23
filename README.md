@@ -34,7 +34,7 @@ On Windows:
     
 On Linux/POSIX:
 
-    pyinstaller --add-data src;src --add-data sounds;sounds --add-data img;img --add-data sprites;sprites --add-data tilemap;tilemap --onefile launcher.py
+    pyinstaller --add-data src:src --add-data sounds:sounds --add-data img:img --add-data sprites:sprites --add-data tilemap:tilemap --onefile launcher.py
 
 # Backstory
 
