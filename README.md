@@ -1,44 +1,27 @@
 # R-Typo
 A Python game, homage to a classic arcade shoot-em-up using PyGame
 
-<a href="https://youtu.be/_gXg7TGss5k">Youtube Link</a>
+<a href="https://youtu.be/_gXg7TGss5k">Demo Video</a>
 
-Sprites ripped by Goemar (thank you!), provided by Retrogamezone.co.uk
+Ripped R-Type sprites by Goemar from Retrogamezone.co.uk
 
-# How to Install
+# How to Run/Play
 
-The game is tested with the following:
-- Python (3.5.1)
-- pygame (1.9.2a0)
-- PyTMX (3.20.14)
+For Windows users, visit the <a href="https://github.com/rkenmi/R-Typo/releases">releases</a> page to download the game.
+Launching the game is as simple as double-clicking on the .exe file.
 
-pygame and PyTMX are mandatory. 
-
-To install PyTMX via pip: 
-
-`pip install pytmx`
-
-To install pygame: 
-
-Either one of these Python 3.5 specific versions must be downloaded locally here: http://www.lfd.uci.edu/~gohlke/pythonlibs/#pygame
-
-`pygame-1.9.2b1-cp35-cp35m-win32.whl` or `pygame-1.9.2b1-cp35-cp35m-win_amd64.whl`
-
-Then they can be installed locally using pip:
-
-`pip install pygame-1.9.2b1-cp35-cp35m-win32.whl` or `pip install pygame-1.9.2b1-cp35-cp35m-win_amd64.whl`
-
-# How to Run
-
-You can simply execute the launcher.py file, or you can go into command prompt and run: 
-
-`python launcher.py`
+Alternatively, if your environment is setup correctly, you can launch the game via python using `python launcher.py`
 
 # How to Build
 
-An executable file can be built by using `pyinstaller`:
+The game is tested with the following:
+- Python 3.5.1/3.4.3
+- pygame 1.9.2a0/1.9.3
+- PyTMX 3.20.14/3.21.3
 
-`pyinstaller --add-data src;src --add-data sounds;sounds --add-data img;img --add-data sprites;sprites --add-data tilemap;tilemap --onefile launcher.py`
+An executable file can be built by using <a href="http://www.pyinstaller.org/">pyinstaller</a>:
+
+    pyinstaller --add-data src;src --add-data sounds;sounds --add-data img;img --add-data sprites;sprites --add-data tilemap;tilemap --onefile launcher.py`
 
 # Backstory
 
