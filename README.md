@@ -21,7 +21,9 @@ The game is tested with the following:
 
 An executable file can be built by using <a href="http://www.pyinstaller.org/">pyinstaller</a>:
 
-    pyinstaller --add-data src;src --add-data sounds;sounds --add-data img;img --add-data sprites;sprites --add-data tilemap;tilemap --onefile launcher.py`
+On Windows:
+
+    pyinstaller --add-data src;src --add-data sounds;sounds --add-data img;img --add-data sprites;sprites --add-data tilemap;tilemap --onefile launcher.py
 
 # Backstory
 
