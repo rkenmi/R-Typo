@@ -3,7 +3,6 @@ import pytmx
 import sys
 from pytmx.util_pygame import load_pygame
 
-import launcher
 from src.enemy import enemy_script
 from src.enemy.unit.enemy import Enemy
 from src.enemy.weapon.enemy_wpn import EnemyWeapon
@@ -362,7 +361,8 @@ def start_level(surface):
             elif 600 > rf_counter > 500 and lives == 0:  # game over screen
                 alpha_surface.fill((0, 0, 0))
             elif rf_counter > 600 and lives == 0:  # back to beginning game menu
-                launcher.main()
+                exit(0)
+                # launcher.main()
 
             surface.blit(alpha_surface, (0, 0))
         else:
@@ -408,7 +408,8 @@ def start_level(surface):
                 alpha_surface.set_alpha(alpha)
                 surface.blit(alpha_surface, (0, 0))
                 if alpha > 800:
-                    launcher.main()
+                    exit(0)
+                    # launcher.main()
 
         pygame.display.update()  # Update the display when all events have been processed
         FPS_CLOCK.tick(FPS)
