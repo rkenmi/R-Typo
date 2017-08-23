@@ -1,4 +1,7 @@
 # R-Typo
+
+<img src="https://www.pygame.org/thumb/95ed7f3963f2d95e0778c111b56466c0.png" alt="Screenshot of gameplay"/>
+
 A Python game, homage to a classic arcade shoot-em-up using PyGame
 
 <a href="https://youtu.be/_gXg7TGss5k">Demo Video</a>
