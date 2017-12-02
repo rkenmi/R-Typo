@@ -16,6 +16,8 @@ For Windows users, simply double-click on **r-typo.exe** to launch the game and 
 
 For Ubuntu/Linux users, you can download the **r-typo** binary file and launch it with `./r-typo`
 
+For Mac users, you can download the **r-typo-osx** binary file and launch it with `./r-typo` (NOTE: There is a performance bug with pygame and Macs and retina displays)
+
 Alternatively, if your environment is setup correctly, you can launch the game via python using `python launcher.py`
 
 # How to Build
